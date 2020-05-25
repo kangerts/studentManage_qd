@@ -1,0 +1,14 @@
+/*全局样式表*/
+html, body, #app{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.el-card{
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,.15)!important;
+}
+
+.el-scrollbar{
+    max-height: 180px;
+}
