@@ -791,7 +791,6 @@
 
 <script>
 // 导入省市数据及解释器
-// 导入省市数据及解释器
 import { provinceAndCityData, CodeToText } from 'element-china-area-data'
 
 export default {
