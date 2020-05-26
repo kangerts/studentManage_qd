@@ -943,7 +943,7 @@ export default {
         studentStatus: '',
         classesAndProfesion: [],
         // 回访情况
-        returnVisit: '本月无变动'
+        returnVisit: ''
       },
       /** 表单验证相关配置 */
       addFormRules: {
@@ -1109,17 +1109,17 @@ export default {
         studentSex: '',
         studentPhone: '',
         employmentStatus: '',
-        companyName: '待安置',
-        postName: '待安置',
+        companyName: '',
+        postName: '',
         studentSalary: 0,
-        companyPhone: '待安置',
-        companyAddress: '待安置',
+        companyPhone: '',
+        companyAddress: '',
         teacherName: '',
         teacherPhone: '',
         studentStatus: '',
         classesAndProfesion: [],
         // 回访情况
-        returnVisit: '本月无变动'
+        returnVisit: ''
       },
       /** 编辑表单验证相关配置 */
       editFormRules: {
@@ -1328,16 +1328,11 @@ export default {
         this.addForm.companyName = '待安置'
         this.addForm.postName = '待安置'
         this.addForm.companyAddress = '待安置'
-      }
-    },
-    // 学生信息修改页面当学生未就业设置有关字段为待安置
-    'editForm.employmentStatus': function (val) {
-      if (val !== '已安置') {
-        this.editForm.companyPhone = '待安置'
-        this.editForm.companyName = '待安置'
-        this.editForm.postName = '待安置'
-        this.editForm.companyAddress = '待安置'
-        this.editForm.studentSalary = 0
+      } else {
+        this.addForm.companyPhone = ''
+        this.addForm.companyName = ''
+        this.addForm.postName = ''
+        this.companyAddressTemp = ''
       }
     },
     // 城市代码数组转换为字符串
@@ -1445,9 +1440,16 @@ export default {
 
     /** 修改学生操作 */
     editDialogVisible1 (studentData) {
+      // 清空回访情况数据
+      this.editForm.returnVisit = ''
       // 对象复制
       for (let key in studentData) {
-        this.editForm[key] = studentData[key]
+        // 防止待安置地学生数据污染已安置选项中的输入框
+        if (studentData[key] !== '待安置') {
+          this.editForm[key] = studentData[key]
+        } else {
+          this.editForm[key] = ''
+        }
       }
       // 遍历处理班级专业自动显示
       let cascaderOptions = this.cascaderOptions
@@ -1488,6 +1490,14 @@ export default {
     editstudent () {
       this.$refs.editFormRef.validate(async valid => {
         if (valid) {
+          // 学生信息修改页面当学生未就业设置有关字段为待安置
+          if (this.editForm.employmentStatus !== '已安置') {
+            this.editForm.companyPhone = '待安置'
+            this.editForm.companyName = '待安置'
+            this.editForm.postName = '待安置'
+            this.editForm.companyAddress = '待安置'
+            this.editForm.studentSalary = 0
+          }
           let formData = JSON.stringify({
             useraction: 'editStudent',
             username: window.sessionStorage.getItem('username'),
