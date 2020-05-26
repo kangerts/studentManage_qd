@@ -750,6 +750,7 @@
           <el-input
             v-model="returnVisitForm.data1"
             disabled
+            :class="[returnVisitForm.data1!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -758,6 +759,7 @@
           <el-input
             v-model="returnVisitForm.data2"
             disabled
+            :class="[returnVisitForm.data2!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -766,6 +768,7 @@
           <el-input
             v-model="returnVisitForm.data3"
             disabled
+            :class="[returnVisitForm.data3!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -774,6 +777,7 @@
           <el-input
             v-model="returnVisitForm.data4"
             disabled
+            :class="[returnVisitForm.data4!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -782,6 +786,7 @@
           <el-input
             v-model="returnVisitForm.data5"
             disabled
+            :class="[returnVisitForm.data5!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -790,6 +795,7 @@
           <el-input
             v-model="returnVisitForm.data6"
             disabled
+            :class="[returnVisitForm.data6!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -798,6 +804,7 @@
           <el-input
             v-model="returnVisitForm.data7"
             disabled
+            :class="[returnVisitForm.data7!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -806,6 +813,7 @@
           <el-input
             v-model="returnVisitForm.data8"
             disabled
+            :class="[returnVisitForm.data8!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -814,6 +822,7 @@
           <el-input
             v-model="returnVisitForm.data9"
             disabled
+            :class="[returnVisitForm.data9!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -822,6 +831,7 @@
           <el-input
             v-model="returnVisitForm.data10"
             disabled
+            :class="[returnVisitForm.data10!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -830,6 +840,7 @@
           <el-input
             v-model="returnVisitForm.data11"
             disabled
+            :class="[returnVisitForm.data11!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
         <el-form-item
@@ -838,6 +849,7 @@
           <el-input
             v-model="returnVisitForm.data12"
             disabled
+            :class="[returnVisitForm.data12!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
       </el-form>
@@ -943,7 +955,7 @@ export default {
         studentStatus: '',
         classesAndProfesion: [],
         // 回访情况
-        returnVisit: ''
+        returnVisit: '本月无变动'
       },
       /** 表单验证相关配置 */
       addFormRules: {
@@ -1119,7 +1131,7 @@ export default {
         studentStatus: '',
         classesAndProfesion: [],
         // 回访情况
-        returnVisit: ''
+        returnVisit: '本月无变动'
       },
       /** 编辑表单验证相关配置 */
       editFormRules: {
@@ -1440,8 +1452,6 @@ export default {
 
     /** 修改学生操作 */
     editDialogVisible1 (studentData) {
-      // 清空回访情况数据
-      this.editForm.returnVisit = ''
       // 对象复制
       for (let key in studentData) {
         // 防止待安置地学生数据污染已安置选项中的输入框
@@ -1705,5 +1715,14 @@ width: 280px;
 
 .el-select {
 width: 120px;
+}
+
+/** 自定义有具体内容的输入框显示特定样式 */
+.my-input {
+/deep/.el-input__inner {
+  color: #409EFF !important;
+  font-size: 15px;
+  font-weight: bold;
+}
 }
 </style>
