@@ -54,16 +54,12 @@ export default {
       // 长度校验
       rulesLoginForm: {
         username: [
-          // {validator: username, trigger: 'blur'},
           { required: true, message: '请输入账户名称', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
-          // {pattern: /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/, message: '密码必须由6-16个英文字母和数字的字符串组成！'}
         ],
         password: [
-          // {validator: password, trigger: 'blur'},
           { required: true, message: '请输入账户密码', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
-          // {pattern: /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/, message: '密码必须由6-16个英文字母和数字的字符串组成！'}
         ]
       }
     }
@@ -77,7 +73,6 @@ export default {
       // 判断业务逻辑
       let router = this.$router
       if (result.data.ret === 1) {
-        // this.$message({ message: result.data.data, type: 'warning', showClose: true, center: true })
         router.push('init')
       }
     },

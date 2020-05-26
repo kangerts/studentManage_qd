@@ -297,7 +297,6 @@ export default {
     color: white;
     font-size: 25px;
     display: flex;
-    /*justify-content: space-between;*/
     padding-left: 0;
   }
 
@@ -325,7 +324,6 @@ export default {
     line-height: 60px;
     color: #fff;
     text-align: center;
-    /*letter-spacing: 0.22em;*/
     cursor: pointer;
   }
 
