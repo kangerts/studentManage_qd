@@ -198,7 +198,6 @@ export default {
         this.activeTabas = '/admin'
         return
       }
-      // console.log('title:' + this.menuList[iindex].children[jindex].subMenuName)
       this.addTab(this.menuList[iindex].children[jindex].subMenuName, this.$route.path)
     }
   },
@@ -218,8 +217,6 @@ export default {
       this.$router.push(tab.name)
     },
     addTab (title, name) {
-      // console.log(this.Tabs)
-      // console.log('title:' + title + 'path:' + name)
       for (let i = 0; i < this.Tabs.length; i++) {
         if (this.Tabs[i].name === name) {
           this.activeTabas = name
@@ -231,8 +228,6 @@ export default {
         name: name,
         isClose: 'closable'
       })
-      // this.tabIndex = this.tabIndex + 1
-      // console.log('tabIndex:' + this.tabIndex)
       this.activeTabas = name
     },
     removeTab (targetName) {
