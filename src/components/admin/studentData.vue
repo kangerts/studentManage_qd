@@ -1328,10 +1328,6 @@ export default {
         this.addForm.companyName = '待安置'
         this.addForm.postName = '待安置'
         this.addForm.companyAddress = '待安置'
-      } else {
-        this.addForm.companyPhone = ''
-        this.addForm.companyName = ''
-        this.addForm.postName = ''
       }
     },
     // 学生信息修改页面当学生未就业设置有关字段为待安置
@@ -1342,10 +1338,6 @@ export default {
         this.editForm.postName = '待安置'
         this.editForm.companyAddress = '待安置'
         this.editForm.studentSalary = 0
-      } else {
-        this.editForm.companyPhone = ''
-        this.editForm.companyName = ''
-        this.editForm.postName = ''
       }
     },
     // 城市代码数组转换为字符串
