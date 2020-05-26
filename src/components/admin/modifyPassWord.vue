@@ -75,22 +75,17 @@ export default {
       // 长度校验
       rulesForm: {
         oldPassword: [
-          // {validator: username, trigger: 'blur'},
           { required: true, message: '请输入原始密码', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
-          // {pattern: /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/, message: '密码必须由6-16个英文字母和数字的字符串组成！'}
         ],
         password: [
-          // {validator: password, trigger: 'blur'},
           { required: true, message: '请输入新密码', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
-          // {pattern: /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/, message: '密码必须由6-16个英文字母和数字的字符串组成！'}
         ],
         enterpassword: [
           { validator: enterpassword, trigger: 'blur' },
           { required: true, message: '请确认新密码', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
-          // {pattern: /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/, message: '密码必须由6-16个英文字母和数字的字符串组成！'}
         ]
       }
     }
