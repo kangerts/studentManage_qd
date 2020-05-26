@@ -80,7 +80,6 @@ export default {
       // 判断业务逻辑
       if (result.data.ret === 0) {
         this.cascaderOptions = result.data.data
-        // console.log(this.cascaderOptions[0])
         this.cascaderValues = this.cascaderOptions[0].value
         this.getPeopleData('getProfessionPeopleData', this.cascaderOptions[0].label, this.cascaderOptions[0].value)
         return
@@ -188,7 +187,6 @@ export default {
           position: 'bottom',
           offset: [0, 10],
           formatter: function (param) {
-            // console.log(param.value / bodyMax * 100 + '%')
             return (param.value / bodyMax * 100).toFixed(0) + '%'
           },
           textStyle: {
@@ -305,7 +303,6 @@ export default {
         },
         {
           // 设置背景底色，不同的情况用这个
-          // name: 'full',
           type: 'pictorialBar', // 异型柱状图 图片、SVG PathData
           symbolBoundingData: bodyMax,
           animationDuration: 0,
