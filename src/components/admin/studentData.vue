@@ -745,111 +745,14 @@
           />
         </el-form-item>
         <el-form-item
-          label="1月回访情况"
+          v-for="(item, index) in returnVisitForm.monthData"
+          :label="`${index+1}月回访情况`"
+          :key="index"
         >
           <el-input
-            v-model="returnVisitForm.data1"
+            v-model="item[index+1]"
             disabled
-            :class="[returnVisitForm.data1!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="2月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data2"
-            disabled
-            :class="[returnVisitForm.data2!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="3月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data3"
-            disabled
-            :class="[returnVisitForm.data3!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="4月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data4"
-            disabled
-            :class="[returnVisitForm.data4!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="5月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data5"
-            disabled
-            :class="[returnVisitForm.data5!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="6月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data6"
-            disabled
-            :class="[returnVisitForm.data6!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="7月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data7"
-            disabled
-            :class="[returnVisitForm.data7!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="8月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data8"
-            disabled
-            :class="[returnVisitForm.data8!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="9月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data9"
-            disabled
-            :class="[returnVisitForm.data9!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="10月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data10"
-            disabled
-            :class="[returnVisitForm.data10!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="11月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data11"
-            disabled
-            :class="[returnVisitForm.data11!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-        <el-form-item
-          label="12月回访情况"
-        >
-          <el-input
-            v-model="returnVisitForm.data12"
-            disabled
-            :class="[returnVisitForm.data12!=='本月无变动'?'my-input':'']"
+            :class="[item[index+1]!=='本月无变动'?'my-input':'']"
           />
         </el-form-item>
       </el-form>
@@ -1548,6 +1451,16 @@ export default {
       // 判断业务逻辑
       if (result.data.ret === 0) {
         this.returnVisitForm = result.data.data[0]
+        // 组装月份资料
+        let monthData = []
+        let index = 0
+        for (let i in result.data.data[0]) {
+          if (i !== 'statusID' && i !== 'addTime' && i !== 'studentCode') {
+            ++index
+            monthData.push({ [index]: result.data.data[0][i] })
+          }
+        }
+        this.returnVisitForm.monthData = monthData
         this.returnVisitForm.studentName = studentData.studentName
         this.returnVisitDialogVisible = true
         return
