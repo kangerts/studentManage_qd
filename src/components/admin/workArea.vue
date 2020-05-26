@@ -21,9 +21,6 @@ export default {
   mounted () {
     this.getWorkAreaData()
   },
-  created () {
-    // this.getWorkAreaData()
-  },
   methods: {
     /** 获取学生工作区域数据 */
     async getWorkAreaData () {
