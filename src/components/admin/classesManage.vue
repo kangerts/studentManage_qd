@@ -55,6 +55,18 @@
         <template slot-scope="scope">
           <el-tooltip
             effect="dark"
+            content="班级学生(可查看本班级所有学生)"
+            placement="top"
+          >
+            <el-button
+              type="info"
+              icon="el-icon-view"
+              circle
+              @click="toStudentDataShowClasses(scope.row.classesName)"
+            />
+          </el-tooltip>
+          <el-tooltip
+            effect="dark"
             content="编辑班级(可编辑班级名称)"
             placement="top"
           >
@@ -399,6 +411,16 @@ export default {
     handleCurrentChange (newPage) {
       this.queryInfo.pageNum = newPage
       this.getclassesData()
+    },
+
+    /** 跳转到学生数据页面并显示本班级的学生 */
+    toStudentDataShowClasses (classesName) {
+      this.$router.push({
+        path: '/admin/studentData',
+        query: {
+          classesName: classesName
+        }
+      })
     }
   }
 }

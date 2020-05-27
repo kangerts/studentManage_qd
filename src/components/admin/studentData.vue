@@ -32,6 +32,10 @@
                 label="学生姓名"
                 value="studentName"
               />
+              <el-option
+                label="班级名称"
+                value="classesName"
+              />
             </el-select>
           </el-input>
         </el-col>
@@ -1278,8 +1282,13 @@ export default {
   /** 生命周期函数 */
   created () {
     // 这里是发起表格数据请求的位置
-    this.getstudentData()
     this.getProfessionAndClassesDataCascaderOptions()
+    let classesName = this.$route.query.classesName
+    if (classesName !== undefined && classesName !== '') {
+      this.queryInfo.keyWord = classesName
+      this.queryInfo.queryType = 'classesName'
+    }
+    this.getstudentData()
   },
   /** 事件处理函数 */
   methods: {
