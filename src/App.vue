@@ -17,7 +17,7 @@ export default {
     return {
       lastTime: null, // 最后一次点击的时间
       currentTime: null, // 当前点击的时间
-      timeOut: 10 * 60 * 1000 // 设置超时时间： 10分钟
+      timeOut: 30 * 60 * 1000 // 设置超时时间： 30分钟
     }
   },
   methods: {
