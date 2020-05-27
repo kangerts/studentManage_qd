@@ -317,7 +317,10 @@
           label="学生学号"
           prop="studentCode"
         >
-          <el-input v-model="addForm.studentCode" />
+          <el-input
+            v-model="addForm.studentCode"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           label="学生名称"
@@ -367,7 +370,10 @@
           label="学生电话"
           prop="studentPhone"
         >
-          <el-input v-model="addForm.studentPhone" />
+          <el-input
+            v-model="addForm.studentPhone"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           label="学生状态"
@@ -407,7 +413,10 @@
           label="指导老师电话"
           prop="teacherPhone"
         >
-          <el-input v-model="addForm.teacherPhone" />
+          <el-input
+            v-model="addForm.teacherPhone"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           label="就业状态"
@@ -469,7 +478,10 @@
           label="实习单位电话"
           prop="companyPhone"
         >
-          <el-input v-model="addForm.companyPhone" />
+          <el-input
+            v-model="addForm.companyPhone"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           v-if="addForm.employmentStatus === '已安置'"
@@ -526,7 +538,10 @@
           label="学生学号"
           prop="studentCode"
         >
-          <el-input v-model="editForm.studentCode" />
+          <el-input
+            v-model="editForm.studentCode"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           label="学生名称"
@@ -576,7 +591,10 @@
           label="学生电话"
           prop="studentPhone"
         >
-          <el-input v-model="editForm.studentPhone" />
+          <el-input
+            v-model="editForm.studentPhone"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           label="学生状态"
@@ -616,7 +634,10 @@
           label="指导老师电话"
           prop="teacherPhone"
         >
-          <el-input v-model="editForm.teacherPhone" />
+          <el-input
+            v-model="editForm.teacherPhone"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           label="就业状态"
@@ -678,7 +699,10 @@
           label="实习单位电话"
           prop="companyPhone"
         >
-          <el-input v-model="editForm.companyPhone" />
+          <el-input
+            v-model="editForm.companyPhone"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+          />
         </el-form-item>
         <el-form-item
           v-if="editForm.employmentStatus === '已安置'"
