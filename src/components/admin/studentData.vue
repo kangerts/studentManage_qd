@@ -1226,15 +1226,23 @@ export default {
     // 当添加学生对话框选择未就业则设置与就业有关的字段为待安置
     'addForm.employmentStatus': function (val) {
       if (val !== '已安置') {
-        this.addForm.companyPhone = '待安置'
-        this.addForm.companyName = '待安置'
-        this.addForm.postName = '待安置'
-        this.addForm.companyAddress = '待安置'
+        this.addForm.companyPhone = val
+        this.addForm.companyName = val
+        this.addForm.postName = val
+        this.addForm.companyAddress = val
       } else {
         this.addForm.companyPhone = ''
         this.addForm.companyName = ''
         this.addForm.postName = ''
         this.companyAddressTemp = ''
+      }
+    },
+    'editForm.employmentStatus': function (val) {
+      if (val !== '已安置') {
+        this.addForm.companyPhone = val
+        this.addForm.companyName = val
+        this.addForm.postName = val
+        this.addForm.companyAddress = val
       }
     },
     // 城市代码数组转换为字符串
@@ -1344,13 +1352,9 @@ export default {
     editDialogVisible1 (studentData) {
       // 对象复制
       for (let key in studentData) {
-        // 防止待安置地学生数据污染已安置选项中的输入框
-        if (studentData[key] !== '待安置') {
-          this.editForm[key] = studentData[key]
-        } else {
-          this.editForm[key] = ''
-        }
+        this.editForm[key] = studentData[key]
       }
+      console.log(this.editForm)
       // 遍历处理班级专业自动显示
       let cascaderOptions = this.cascaderOptions
       let arr = []
@@ -1392,10 +1396,10 @@ export default {
         if (valid) {
           // 学生信息修改页面当学生未就业设置有关字段为待安置
           if (this.editForm.employmentStatus !== '已安置') {
-            this.editForm.companyPhone = '待安置'
-            this.editForm.companyName = '待安置'
-            this.editForm.postName = '待安置'
-            this.editForm.companyAddress = '待安置'
+            this.editForm.companyPhone = this.editForm.employmentStatus
+            this.editForm.companyName = this.editForm.employmentStatus
+            this.editForm.postName = this.editForm.employmentStatus
+            this.editForm.companyAddress = this.editForm.employmentStatus
             this.editForm.studentSalary = 0
           }
           let formData = JSON.stringify({
