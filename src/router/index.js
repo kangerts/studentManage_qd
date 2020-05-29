@@ -25,6 +25,7 @@ const salaryList = () => import('../components/admin/salaryList')
 const workArea = () => import('../components/admin/workArea')
 const workDirection = () => import('../components/admin/workDirection')
 const updateLogs = () => import('../components/admin/updateLogs')
+const systemLogs = () => import('../components/admin/systemLogs')
 
 Vue.use(VueRouter)
 
@@ -63,7 +64,8 @@ const routes = [
       { path: '/admin/salaryList', component: salaryList },
       { path: '/admin/workArea', component: workArea },
       { path: '/admin/workDirection', component: workDirection },
-      { path: '/admin/updateLogs', component: updateLogs }
+      { path: '/admin/updateLogs', component: updateLogs },
+      { path: '/admin/systemLogs', component: systemLogs }
     ]
   }
 ]

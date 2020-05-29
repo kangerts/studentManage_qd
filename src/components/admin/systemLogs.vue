@@ -10,7 +10,7 @@
           suffix-icon="el-icon-search"
           class="input-with-select"
           @focus="setPageNum"
-          @input="getEmploymentStatusData"
+          @input="getSystemLogsData"
           clearable
         >
           <el-select
@@ -19,23 +19,36 @@
             placeholder="搜索类型"
           >
             <el-option
-              label="学生学号"
-              value="studentCode"
+              label="暂无搜索"
+              value="noSearch"
             />
             <el-option
-              label="学生姓名"
-              value="studentName"
+              label="操作账户"
+              value="operationUser"
             />
             <el-option
-              label="班级名称"
-              value="classesName"
-            />
-            <el-option
-              label="专业名称"
-              value="professionName"
+              label="操作类型"
+              value="operationType"
             />
           </el-select>
         </el-input>
+      </el-col>
+      <!--    按钮区域列-->
+      <el-col :span="2">
+        <el-row>
+          <el-tooltip
+            effect="dark"
+            content="删除操作日志"
+            placement="top"
+          >
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              @click="deleteSystemLogsDialogVisible = true"
+            />
+          </el-tooltip>
+        </el-row>
       </el-col>
     </el-row>
     <!--  表格数据区域-->
@@ -65,12 +78,31 @@
       :total="total"
       background
     />
+    <!--    删除操作日志对话框-->
+    <el-dialog
+      title="清空日志"
+      :visible.sync="deleteSystemLogsDialogVisible"
+      width="50%"
+      :close-on-click-modal="false"
+    >
+      <span>确认删除吗?</span>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="deleteSystemLogsDialogVisible = false">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="deleteSystemLogs"
+        >删除日志</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ReturnVisit',
+  name: 'SystemLogs',
   data () {
     return {
       /** 数据表格 */
@@ -78,8 +110,8 @@ export default {
       queryInfo: {
         // 当前搜索关键字
         keyWord: '',
-        // 当前搜索类型(例如学号或者名称)
-        queryType: '',
+        // 当前搜索类型
+        queryType: 'noSearch',
         // 当前页数
         pageNum: 1,
         // 当前每页显示多少条数据
@@ -90,31 +122,20 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '数据标识', 'prop': 'statusID', 'width': '80px' },
-        { 'label': '学生学号', 'prop': 'studentCode', 'width': '100px' },
-        { 'label': '学生名称', 'prop': 'studentName', 'width': '100px' },
-        { 'label': '所属专业', 'prop': 'toProfession', 'width': '180px' },
-        { 'label': '所属班级', 'prop': 'toClasses', 'width': '100px' },
-        { 'label': '1月回访情况', 'prop': 'data1', 'width': '200px' },
-        { 'label': '2月回访情况', 'prop': 'data2', 'width': '200px' },
-        { 'label': '3月回访情况', 'prop': 'data3', 'width': '200px' },
-        { 'label': '4月回访情况', 'prop': 'data4', 'width': '200px' },
-        { 'label': '5月回访情况', 'prop': 'data5', 'width': '200px' },
-        { 'label': '6月回访情况', 'prop': 'data6', 'width': '200px' },
-        { 'label': '7月回访情况', 'prop': 'data7', 'width': '200px' },
-        { 'label': '8月回访情况', 'prop': 'data8', 'width': '200px' },
-        { 'label': '9月回访情况', 'prop': 'data9', 'width': '200px' },
-        { 'label': '10月回访情况', 'prop': 'data10', 'width': '200px' },
-        { 'label': '11月回访情况', 'prop': 'data11', 'width': '200px' },
-        { 'label': '12月回访情况', 'prop': 'data12', 'width': '200px' },
-        { 'label': '创建时间', 'prop': 'addTime', 'width': '100px' }
-      ]
+        { 'label': '日志编号', 'prop': 'logCode', 'width': 100 },
+        { 'label': '操作账户', 'prop': 'operationUser', 'width': 120 },
+        { 'label': '操作类型', 'prop': 'operationType', 'width': 180 },
+        { 'label': '数据记录', 'prop': 'dataRecord' },
+        { 'label': '创建时间', 'prop': 'addTime', 'width': 150 }
+      ],
+      /** 删除操作日志对话框是否显示 */
+      deleteSystemLogsDialogVisible: false
     }
   },
   /** 生命周期函数 */
   created () {
     // 这里是发起表格数据请求的位置
-    this.getEmploymentStatusData()
+    this.getSystemLogsData()
   },
   /** 事件处理函数 */
   methods: {
@@ -124,10 +145,33 @@ export default {
       this.getEmploymentStatusData()
     },
 
-    /** 获取就业状态页面的专业列表数据 */
-    async getEmploymentStatusData () {
+    /** 删除系统操作日志 */
+    async deleteSystemLogs () {
       let formData = JSON.stringify({
-        'useraction': 'getEmploymentStatusData',
+        'useraction': 'deleteSystemLogsData',
+        'username': window.sessionStorage.getItem('username')
+      })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        this.$message({
+          message: result.data.data,
+          type: 'success',
+          showClose: true,
+          center: true
+        })
+        this.getSystemLogsData()
+        this.deleteSystemLogsDialogVisible = false
+      } else {
+        this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
+      }
+    },
+
+    /** 获取系统操作日志列表数据 */
+    async getSystemLogsData () {
+      let formData = JSON.stringify({
+        'useraction': 'getSystemLogsData',
         'username': window.sessionStorage.getItem('username'),
         'query': this.queryInfo
       })
@@ -145,12 +189,12 @@ export default {
     /** 监听每页显示多少数据的改变 */
     handleSizeChange (newSize) {
       this.queryInfo.pageSize = newSize
-      this.getEmploymentStatusData()
+      this.getSystemLogsData()
     },
     /** 监听页码的改变 */
     handleCurrentChange (newPage) {
       this.queryInfo.pageNum = newPage
-      this.getEmploymentStatusData()
+      this.getSystemLogsData()
     }
   }
 }
