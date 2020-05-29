@@ -147,101 +147,12 @@
         label="#"
       />
       <el-table-column
-        label="学生届数"
+        :key="table.prop"
+        v-for="table in tableHeader"
+        :label="table.label"
+        :prop="table.prop"
         align="center"
-        prop="studentLevel"
-      />
-      <el-table-column
-        label="所属专业"
-        align="center"
-        prop="toProfession"
-        width="150px"
-      />
-      <el-table-column
-        label="所属班级"
-        align="center"
-        prop="toClasses"
-        width="100px"
-      />
-      <el-table-column
-        label="学生学号"
-        align="center"
-        prop="studentCode"
-        width="120px"
-      />
-      <el-table-column
-        label="学生姓名"
-        align="center"
-        prop="studentName"
-        width="120px"
-      />
-      <el-table-column
-        label="学生性别"
-        align="center"
-        prop="studentSex"
-      />
-      <el-table-column
-        label="学生电话"
-        align="center"
-        prop="studentPhone"
-        width="160px"
-      />
-      <el-table-column
-        label="就业状态"
-        align="center"
-        prop="employmentStatus"
-        width="120px"
-      />
-      <el-table-column
-        label="实习单位名称"
-        align="center"
-        prop="companyName"
-        width="180px"
-      />
-      <el-table-column
-        label="实习单位地址"
-        align="center"
-        prop="companyAddress"
-        width="160px"
-      />
-      <el-table-column
-        label="岗位名称"
-        align="center"
-        prop="postName"
-      />
-      <el-table-column
-        label="实习薪资"
-        align="center"
-        prop="studentSalary"
-      />
-      <el-table-column
-        label="实习单位电话"
-        align="center"
-        prop="companyPhone"
-        width="160px"
-      />
-      <el-table-column
-        label="指导老师姓名"
-        align="center"
-        prop="teacherName"
-        width="120px"
-      />
-      <el-table-column
-        label="指导老师电话"
-        align="center"
-        prop="teacherPhone"
-        width="160px"
-      />
-      <el-table-column
-        label="学生状态"
-        align="center"
-        prop="studentStatus"
-      />
-      <el-table-column
-        label="创建时间"
-        align="center"
-        prop="addTime"
-        width="120px"
+        :width="table.width"
       />
       <el-table-column
         label="操作"
@@ -253,14 +164,14 @@
         <template slot-scope="scope">
           <el-tooltip
             effect="dark"
-            content="回访信息(可查看学生每个月的信息变更动态)"
+            content="查看企业(可查看本学生所在的企业)"
             placement="top"
           >
             <el-button
-              type="primary"
-              icon="el-icon-s-order"
+              type="info"
+              icon="el-icon-view"
               circle
-              @click="returnVisitDialogVisible1(scope.row)"
+              @click="toEnterpriseShow(scope.row.enterpriseName)"
             />
           </el-tooltip>
           <el-tooltip
@@ -310,7 +221,6 @@
       width="50%"
       :close-on-click-modal="false"
     >
-      <!--      对话框主体区域-->
       <el-form
         :model="addForm"
         :rules="addFormRules"
@@ -354,7 +264,6 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
-        <!--        联动菜单-->
         <el-form-item
           label="专业班级"
           prop="classesAndProfesion"
@@ -408,13 +317,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item
-          label="指导老师姓名"
+          label="直属主管"
           prop="teacherName"
         >
           <el-input v-model="addForm.teacherName" />
         </el-form-item>
         <el-form-item
-          label="指导老师电话"
+          label="主管电话"
           prop="teacherPhone"
         >
           <el-input
@@ -458,20 +367,6 @@
         </el-form-item>
         <el-form-item
           v-if="addForm.employmentStatus === '已安置'"
-          label="实习单位名称"
-          prop="companyName"
-        >
-          <el-input v-model="addForm.companyName" />
-        </el-form-item>
-        <el-form-item
-          v-if="addForm.employmentStatus === '已安置'"
-          label="岗位名称"
-          prop="postName"
-        >
-          <el-input v-model="addForm.postName" />
-        </el-form-item>
-        <el-form-item
-          v-if="addForm.employmentStatus === '已安置'"
           label="实习薪资"
           prop="studentSalary"
         >
@@ -479,39 +374,29 @@
         </el-form-item>
         <el-form-item
           v-if="addForm.employmentStatus === '已安置'"
-          label="实习单位电话"
-          prop="companyPhone"
-        >
-          <el-input
-            v-model="addForm.companyPhone"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="addForm.employmentStatus === '已安置'"
-          label="企业地址"
-          prop="companyAddress"
+          label="企业岗位"
+          prop="enterpriseAndPostData"
           width="200px"
         >
           <el-cascader
             size="large"
-            :options="chinaAddress"
-            v-model="companyAddressTemp"
+            :options="postDataCascaderOptions"
+            v-model="addForm.enterpriseAndPostData"
             :props="{ expandTrigger: 'hover' }"
             filterable
             clearable
             separator=" -> "
-            placeholder="试试搜索省或城市"
+            placeholder="试试搜索企业名称或岗位"
           />
         </el-form-item>
         <el-form-item
-          label="回访情况"
-          prop="returnVisit"
+          v-if="addForm.employmentStatus === '已安置'"
+          label="岗位职责"
+          prop="postDuty"
         >
-          <el-input v-model="addForm.returnVisit" />
+          <el-input v-model="addForm.postDuty" />
         </el-form-item>
       </el-form>
-      <!--      对话框底部区域-->
       <span
         slot="footer"
         class="dialog-footer"
@@ -531,7 +416,6 @@
       width="50%"
       :close-on-click-modal="false"
     >
-      <!--      对话框主体区域-->
       <el-form
         :model="editForm"
         :rules="editFormRules"
@@ -575,7 +459,6 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
-        <!--        联动菜单-->
         <el-form-item
           label="专业班级"
           prop="classesAndProfesion"
@@ -629,13 +512,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item
-          label="指导老师姓名"
+          label="直属主管"
           prop="teacherName"
         >
           <el-input v-model="editForm.teacherName" />
         </el-form-item>
         <el-form-item
-          label="指导老师电话"
+          label="主管电话"
           prop="teacherPhone"
         >
           <el-input
@@ -679,20 +562,6 @@
         </el-form-item>
         <el-form-item
           v-if="editForm.employmentStatus === '已安置'"
-          label="实习单位名称"
-          prop="companyName"
-        >
-          <el-input v-model="editForm.companyName" />
-        </el-form-item>
-        <el-form-item
-          v-if="editForm.employmentStatus === '已安置'"
-          label="岗位名称"
-          prop="postName"
-        >
-          <el-input v-model="editForm.postName" />
-        </el-form-item>
-        <el-form-item
-          v-if="editForm.employmentStatus === '已安置'"
           label="实习薪资"
           prop="studentSalary"
         >
@@ -700,39 +569,29 @@
         </el-form-item>
         <el-form-item
           v-if="editForm.employmentStatus === '已安置'"
-          label="实习单位电话"
-          prop="companyPhone"
-        >
-          <el-input
-            v-model="editForm.companyPhone"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="editForm.employmentStatus === '已安置'"
-          label="企业地址"
-          prop="companyAddress"
+          label="企业岗位"
+          prop="enterpriseAndPostData"
           width="200px"
         >
           <el-cascader
             size="large"
-            :options="chinaAddress"
-            v-model="companyAddressTemp"
+            :options="postDataCascaderOptions"
+            v-model="editForm.enterpriseAndPostData"
             :props="{ expandTrigger: 'hover' }"
             filterable
             clearable
             separator=" -> "
-            placeholder="试试搜索省或城市"
+            placeholder="试试搜索企业名称或岗位"
           />
         </el-form-item>
         <el-form-item
-          label="回访情况"
-          prop="returnVisit"
+          v-if="editForm.employmentStatus === '已安置'"
+          label="岗位职责"
+          prop="postDuty"
         >
-          <el-input v-model="editForm.returnVisit" />
+          <el-input v-model="editForm.postDuty" />
         </el-form-item>
       </el-form>
-      <!--      对话框底部区域-->
       <span
         slot="footer"
         class="dialog-footer"
@@ -742,54 +601,6 @@
           type="primary"
           @click="editstudent"
         >修改信息</el-button>
-      </span>
-    </el-dialog>
-
-    <!-- 学生回访信息对话框 -->
-    <el-dialog
-      title="学生回访信息"
-      :visible.sync="returnVisitDialogVisible"
-      width="50%"
-      :close-on-click-modal="false"
-    >
-      <!--      对话框主体区域-->
-      <el-form
-        label-width="100px"
-      >
-        <el-form-item
-          label="学生学号"
-        >
-          <el-input
-            v-model="returnVisitForm.studentCode"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          label="学生名称"
-        >
-          <el-input
-            v-model="returnVisitForm.studentName"
-            disabled
-          />
-        </el-form-item>
-        <el-form-item
-          v-for="(item, index) in returnVisitForm.monthData"
-          :label="`${index+1}月回访情况`"
-          :key="index"
-        >
-          <el-input
-            v-model="item[index+1]"
-            disabled
-            :class="[item[index+1]!=='本月无变动'?'my-input':'']"
-          />
-        </el-form-item>
-      </el-form>
-      <!--      对话框底部区域-->
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="returnVisitDialogVisible = false">取 消</el-button>
       </span>
     </el-dialog>
 
@@ -819,13 +630,31 @@
 
 <script>
 // 导入省市数据及解释器
-import { provinceAndCityData, CodeToText } from 'element-china-area-data'
+import { provinceAndCityData } from 'element-china-area-data'
 
 export default {
   name: 'StudentData',
   data () {
     return {
-      c: CodeToText,
+      tableHeader: [
+        { 'label': '学生届数', 'prop': 'studentLevel', 'width': 100 },
+        { 'label': '所属专业', 'prop': 'toProfession', 'width': 150 },
+        { 'label': '所属班级', 'prop': 'toClasses', 'width': 150 },
+        { 'label': '学生学号', 'prop': 'studentCode', 'width': 150 },
+        { 'label': '学生姓名', 'prop': 'studentName', 'width': 150 },
+        { 'label': '学生性别', 'prop': 'studentSex', 'width': 100 },
+        { 'label': '学生电话', 'prop': 'studentPhone', 'width': 180 },
+        { 'label': '就业状态', 'prop': 'employmentStatus', 'width': 100 },
+        { 'label': '实习单位名称', 'prop': 'enterpriseName', 'width': 200 },
+        { 'label': '实习单位地址', 'prop': 'postAddress', 'width': 300 },
+        { 'label': '岗位名称', 'prop': 'postName', 'width': 200 },
+        { 'label': '最新薪资', 'prop': 'studentSalary', 'width': 150 },
+        { 'label': '实习单位电话', 'prop': 'enterprisePhone', 'width': 180 },
+        { 'label': '直属主管', 'prop': 'teacherName', 'width': 150 },
+        { 'label': '主管电话', 'prop': 'teacherPhone', 'width': 180 },
+        { 'label': '学生状态', 'prop': 'studentStatus', 'width': 120 },
+        { 'label': '创建时间', 'prop': 'addTime', 'width': 150 }
+      ],
       // 企业地址数据
       chinaAddress: provinceAndCityData,
       noEmployment: [
@@ -866,26 +695,22 @@ export default {
       returnVisitDialogVisible: false,
       /** 控制文件上传对话框的显示与隐藏 */
       uploadDialogVisible: true,
-      /** 公共的单位地址临时属性 */
-      companyAddressTemp: '',
+      /** 企业岗位联级菜单数据 */
+      postDataCascaderOptions: '',
       /** 新增学生表单数据 */
       addForm: {
         studentCode: '',
         studentName: '',
         studentSex: '',
+        classesAndProfesion: [],
         studentPhone: '',
-        employmentStatus: '',
-        companyName: '',
-        postName: '',
-        studentSalary: 0,
-        companyPhone: '',
-        companyAddress: '',
+        studentStatus: '',
         teacherName: '',
         teacherPhone: '',
-        studentStatus: '',
-        classesAndProfesion: [],
-        // 回访情况
-        returnVisit: '本月无变动'
+        employmentStatus: '',
+        studentSalary: 0,
+        enterpriseAndPostData: [],
+        postDuty: ''
       },
       /** 表单验证相关配置 */
       addFormRules: {
@@ -980,30 +805,6 @@ export default {
             message: '请选择学生就业状态'
           }
         ],
-        companyName: [
-          {
-            required: true,
-            message: '请输入实习单位名称',
-            trigger: 'blur'
-          },
-          {
-            min: 2,
-            message: '长度在至少 2 个字符',
-            trigger: 'blur'
-          }
-        ],
-        postName: [
-          {
-            required: true,
-            message: '请输入实习岗位名称',
-            trigger: 'blur'
-          },
-          {
-            min: 2,
-            message: '长度在至少 2 个字符',
-            trigger: 'blur'
-          }
-        ],
         studentSalary: [
           {
             required: true,
@@ -1011,35 +812,23 @@ export default {
             trigger: 'blur'
           }
         ],
-        companyPhone: [
+        enterpriseAndPostData: [
           {
             required: true,
-            message: '请输入实习单位电话',
-            trigger: 'blur'
-          },
-          {
-            min: 11,
-            max: 11,
-            message: '长度 11 个字符',
+            message: '请选择企业岗位绑定',
             trigger: 'blur'
           }
         ],
-        companyAddress: [
+        postDuty: [
           {
             required: true,
-            message: '请选择实习单位地址',
-            trigger: 'blur'
-          }
-        ],
-        returnVisit: [
-          {
-            required: true,
-            message: '请输入本月回访情况',
+            message: '请输入岗位职责',
             trigger: 'blur'
           },
           {
-            min: 4,
-            message: '长度在至少 4 个字符',
+            min: 2,
+            max: 400,
+            message: '长度在 2 到 400 个字符',
             trigger: 'blur'
           }
         ]
@@ -1049,19 +838,15 @@ export default {
         studentCode: '',
         studentName: '',
         studentSex: '',
+        classesAndProfesion: [],
         studentPhone: '',
-        employmentStatus: '',
-        companyName: '',
-        postName: '',
-        studentSalary: 0,
-        companyPhone: '',
-        companyAddress: '',
+        studentStatus: '',
         teacherName: '',
         teacherPhone: '',
-        studentStatus: '',
-        classesAndProfesion: [],
-        // 回访情况
-        returnVisit: '本月无变动'
+        employmentStatus: '',
+        studentSalary: 0,
+        enterpriseAndPostData: [],
+        postDuty: ''
       },
       /** 编辑表单验证相关配置 */
       editFormRules: {
@@ -1156,30 +941,6 @@ export default {
             message: '请选择学生就业状态'
           }
         ],
-        companyName: [
-          {
-            required: true,
-            message: '请输入实习单位名称',
-            trigger: 'blur'
-          },
-          {
-            min: 2,
-            message: '长度在至少 2 个字符',
-            trigger: 'blur'
-          }
-        ],
-        postName: [
-          {
-            required: true,
-            message: '请输入实习岗位名称',
-            trigger: 'blur'
-          },
-          {
-            min: 2,
-            message: '长度在至少 2 个字符',
-            trigger: 'blur'
-          }
-        ],
         studentSalary: [
           {
             required: true,
@@ -1187,43 +948,26 @@ export default {
             trigger: 'blur'
           }
         ],
-        companyPhone: [
+        enterpriseAndPostData: [
           {
             required: true,
-            message: '请输入实习单位电话',
-            trigger: 'blur'
-          },
-          {
-            min: 11,
-            max: 11,
-            message: '长度 11 个字符',
+            message: '请选择企业岗位绑定',
             trigger: 'blur'
           }
         ],
-        companyAddress: [
+        postDuty: [
           {
             required: true,
-            message: '请选择实习单位地址',
-            trigger: 'blur'
-          }
-        ],
-        returnVisit: [
-          {
-            required: true,
-            message: '请输入本月回访情况',
+            message: '请输入岗位职责',
             trigger: 'blur'
           },
           {
-            min: 4,
-            message: '长度在至少 4 个字符',
+            min: 2,
+            max: 400,
+            message: '长度在 2 到 400 个字符',
             trigger: 'blur'
           }
         ]
-      },
-      /** 回访信息表单数据 */
-      returnVisitForm: {
-        studentCode: '',
-        studentName: ''
       }
     }
   },
@@ -1250,33 +994,6 @@ export default {
       if (val) {
         this.getProfessionAndClassesDataCascaderOptions()
       }
-    },
-    // 当添加学生对话框选择未就业则设置与就业有关的字段为待安置
-    'addForm.employmentStatus': function (val) {
-      if (val !== '已安置') {
-        this.addForm.companyPhone = val
-        this.addForm.companyName = val
-        this.addForm.postName = val
-        this.addForm.companyAddress = val
-      } else {
-        this.addForm.companyPhone = ''
-        this.addForm.companyName = ''
-        this.addForm.postName = ''
-        this.companyAddressTemp = ''
-      }
-    },
-    'editForm.employmentStatus': function (val) {
-      if (val !== '已安置') {
-        this.addForm.companyPhone = val
-        this.addForm.companyName = val
-        this.addForm.postName = val
-        this.addForm.companyAddress = val
-      }
-    },
-    // 城市代码数组转换为字符串
-    'companyAddressTemp': function (val) {
-      this.addForm.companyAddress = CodeToText[val[0]] + '-' + CodeToText[val[1]]
-      this.editForm.companyAddress = CodeToText[val[0]] + '-' + CodeToText[val[1]]
     }
   },
   /** 生命周期函数 */
@@ -1289,6 +1006,7 @@ export default {
       this.queryInfo.queryType = 'classesName'
     }
     this.getstudentData()
+    this.getPostDataCascaderOptions()
   },
   /** 事件处理函数 */
   methods: {
@@ -1356,7 +1074,6 @@ export default {
             username: window.sessionStorage.getItem('username'),
             ...this.addForm
           })
-          console.log(formData)
           // 提交登出请求
           const result = await this.$http.post('/data/', formData)
           if (result.data.ret === 0) {
@@ -1387,7 +1104,7 @@ export default {
       for (let key in studentData) {
         this.editForm[key] = studentData[key]
       }
-      console.log(this.editForm)
+
       // 遍历处理班级专业自动显示
       let cascaderOptions = this.cascaderOptions
       let arr = []
@@ -1405,34 +1122,30 @@ export default {
       }
       this.editForm.classesAndProfesion = arr
 
-      // 自动显示单位地址
-      let chinaAddress = this.chinaAddress
-      let address = studentData.companyAddress.split('-')
+      // 自动显示企业岗位
+      let postDataCascaderOptions = this.postDataCascaderOptions
+      let enterprisePost = [this.editForm.enterpriseName, this.editForm.postName]
       let arr1 = []
-      for (let i = 0; i < chinaAddress.length; i++) {
+      for (let i = 0; i < postDataCascaderOptions.length; i++) {
         // 获取省份
-        if (chinaAddress[i].label === address[0]) {
-          arr1.push(chinaAddress[i].value)
-          for (let ii = 0; ii < chinaAddress[i].children.length; ii++) {
+        if (postDataCascaderOptions[i].label === enterprisePost[0]) {
+          arr1.push(postDataCascaderOptions[i].value)
+          for (let ii = 0; ii < postDataCascaderOptions[i].children.length; ii++) {
             // 获取市区等
-            if (chinaAddress[i].children[ii].label === address[1]) {
-              arr1.push(chinaAddress[i].children[ii].value)
+            if (postDataCascaderOptions[i].children[ii].label === enterprisePost[1]) {
+              arr1.push(postDataCascaderOptions[i].children[ii].value)
             }
           }
         }
       }
-      this.companyAddressTemp = arr1
+      this.editForm.enterpriseAndPostData = arr1
       this.editDialogVisible = true
     },
     editstudent () {
       this.$refs.editFormRef.validate(async valid => {
         if (valid) {
-          // 学生信息修改页面当学生未就业设置有关字段为待安置
+          // 学生信息修改页面当学生未就业设置有关字段为其对应值
           if (this.editForm.employmentStatus !== '已安置') {
-            this.editForm.companyPhone = this.editForm.employmentStatus
-            this.editForm.companyName = this.editForm.employmentStatus
-            this.editForm.postName = this.editForm.employmentStatus
-            this.editForm.companyAddress = this.editForm.employmentStatus
             this.editForm.studentSalary = 0
           }
           let formData = JSON.stringify({
@@ -1460,40 +1173,6 @@ export default {
             })
           }
         }
-      })
-    },
-
-    /** 查看学生回访信息 */
-    async returnVisitDialogVisible1 (studentData) {
-      let formData = JSON.stringify({
-        useraction: 'returnVisitData',
-        username: window.sessionStorage.getItem('username'),
-        studentCode: studentData.studentCode
-      })
-      // 提交表单
-      const result = await this.$http.post('/data/', formData)
-      // 判断业务逻辑
-      if (result.data.ret === 0) {
-        this.returnVisitForm = result.data.data[0]
-        // 组装月份资料
-        let monthData = []
-        let index = 0
-        for (let i in result.data.data[0]) {
-          if (i !== 'statusID' && i !== 'addTime' && i !== 'studentCode') {
-            ++index
-            monthData.push({ [index]: result.data.data[0][i] })
-          }
-        }
-        this.returnVisitForm.monthData = monthData
-        this.returnVisitForm.studentName = studentData.studentName
-        this.returnVisitDialogVisible = true
-        return
-      }
-      this.$message({
-        message: '读取数据失败！',
-        type: 'error',
-        showClose: true,
-        center: true
       })
     },
 
@@ -1544,6 +1223,26 @@ export default {
         this.queryInfo.pageNum = result.data.pageNum
         this.total = result.data.total
         this.tableData = result.data.data
+        return
+      }
+      this.$message({
+        message: '读取数据失败！',
+        type: 'error',
+        showClose: true,
+        center: true
+      })
+    },
+
+    /** 获取企业岗位联级菜单数据 */
+    async getPostDataCascaderOptions () {
+      let formData = JSON.stringify({
+        useraction: 'getPostDataCascaderOptions',
+        username: window.sessionStorage.getItem('username') })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        this.postDataCascaderOptions = result.data.data
         return
       }
       this.$message({
@@ -1627,6 +1326,19 @@ export default {
       } else {
         this.$message({ message: '请上传以xls或xlsx为后缀的文件！', type: 'warning', showClose: true, center: true })
       }
+    },
+
+    /** 跳转到企业数据页面并显示本学生对应的企业 */
+    toEnterpriseShow (enterpriseName) {
+      if (enterpriseName === '未绑定') {
+        return this.$message({ message: '此学生未绑定企业岗位，暂不支持查看企业！', type: 'warning', showClose: true, center: true })
+      }
+      this.$router.push({
+        path: '/admin/enterpriseManage',
+        query: {
+          enterpriseName: enterpriseName
+        }
+      })
     }
   }
 }
@@ -1654,12 +1366,4 @@ width: 280px;
 width: 120px;
 }
 
-/** 自定义有具体内容的输入框显示特定样式 */
-.my-input {
-/deep/.el-input__inner {
-  color: #409EFF !important;
-  font-size: 15px;
-  font-weight: bold;
-}
-}
 </style>

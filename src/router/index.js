@@ -16,8 +16,9 @@ const modifyAccount = () => import('../components/admin/modifyAccount')
 const modifyPassWord = () => import('../components/admin/modifyPassWord')
 const professionManage = () => import('../components/admin/professionManage')
 const classesManage = () => import('../components/admin/classesManage')
+const enterpriseManage = () => import('../components/admin/enterpriseManage')
+const postManage = () => import('../components/admin/postManage')
 const studentData = () => import('../components/admin/studentData')
-const returnVisit = () => import('../components/admin/returnVisit')
 const sexRatio = () => import('../components/admin/sexRatio')
 const unemployedRate = () => import('../components/admin/unemployedRate')
 const salaryList = () => import('../components/admin/salaryList')
@@ -54,8 +55,9 @@ const routes = [
       { path: '/admin/modifyPassWord', component: modifyPassWord },
       { path: '/admin/professionManage', component: professionManage },
       { path: '/admin/classesManage', component: classesManage },
+      { path: '/admin/enterpriseManage', component: enterpriseManage },
+      { path: '/admin/postManage', component: postManage },
       { path: '/admin/studentData', component: studentData },
-      { path: '/admin/returnVisit', component: returnVisit },
       { path: '/admin/sexRatio', component: sexRatio },
       { path: '/admin/unemployedRate', component: unemployedRate },
       { path: '/admin/salaryList', component: salaryList },

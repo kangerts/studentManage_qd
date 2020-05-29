@@ -144,7 +144,10 @@ export default {
           'subMenuName': '创建容器',
           'children': [
             { 'id': '2-1', 'subMenuName': '专业管理', 'path': '/admin/professionManage' },
-            { 'id': '2-2', 'subMenuName': '班级管理', 'path': '/admin/classesManage' }
+            { 'id': '2-2', 'subMenuName': '班级管理', 'path': '/admin/classesManage' },
+            { 'id': '2-3', 'subMenuName': '企业管理', 'path': '/admin/enterpriseManage' },
+            { 'id': '2-4', 'subMenuName': '岗位管理', 'path': '/admin/postManage' }
+
           ]
         },
         {
@@ -152,8 +155,8 @@ export default {
           'icon': 'el-icon-s-order',
           'subMenuName': '学生信息',
           'children': [
-            { 'id': '3-1', 'subMenuName': '学生数据', 'path': '/admin/studentData' },
-            { 'id': '3-2', 'subMenuName': '回访数据', 'path': '/admin/returnVisit' }
+            { 'id': '3-1', 'subMenuName': '学生数据', 'path': '/admin/studentData' }
+            // { 'id': '3-2', 'subMenuName': '回访数据', 'path': '/admin/returnVisit' }
           ]
         },
         {

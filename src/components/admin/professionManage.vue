@@ -65,7 +65,7 @@
           </el-tooltip>
           <el-tooltip
             effect="dark"
-            content="删除专业(不会删除班级及学生)"
+            content="删除专业(只会删除绑定的班级)"
             placement="top"
           >
             <el-button
