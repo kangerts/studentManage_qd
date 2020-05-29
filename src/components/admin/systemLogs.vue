@@ -122,11 +122,11 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '日志编号', 'prop': 'logCode', 'width': 100 },
+        { 'label': '日志编号', 'prop': 'logCode', 'width': 80 },
         { 'label': '操作账户', 'prop': 'operationUser', 'width': 120 },
-        { 'label': '操作类型', 'prop': 'operationType', 'width': 180 },
+        { 'label': '操作类型', 'prop': 'operationType', 'width': 120 },
         { 'label': '数据记录', 'prop': 'dataRecord' },
-        { 'label': '创建时间', 'prop': 'addTime', 'width': 150 }
+        { 'label': '创建时间', 'prop': 'addTime', 'width': 130 }
       ],
       /** 删除操作日志对话框是否显示 */
       deleteSystemLogsDialogVisible: false
