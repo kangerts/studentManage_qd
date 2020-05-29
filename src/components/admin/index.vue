@@ -8,7 +8,7 @@
     <div
       style="cursor:pointer;color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #03B8CF"
       class="box-card"
-      @click="$router.push('/admin/returnVisit')"
+      @click="$router.push('/admin/postManage')"
     >
       <div style="height: 40px;line-height: 40px">
         {{ this.indexData.indexList[0] }}
