@@ -265,6 +265,20 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item
+          label="学生籍贯"
+          prop="studentNativePlace"
+        >
+          <el-cascader
+            placeholder="试试搜索城市名称吧~"
+            v-model="studentNativePlaceTemp"
+            :options="studentNativePlaceCascaderOptions"
+            :props="{ expandTrigger: 'hover' }"
+            filterable
+            clearable
+            separator=" -> "
+          />
+        </el-form-item>
+        <el-form-item
           label="专业班级"
           prop="classesAndProfesion"
           width="200px"
@@ -460,6 +474,20 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item
+          label="学生籍贯"
+          prop="studentNativePlace"
+        >
+          <el-cascader
+            placeholder="试试搜索城市名称吧~"
+            v-model="studentNativePlaceTemp"
+            :options="studentNativePlaceCascaderOptions"
+            :props="{ expandTrigger: 'hover' }"
+            filterable
+            clearable
+            separator=" -> "
+          />
+        </el-form-item>
+        <el-form-item
           label="专业班级"
           prop="classesAndProfesion"
           width="200px"
@@ -630,7 +658,7 @@
 
 <script>
 // 导入省市数据及解释器
-import { provinceAndCityData } from 'element-china-area-data'
+import { provinceAndCityData, CodeToText } from 'element-china-area-data'
 
 export default {
   name: 'StudentData',
@@ -643,6 +671,7 @@ export default {
         { 'label': '学生学号', 'prop': 'studentCode', 'width': 150 },
         { 'label': '学生姓名', 'prop': 'studentName', 'width': 150 },
         { 'label': '学生性别', 'prop': 'studentSex', 'width': 100 },
+        { 'label': '学生籍贯', 'prop': 'studentNativePlace', 'width': 100 },
         { 'label': '学生电话', 'prop': 'studentPhone', 'width': 180 },
         { 'label': '就业状态', 'prop': 'employmentStatus', 'width': 100 },
         { 'label': '实习单位名称', 'prop': 'enterpriseName', 'width': 200 },
@@ -697,11 +726,16 @@ export default {
       uploadDialogVisible: true,
       /** 企业岗位联级菜单数据 */
       postDataCascaderOptions: '',
+      /** 学生籍贯地址联级菜单数据 */
+      studentNativePlaceCascaderOptions: provinceAndCityData,
+      /** 学生籍贯地址临时属性 */
+      studentNativePlaceTemp: '',
       /** 新增学生表单数据 */
       addForm: {
         studentCode: '',
         studentName: '',
         studentSex: '',
+        studentNativePlace: '',
         classesAndProfesion: [],
         studentPhone: '',
         studentStatus: '',
@@ -747,6 +781,13 @@ export default {
             trigger: 'blur'
           }
         ],
+        studentNativePlace: [
+          {
+            required: true,
+            message: '请选择学生籍贯',
+            trigger: 'blur'
+          }
+        ],
         classesAndProfesion: [
           {
             required: true,
@@ -776,7 +817,7 @@ export default {
         teacherName: [
           {
             required: true,
-            message: '请输入指导老师姓名',
+            message: '请输入直属主管老师姓名',
             trigger: 'blur'
           },
           {
@@ -789,7 +830,7 @@ export default {
         teacherPhone: [
           {
             required: true,
-            message: '请输入指导老师电话',
+            message: '请输入直属主管老师电话',
             trigger: 'blur'
           },
           {
@@ -838,6 +879,7 @@ export default {
         studentCode: '',
         studentName: '',
         studentSex: '',
+        studentNativePlace: '',
         classesAndProfesion: [],
         studentPhone: '',
         studentStatus: '',
@@ -883,6 +925,13 @@ export default {
             trigger: 'blur'
           }
         ],
+        studentNativePlace: [
+          {
+            required: true,
+            message: '请选择学生籍贯',
+            trigger: 'blur'
+          }
+        ],
         classesAndProfesion: [
           {
             required: true,
@@ -912,7 +961,7 @@ export default {
         teacherName: [
           {
             required: true,
-            message: '请输入指导老师姓名',
+            message: '请输入直属主管老师姓名',
             trigger: 'blur'
           },
           {
@@ -925,7 +974,7 @@ export default {
         teacherPhone: [
           {
             required: true,
-            message: '请输入指导老师电话',
+            message: '请输入直属主管老师电话',
             trigger: 'blur'
           },
           {
@@ -994,6 +1043,11 @@ export default {
       if (val) {
         this.getProfessionAndClassesDataCascaderOptions()
       }
+    },
+    studentNativePlaceTemp: function (val) {
+      let data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
+      this.editForm.studentNativePlace = data
+      this.addForm.studentNativePlace = data
     }
   },
   /** 生命周期函数 */
@@ -1111,6 +1165,24 @@ export default {
         this.editForm[key] = studentData[key]
       }
 
+      // 自动显示学生籍贯
+      let data = studentData.studentNativePlace.split('-')
+      let studentNativePlaceCascaderOptions = this.studentNativePlaceCascaderOptions
+      let arr0 = []
+      for (let k = 0; k < studentNativePlaceCascaderOptions.length; k++) {
+        // 获取省份代号
+        if (data[0] === studentNativePlaceCascaderOptions[k].label) {
+          arr0.push(studentNativePlaceCascaderOptions[k].value)
+          for (let j = 0; j < studentNativePlaceCascaderOptions[k].children.length; j++) {
+            // 获取城市代号
+            if (data[1] === studentNativePlaceCascaderOptions[k].children[j].label) {
+              arr0.push(studentNativePlaceCascaderOptions[k].children[j].value)
+            }
+          }
+        }
+      }
+      this.studentNativePlaceTemp = arr0
+
       // 遍历处理班级专业自动显示
       let cascaderOptions = this.cascaderOptions
       let arr = []
@@ -1133,11 +1205,11 @@ export default {
       let enterprisePost = [this.editForm.enterpriseName, this.editForm.postName]
       let arr1 = []
       for (let i = 0; i < postDataCascaderOptions.length; i++) {
-        // 获取省份
+        // 获取公司
         if (postDataCascaderOptions[i].label === enterprisePost[0]) {
           arr1.push(postDataCascaderOptions[i].value)
           for (let ii = 0; ii < postDataCascaderOptions[i].children.length; ii++) {
-            // 获取市区等
+            // 获取岗位
             if (postDataCascaderOptions[i].children[ii].label === enterprisePost[1]) {
               arr1.push(postDataCascaderOptions[i].children[ii].value)
             }
