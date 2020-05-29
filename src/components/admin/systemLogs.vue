@@ -137,6 +137,13 @@ export default {
     // 这里是发起表格数据请求的位置
     this.getSystemLogsData()
   },
+  watch: {
+    'queryInfo.queryType': function (val) {
+      if (val === 'noSearch') {
+        this.getSystemLogsData()
+      }
+    }
+  },
   /** 事件处理函数 */
   methods: {
     /** 修复当用户在大于1的分页进行数据搜索没有返回值的问题 */
