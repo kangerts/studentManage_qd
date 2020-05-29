@@ -14,7 +14,7 @@
         {{ this.indexData.indexList[0] }}
       </div>
       <div style="height: 60px;line-height: 60px;font-weight: bold;font-size: 35px">
-        {{ this.indexData.employmentStatusCount }}
+        {{ this.indexData.postCount }}
       </div>
     </div>
     <div
@@ -107,7 +107,7 @@ export default {
     return {
       // 首页数据
       indexData: {
-        employmentStatusCount: 0,
+        postCount: 0,
         unemployedCount: 0,
         employmentCount: 0,
         studentSumCount: 0,
@@ -115,7 +115,7 @@ export default {
         classesSumCount: 0,
         boySumCount: 0,
         girlSumCount: 0,
-        indexList: ['回访数据数', '未就业人数', '已就业人数', '学生总人数', '专业总个数', '班级总个数', '男生总人数', '女生总人数']
+        indexList: ['企业岗位数', '未就业人数', '已就业人数', '学生总人数', '专业总个数', '班级总个数', '男生总人数', '女生总人数']
       }
     }
   },
@@ -132,14 +132,9 @@ export default {
       const result = await this.$http.post('/data/', formData)
       // 判断业务逻辑
       if (result.data.ret === 0) {
-        this.indexData.employmentStatusCount = result.data.employmentStatusCount
-        this.indexData.unemployedCount = result.data.unemployedCount
-        this.indexData.employmentCount = result.data.employmentCount
-        this.indexData.studentSumCount = result.data.studentSumCount
-        this.indexData.professionSumCount = result.data.professionSumCount
-        this.indexData.classesSumCount = result.data.classesSumCount
-        this.indexData.boySumCount = result.data.boySumCount
-        this.indexData.girlSumCount = result.data.girlSumCount
+        for (let key in result.data) {
+          this.indexData[key] = result.data[key]
+        }
       }
     }
   }
