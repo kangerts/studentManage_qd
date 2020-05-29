@@ -1069,6 +1069,12 @@ export default {
     addstudent () {
       this.$refs.addFormRef.validate(async valid => {
         if (valid) {
+          // 学生信息修改页面当学生未就业设置有关字段为其对应值
+          if (this.editForm.employmentStatus !== '已安置') {
+            this.editForm.studentSalary = 0
+            this.editForm.enterpriseAndPostData = []
+            this.editForm.postDuty = ''
+          }
           let formData = JSON.stringify({
             useraction: 'addstudent',
             username: window.sessionStorage.getItem('username'),
