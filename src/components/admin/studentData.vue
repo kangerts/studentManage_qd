@@ -1069,11 +1069,11 @@ export default {
     addstudent () {
       this.$refs.addFormRef.validate(async valid => {
         if (valid) {
-          // 学生信息修改页面当学生未就业设置有关字段为其对应值
-          if (this.editForm.employmentStatus !== '已安置') {
-            this.editForm.studentSalary = 0
-            this.editForm.enterpriseAndPostData = []
-            this.editForm.postDuty = ''
+          // 修复 多次添加学生信息，已安置学生表单会污染其他表单
+          if (this.addForm.employmentStatus !== '已安置') {
+            this.addForm.studentSalary = 0
+            this.addForm.enterpriseAndPostData = []
+            this.addForm.postDuty = ''
           }
           let formData = JSON.stringify({
             useraction: 'addstudent',
@@ -1150,7 +1150,7 @@ export default {
     editstudent () {
       this.$refs.editFormRef.validate(async valid => {
         if (valid) {
-          // 学生信息修改页面当学生未就业设置有关字段为其对应值
+          // 修复 多次修改学生信息，已安置学生表单会污染其他表单
           if (this.editForm.employmentStatus !== '已安置') {
             this.editForm.studentSalary = 0
             this.editForm.enterpriseAndPostData = []
