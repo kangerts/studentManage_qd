@@ -20,7 +20,7 @@
       class="right-col"
     >
       <el-row style="height: 50px;color: #409EFF">
-        <i class="el-icon-s-promotion" />当前版本:V1.0
+        <i class="el-icon-s-promotion" />当前版本:V1.5
       </el-row>
     </el-col>
   </el-row>
@@ -34,12 +34,20 @@ export default {
       // 时间线列表数据
       timeline: [
         {
+          content: '新增 企业、岗位管理 优化 学生信息显示',
+          timestamp: '2020-05-29 11:45',
+          size: 'normal',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#409EFF'
+        },
+        {
           content: '更新 项目依赖版本',
           timestamp: '2020-04-02 22:45',
           size: 'normal',
           type: 'success',
           icon: 'el-icon-more',
-          color: '#409EFF'
+          color: '#0bbd87'
         },
         {
           content: '优化 系统整体运行速度',
