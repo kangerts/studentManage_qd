@@ -671,7 +671,7 @@ export default {
         { 'label': '学生学号', 'prop': 'studentCode', 'width': 150 },
         { 'label': '学生姓名', 'prop': 'studentName', 'width': 150 },
         { 'label': '学生性别', 'prop': 'studentSex', 'width': 100 },
-        { 'label': '学生籍贯', 'prop': 'studentNativePlace', 'width': 100 },
+        { 'label': '学生籍贯', 'prop': 'studentNativePlace', 'width': 120 },
         { 'label': '学生电话', 'prop': 'studentPhone', 'width': 180 },
         { 'label': '就业状态', 'prop': 'employmentStatus', 'width': 100 },
         { 'label': '实习单位名称', 'prop': 'enterpriseName', 'width': 200 },
