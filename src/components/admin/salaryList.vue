@@ -47,7 +47,7 @@ export default {
       placeholder: '试试搜索专业名称吧',
       cascaderOptions: [], // 专业班级联动菜单数据
       cascaderValues: '', // 专业班级联动菜单值
-      type: 'getProfessionPeopleData' // 获取数据的类型
+      type: 'getProfessionSalaryData' // 获取数据的类型
     }
   },
   mounted () {
