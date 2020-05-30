@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%;height: 460px">
+  <div style="width: 100%;height: 500px">
     <el-tooltip
       effect="dark"
       :content="tooltipContent"
@@ -30,7 +30,7 @@
       :init-options="initCharts"
       autoresize
       ref="salaryListRef"
-      style="height: 100%;width: 100%;border-radius: 25px"
+      style="width: 100%;margin-top: 25px"
     />
   </div>
 </template>
@@ -312,6 +312,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+/deep/.echarts {
+  > div {
+    border-radius: 25px;
+  }
+}
 </style>
