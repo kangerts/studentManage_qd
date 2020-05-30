@@ -134,7 +134,7 @@ export default {
           visualMap: {
             show: true,
             min: 0,
-            max: 200,
+            max: 100,
             left: 100,
             bottom: 200,
             text: ['多', '少'], // 文本，默认为数值文本
