@@ -51,7 +51,7 @@
                 type="primary"
                 icon="el-icon-plus"
                 circle
-                @click="addDialogVisible = true"
+                @click="addDialogVisible = true, studentNativePlaceTemp = ''"
               />
             </el-tooltip>
           </el-row>
@@ -153,6 +153,13 @@
         :prop="table.prop"
         align="center"
         :width="table.width"
+      />
+      <el-table-column
+        width="160"
+        :formatter="dateFormatter"
+        label="修改时间"
+        prop="addTime"
+        align="center"
       />
       <el-table-column
         label="操作"
@@ -659,6 +666,7 @@
 <script>
 // 导入省市数据及解释器
 import { provinceAndCityData, CodeToText } from 'element-china-area-data'
+import moment from 'moment'
 
 export default {
   name: 'StudentData',
@@ -681,8 +689,7 @@ export default {
         { 'label': '实习单位电话', 'prop': 'enterprisePhone', 'width': 180 },
         { 'label': '直属主管', 'prop': 'teacherName', 'width': 150 },
         { 'label': '主管电话', 'prop': 'teacherPhone', 'width': 180 },
-        { 'label': '学生状态', 'prop': 'studentStatus', 'width': 120 },
-        { 'label': '创建时间', 'prop': 'addTime', 'width': 150 }
+        { 'label': '学生状态', 'prop': 'studentStatus', 'width': 120 }
       ],
       // 企业地址数据
       chinaAddress: provinceAndCityData,
@@ -1045,9 +1052,15 @@ export default {
       }
     },
     studentNativePlaceTemp: function (val) {
-      let data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
-      this.editForm.studentNativePlace = data
-      this.addForm.studentNativePlace = data
+      console.log(val)
+      if (val.length !== 0) {
+        let data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
+        this.editForm.studentNativePlace = data
+        this.addForm.studentNativePlace = data
+      } else {
+        this.editForm.studentNativePlace = ''
+        this.addForm.studentNativePlace = ''
+      }
     }
   },
   /** 生命周期函数 */
@@ -1331,6 +1344,13 @@ export default {
         showClose: true,
         center: true
       })
+    },
+
+    /** 时间格式化 */
+    dateFormatter: function (row, column) {
+      var date = row[column.property]
+      if (date === undefined) return ''
+      return moment(date).format('YYYY-MM-DD HH:mm:ss')
     },
 
     /** 监听每页显示多少数据的改变 */
