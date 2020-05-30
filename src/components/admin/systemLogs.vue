@@ -66,6 +66,13 @@
         :prop="table.prop"
         align="center"
       />
+      <el-table-column
+        width="160"
+        :formatter="dateFormatter"
+        label="创建时间"
+        prop="addTime"
+        align="center"
+      />
     </el-table>
     <!--    分页器区域-->
     <el-pagination
@@ -101,6 +108,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'SystemLogs',
   data () {
@@ -125,8 +133,7 @@ export default {
         { 'label': '日志编号', 'prop': 'logCode', 'width': 80 },
         { 'label': '操作账户', 'prop': 'operationUser', 'width': 120 },
         { 'label': '操作类型', 'prop': 'operationType', 'width': 120 },
-        { 'label': '数据记录', 'prop': 'dataRecord' },
-        { 'label': '创建时间', 'prop': 'addTime', 'width': 130 }
+        { 'label': '数据记录', 'prop': 'dataRecord' }
       ],
       /** 删除操作日志对话框是否显示 */
       deleteSystemLogsDialogVisible: false
@@ -193,6 +200,16 @@ export default {
       }
       this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
     },
+
+    /** 时间格式化 */
+    dateFormatter: function (row, column) {
+      var date = row[column.property]
+
+      if (date === undefined) { return '' };
+
+      return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    },
+
     /** 监听每页显示多少数据的改变 */
     handleSizeChange (newSize) {
       this.queryInfo.pageSize = newSize
