@@ -141,21 +141,19 @@ export default {
       var bodyMax = 0 // 指定图形界限的值(总人数)
       var boyNum = 0 // 男孩数量
       var girlNum = 0 // 女孩数量
-      if (type === 'getProfessionPeopleData') {
-        formData = JSON.stringify({
-          'useraction': 'getPeopleData',
-          'type': type === 'getProfessionPeopleData' ? 'getProfessionPeopleData' : 'getClassesPeopleData',
-          'username': window.sessionStorage.getItem('username'),
-          'professionCode': code
-        })
-        // 提交表单
-        const result = await this.$http.post('/data/', formData)
-        // 判断业务逻辑
-        if (result.data.ret === 0) {
-          bodyMax = result.data.bodyMax
-          boyNum = result.data.boyNum
-          girlNum = result.data.girlNum
-        }
+      formData = JSON.stringify({
+        'useraction': 'getPeopleData',
+        'type': type === 'getProfessionPeopleData' ? 'getProfessionPeopleData' : 'getClassesPeopleData',
+        'username': window.sessionStorage.getItem('username'),
+        'code': code
+      })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        bodyMax = result.data.bodyMax
+        boyNum = result.data.boyNum
+        girlNum = result.data.girlNum
       }
       /**
          * echarts数据显示
