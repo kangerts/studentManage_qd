@@ -34,12 +34,20 @@ export default {
       // 时间线列表数据
       timeline: [
         {
+          content: '新增 工资榜显示专业或班级最高最低工资及平均工资',
+          timestamp: '2020-05-30 13:21',
+          size: 'normal',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#409EFF'
+        },
+        {
           content: '新增 企业、岗位管理 优化 学生信息显示',
           timestamp: '2020-05-29 11:45',
           size: 'normal',
           type: 'success',
           icon: 'el-icon-more',
-          color: '#409EFF'
+          color: '#0bbd87'
         },
         {
           content: '更新 项目依赖版本',
