@@ -144,25 +144,9 @@ export default {
       if (type === 'getProfessionPeopleData') {
         formData = JSON.stringify({
           'useraction': 'getPeopleData',
-          'type': type,
+          'type': type === 'getProfessionPeopleData' ? 'getProfessionPeopleData' : 'getClassesPeopleData',
           'username': window.sessionStorage.getItem('username'),
           'professionCode': code
-        })
-        // 提交表单
-        const result = await this.$http.post('/data/', formData)
-        // 判断业务逻辑
-        if (result.data.ret === 0) {
-          bodyMax = result.data.bodyMax
-          boyNum = result.data.boyNum
-          girlNum = result.data.girlNum
-        }
-      }
-      if (type === 'getClassesPeopleData') {
-        formData = JSON.stringify({
-          'useraction': 'getPeopleData',
-          'type': type,
-          'username': window.sessionStorage.getItem('username'),
-          'classesCode': code
         })
         // 提交表单
         const result = await this.$http.post('/data/', formData)
