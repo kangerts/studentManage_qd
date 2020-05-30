@@ -52,7 +52,6 @@ export default {
   },
   mounted () {
     this.getProfessionDataCascaderOptions()
-    this.getSalaryData()
   },
   methods: {
     changeViewData () {
