@@ -49,7 +49,7 @@ export default {
           /** 判断是否因为用户未登录可以退出 */
           let username = window.sessionStorage.getItem('username')
           if (username === null || username === undefined || username === '') {
-            this.$router.push('login')
+            this.$router.push('/login')
             this.$message({ message: '用户未登录，请重新登录', type: 'warning', showClose: true, center: true })
           }
           this.lastTime = new Date().getTime() // 如果在10分钟内点击，则把这次点击的时间记录覆盖掉之前存的最后一次点击的时间
