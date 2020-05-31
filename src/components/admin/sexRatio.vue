@@ -50,7 +50,6 @@ export default {
   },
   mounted () {
     this.getProfessionDataCascaderOptions()
-    this.getPeopleData()
   },
   methods: {
     changeViewData () {
