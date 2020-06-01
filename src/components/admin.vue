@@ -37,7 +37,7 @@
         <!--        页面左侧菜单区域-->
         <el-menu
           :collapse="isCollapse"
-          default-active="/admin"
+          :default-active="$route.path"
           background-color="#EEF1F6"
           text-color="#48576a"
           active-text-color="#409EFF"
