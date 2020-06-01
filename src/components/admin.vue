@@ -211,8 +211,6 @@ export default {
       this.$router.push('/admin')
     }
   },
-  mounted () {
-  },
   methods: {
     /** tabs标签相关函数 */
     // tab切换时，动态的切换路由
