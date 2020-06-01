@@ -1,38 +1,38 @@
 <template>
   <el-form
-    :model="modifyPassWord"
+    :model="modifyAccount"
     :rules="rulesForm"
     label-width="80px"
-    ref="initForm"
+    ref="modifyAccountForm"
   >
     <el-form-item
       label="原始账户"
-      prop="oldPassword"
+      prop="oldUsername"
     >
       <el-input
         clearable
         prefix-icon="el-icon-c-scale-to-original"
-        v-model="modifyPassWord.oldPassword"
+        v-model="modifyAccount.oldUsername"
       />
     </el-form-item>
     <el-form-item
       label="新账户"
-      prop="password"
+      prop="newusername"
     >
       <el-input
         clearable
         prefix-icon="el-icon-c-scale-to-original"
-        v-model="modifyPassWord.password"
+        v-model="modifyAccount.newusername"
       />
     </el-form-item>
     <el-form-item
       label="确认账户"
-      prop="enterpassword"
+      prop="enterUsername"
     >
       <el-input
         clearable
         prefix-icon="el-icon-c-scale-to-original"
-        v-model="modifyPassWord.enterpassword"
+        v-model="modifyAccount.enterUsername"
       />
     </el-form-item>
     <el-form-item>
@@ -52,10 +52,10 @@ export default {
   name: 'ModifyAccount',
   data () {
     // 校验密码是否一致
-    var enterpassword = (rule, value, callback) => {
+    var enterUsername = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入新账户'))
-      } else if (value !== this.modifyPassWord.password) {
+      } else if (value !== this.modifyAccount.newusername) {
         callback(new Error('两次输入的账户不一致!'))
       } else {
         callback()
@@ -64,23 +64,23 @@ export default {
     return {
       // 是否设置加载状态
       isLoading: false,
-      modifyPassWord: {
-        oldPassword: '',
-        password: '',
-        enterpassword: ''
+      modifyAccount: {
+        oldUsername: '',
+        newusername: '',
+        enterUsername: ''
       },
       // 长度校验
       rulesForm: {
-        oldPassword: [
+        oldUsername: [
           { required: true, message: '请输入原始账户', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
         ],
-        password: [
+        newusername: [
           { required: true, message: '请输入新账户', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
         ],
-        enterpassword: [
-          { validator: enterpassword, trigger: 'blur' },
+        enterUsername: [
+          { validator: enterUsername, trigger: 'blur' },
           { required: true, message: '请确认新账户', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
         ]
@@ -92,17 +92,17 @@ export default {
     // 表单提交方法
     async submitForm () {
       const message = this.$message
-      this.$refs.initForm.validate(async valid => {
+      this.$refs.modifyAccountForm.validate(async valid => {
         // 判断是否合法
         if (valid) {
           // 设置按钮状态
           this.isLoading = true
           // 获取表单数据
-          let data = this.modifyPassWord
+          let data = this.modifyAccount
           let formData = JSON.stringify({
             'useraction': 'userModifyAccount',
-            'username': data.oldPassword,
-            'newusername': data.enterpassword
+            'username': data.oldUsername,
+            'newusername': data.enterUsername
           })
           // 提交表单
           const result = await this.$http.post('/user/', formData)

@@ -119,7 +119,7 @@ export default {
   data () {
     return {
       /** tabs标签相关属性 */
-      // 当前打开的tabs下标
+      // 当前打开的tabs名称
       activeTabas: '/admin',
       Tabs: [{
         title: '系统首页',
@@ -156,7 +156,6 @@ export default {
           'subMenuName': '学生信息',
           'children': [
             { 'id': '3-1', 'subMenuName': '学生数据', 'path': '/admin/studentData' }
-            // { 'id': '3-2', 'subMenuName': '回访数据', 'path': '/admin/returnVisit' }
           ]
         },
         {
@@ -207,9 +206,7 @@ export default {
   },
   created () {
     // 保证admin中的页面刷新后重置到/admin路由下
-    if (this.$route.path !== '/admin') {
-      this.$router.push('/admin')
-    }
+    if (this.$route.path !== '/admin') this.$router.push('/admin')
   },
   methods: {
     /** tabs标签相关函数 */

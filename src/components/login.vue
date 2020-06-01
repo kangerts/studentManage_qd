@@ -67,17 +67,16 @@ export default {
   // 方法绑定
   methods: {
     // 检测是否初始化系统
-    isSysteInit: async function () {
+    async isSysteInit () {
       let formData = JSON.stringify({ 'useraction': 'isSystemInit' })
       const result = await this.$http.post('/user/', formData)
       // 判断业务逻辑
-      let router = this.$router
       if (result.data.ret === 1) {
-        router.push('init')
+        this.$router.push('init')
       }
     },
     // 表单提交方法
-    submitForm: function () {
+    submitForm () {
       // 设置按钮状态
       let message = this.$message
       let route = this.$router
@@ -86,19 +85,16 @@ export default {
         // 判断是否合法
         if (valid) {
           loginButton.loading = true
-          // 获取表单数据
-          let data = this.loginForm
           let formData = JSON.stringify({
             'useraction': 'userLogin',
-            'username': data.username,
-            'password': data.password
+            ...this.loginForm
           })
           // 提交表单
           const result = await this.$http.post('/user/', formData)
           if (result.data.ret === 0) {
             loginButton.loading = false
             // 登录成功保存用户账号
-            window.sessionStorage.setItem('username', data.username)
+            window.sessionStorage.setItem('username', this.loginForm.username)
             message({ message: result.data.data, type: 'success', showClose: true, center: true })
             route.push('/admin')
           } else if (result.data.ret === 1) {

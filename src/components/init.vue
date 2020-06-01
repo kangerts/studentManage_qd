@@ -93,17 +93,14 @@ export default {
   // 方法绑定
   methods: {
     // 检测是否初始化系统
-    isSysteInit: async function () {
+    async isSysteInit () {
       let formData = JSON.stringify({ 'useraction': 'isSystemInit' })
       // 提交表单
       const result = await this.$http.post('/user/', formData)
       // 判断业务逻辑
       if (result.data.ret === 0) {
         this.$message({ message: result.data.data, type: 'success', showClose: true, center: true })
-        let router = this.$router
-        setTimeout(function () {
-          router.push('login')
-        }, 1500)
+        this.$router.push('login')
       }
       if (result.data.ret === 1) {
         this.$message({ message: result.data.data, type: 'warning', showClose: true, center: true })
