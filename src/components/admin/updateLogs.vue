@@ -1,5 +1,8 @@
 <template>
-  <el-row :gutter="100">
+  <el-row
+    :gutter="100"
+    style="height: 500px;overflow: auto;"
+  >
     <el-col :span="10">
       <el-timeline>
         <el-timeline-item
