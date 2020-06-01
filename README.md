@@ -1,4 +1,5 @@
-# 学生就业跟踪系统(前端)
+# 学生就业管理系统(前端)
+[点击查看后端项目](https://github.com/kangerts/studentManage_hd)
 
 ## 项目开发环境
 - IDE:      vscode
