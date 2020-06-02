@@ -304,7 +304,7 @@ export default {
         { 'label': '天眼查分数', 'prop': 'skyEyeScore', 'width': 100 },
         { 'label': '备注', 'prop': 'remarks', 'width': 300 },
         { 'label': '岗位数量', prop: 'postCount' },
-        { 'label': '更新日期', 'prop': 'addTime', 'width': 150 }
+        { 'label': '添加日期', 'prop': 'addTime', 'width': 150 }
       ],
       // 添加企业表单是否显示
       addEnterpriseDialogVisible: false,
