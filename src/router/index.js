@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-/** 导入初始化组件 */
-import init from '../components/init'
-
-/** 导入用户登录组件 */
-import login from '../components/login'
 
 /** 导入element-UI信息提示组件 */
 import { Message } from 'element-ui'
 
 /** 按需导入后台系统功能组件 */
+const init = () => import('../components/init')
+const login = () => import('../components/login')
 const admin = () => import('../components/admin')
 const index = () => import('../components/admin/index')
 const modifyAccount = () => import('../components/admin/modifyAccount')
