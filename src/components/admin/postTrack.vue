@@ -57,6 +57,13 @@
         :width="table.width"
       />
       <el-table-column
+        :formatter="dateFormatter"
+        align="center"
+        prop="addTime"
+        width="180"
+        label="记录时间"
+      />
+      <el-table-column
         label="操作"
         align="center"
         width="200px"
@@ -125,6 +132,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'PostTrack',
   data () {
@@ -154,8 +163,7 @@ export default {
         { 'label': '所在企业', 'prop': 'enterpriseName', 'width': 250 },
         { 'label': '最新岗位', 'prop': 'postName', 'width': 200 },
         { 'label': '岗位职责', 'prop': 'postDuty', 'width': 400 },
-        { 'label': '备注', 'prop': 'remarks', 'width': 200 },
-        { 'label': '记录时间', 'prop': 'addTime', 'width': 150 }
+        { 'label': '备注', 'prop': 'remarks', 'width': 200 }
       ],
       // 删除岗位跟踪记录
       deletePostTrackDialogVisible: false
@@ -248,6 +256,12 @@ export default {
       })
     },
 
+    /** 时间格式化 */
+    dateFormatter: function (row, column) {
+      var date = row[column.property]
+      if (date === undefined) return ''
+      return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    },
     /** 修复当用户在大于1的分页进行数据搜索没有返回值的问题 */
     setPageNum () {
       this.queryInfo.pageNum = 1
