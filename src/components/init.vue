@@ -19,6 +19,16 @@
           />
         </el-form-item>
         <el-form-item
+          label="教师名称"
+          prop="teachername"
+        >
+          <el-input
+            prefix-icon="el-icon-user-solid"
+            v-model="initForm.teachername"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item
           label="用户密码"
           prop="password"
         >
@@ -69,6 +79,7 @@ export default {
     return {
       initForm: {
         username: '',
+        teachername: '',
         password: '',
         enterpassword: ''
       },
@@ -77,6 +88,10 @@ export default {
         username: [
           { required: true, message: '请输入账户名称', trigger: 'blur' },
           { min: 6, max: 21, message: '长度在 6 到 21 个字符', trigger: 'blur' }
+        ],
+        teachername: [
+          { required: true, message: '请输入教师名称', trigger: 'blur' },
+          { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入账户密码', trigger: 'blur' },
@@ -116,11 +131,9 @@ export default {
           initButton.loading = true
 
           // 获取表单数据
-          let data = this.initForm
           let formData = JSON.stringify({
             'useraction': 'systemInit',
-            'username': data.username,
-            'password': data.password
+            ...this.initForm
           })
           // 提交表单
           const result = await this.$http.post('/user/', formData)
