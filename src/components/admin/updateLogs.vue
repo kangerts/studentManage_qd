@@ -37,12 +37,28 @@ export default {
       // 时间线列表数据
       timeline: [
         {
+          content: '新增 教师名称修改',
+          timestamp: '2020-06-04 21:34',
+          size: 'normal',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#409EFF'
+        },
+        {
+          content: '新增 学生岗位追踪',
+          timestamp: '2020-06-04 20:01',
+          size: 'normal',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#0bbd87'
+        },
+        {
           content: '新增 工资榜显示专业或班级最高最低工资及平均工资',
           timestamp: '2020-05-30 13:21',
           size: 'normal',
           type: 'success',
           icon: 'el-icon-more',
-          color: '#409EFF'
+          color: '#0bbd87'
         },
         {
           content: '新增 企业、岗位管理 优化 学生信息显示',
