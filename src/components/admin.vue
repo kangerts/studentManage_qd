@@ -135,7 +135,8 @@ export default {
           'subMenuName': '教师账户',
           'children': [
             { 'id': '1-1', 'subMenuName': '账户修改', 'path': '/admin/modifyAccount' },
-            { 'id': '1-2', 'subMenuName': '密码修改', 'path': '/admin/modifyPassWord' }
+            { 'id': '1-2', 'subMenuName': '密码修改', 'path': '/admin/modifyPassWord' },
+            { 'id': '1-3', 'subMenuName': '教师修改', 'path': '/admin/modifyTeacher' }
           ]
         },
         {

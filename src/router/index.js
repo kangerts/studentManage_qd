@@ -11,6 +11,7 @@ const admin = () => import('../components/admin')
 const index = () => import('../components/admin/index')
 const modifyAccount = () => import('../components/admin/modifyAccount')
 const modifyPassWord = () => import('../components/admin/modifyPassWord')
+const modifyTeacher = () => import('../components/admin/modifyTeacher')
 const professionManage = () => import('../components/admin/professionManage')
 const classesManage = () => import('../components/admin/classesManage')
 const enterpriseManage = () => import('../components/admin/enterpriseManage')
@@ -52,6 +53,7 @@ const routes = [
       { path: '/admin', component: index },
       { path: '/admin/modifyAccount', component: modifyAccount },
       { path: '/admin/modifyPassWord', component: modifyPassWord },
+      { path: '/admin/modifyTeacher', component: modifyTeacher },
       { path: '/admin/professionManage', component: professionManage },
       { path: '/admin/classesManage', component: classesManage },
       { path: '/admin/enterpriseManage', component: enterpriseManage },
