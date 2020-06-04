@@ -415,7 +415,21 @@
           label="岗位职责"
           prop="postDuty"
         >
-          <el-input v-model="addForm.postDuty" />
+          <el-input
+            autosize
+            type="textarea"
+            v-model="addForm.postDuty"
+          />
+        </el-form-item>
+        <el-form-item
+          label="备注"
+          prop="remarks"
+        >
+          <el-input
+            autosize
+            type="textarea"
+            v-model="addForm.remarks"
+          />
         </el-form-item>
       </el-form>
       <span
@@ -624,7 +638,21 @@
           label="岗位职责"
           prop="postDuty"
         >
-          <el-input v-model="editForm.postDuty" />
+          <el-input
+            autosize
+            type="textarea"
+            v-model="editForm.postDuty"
+          />
+        </el-form-item>
+        <el-form-item
+          label="备注"
+          prop="remarks"
+        >
+          <el-input
+            autosize
+            type="textarea"
+            v-model="editForm.remarks"
+          />
         </el-form-item>
       </el-form>
       <span
@@ -752,7 +780,8 @@ export default {
         employmentStatus: '',
         studentSalary: 0,
         enterpriseAndPostData: [],
-        postDuty: ''
+        postDuty: '',
+        remarks: ''
       },
       /** 表单验证相关配置 */
       addFormRules: {
@@ -896,7 +925,8 @@ export default {
         employmentStatus: '',
         studentSalary: 0,
         enterpriseAndPostData: [],
-        postDuty: ''
+        postDuty: '',
+        remarks: ''
       },
       /** 编辑表单验证相关配置 */
       editFormRules: {
@@ -1053,7 +1083,6 @@ export default {
       }
     },
     studentNativePlaceTemp: function (val) {
-      console.log(val)
       if (val.length !== 0) {
         let data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
         this.editForm.studentNativePlace = data
@@ -1072,6 +1101,11 @@ export default {
     if (classesName !== undefined && classesName !== '') {
       this.queryInfo.keyWord = classesName
       this.queryInfo.queryType = 'classesName'
+    }
+    let studentCode = this.$route.query.studentCode
+    if (studentCode !== undefined && studentCode !== '') {
+      this.queryInfo.keyWord = studentCode
+      this.queryInfo.queryType = 'studentCode'
     }
     this.getstudentData()
     this.getPostDataCascaderOptions()
@@ -1381,7 +1415,6 @@ export default {
         data: formData,
         responseType: 'blob'
       }).then(res => {
-        console.log()
         if (res.data.size <= 106) {
           return message({ message: '此类型数据为空，不提供下载！', type: 'warning', showClose: true, center: true })
         }

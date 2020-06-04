@@ -155,7 +155,8 @@ export default {
           'icon': 'el-icon-s-order',
           'subMenuName': '学生信息',
           'children': [
-            { 'id': '3-1', 'subMenuName': '学生数据', 'path': '/admin/studentData' }
+            { 'id': '3-1', 'subMenuName': '学生数据', 'path': '/admin/studentData' },
+            { 'id': '3-2', 'subMenuName': '岗位追踪', 'path': '/admin/postTrack' }
           ]
         },
         {

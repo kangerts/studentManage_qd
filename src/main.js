@@ -13,8 +13,8 @@ import ECharts from 'vue-echarts'
 import 'echarts/map/js/china'
 
 // 使用axios
-axios.defaults.baseURL = 'http://student.free.idcfengye.com/system/'
-// axios.defaults.baseURL = 'http://127.0.0.1:8000/system/'
+// axios.defaults.baseURL = 'http://student.free.idcfengye.com/system/'
+axios.defaults.baseURL = 'http://127.0.0.1:8000/system/'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
