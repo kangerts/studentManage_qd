@@ -1124,7 +1124,7 @@ export default {
     /** 获取专业及班级数据 */
     async getProfessionAndClassesDataCascaderOptions () {
       let formData = JSON.stringify({
-        useraction: 'getProfessionAndClassesDataCascaderOptions',
+        useraction: 'getProfessionAndClassesCascaderOptions',
         username: window.sessionStorage.getItem('username')
       })
       // 提交表单
