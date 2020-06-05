@@ -1340,30 +1340,6 @@ export default {
       }
     },
 
-    /** 获取学生管理页面的学生列表数据 */
-    async getstudentData () {
-      let formData = JSON.stringify({
-        useraction: 'getStudentData',
-        username: window.sessionStorage.getItem('username'),
-        query: this.queryInfo
-      })
-      // 提交表单
-      const result = await this.$http.post('/data/', formData)
-      // 判断业务逻辑
-      if (result.data.ret === 0) {
-        this.queryInfo.pageNum = result.data.pageNum
-        this.total = result.data.total
-        this.tableData = result.data.data
-        return
-      }
-      this.$message({
-        message: '读取数据失败！',
-        type: 'error',
-        showClose: true,
-        center: true
-      })
-    },
-
     /** 获取企业岗位联级菜单数据 */
     async getPostDataCascaderOptions () {
       let formData = JSON.stringify({
