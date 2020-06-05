@@ -680,9 +680,7 @@
       width="50%"
       :close-on-click-modal="false"
     >
-      <!--      对话框主体区域-->
       <span>确认删除吗?</span>
-      <!--      对话框底部区域-->
       <span
         slot="footer"
         class="dialog-footer"
