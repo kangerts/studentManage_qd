@@ -1,11 +1,38 @@
 <template>
-  <v-chart
-    :options="polar"
-    :init-options="initCharts"
-    ref="workAreaMapRef"
-    autoresize
-    style="height: 460px;width: 100%"
-  />
+  <div style="width: 100%;height: 500px">
+    <el-tooltip
+      effect="dark"
+      :content="tooltipContent"
+      placement="top"
+    >
+      <el-button
+        style="margin-bottom: 15px"
+        type="primary"
+        icon="el-icon-picture-outline-round"
+        circle
+        @click="changeViewData"
+      />
+    </el-tooltip>
+    <el-cascader
+      style="margin-left: 15px;width: 300px"
+      ref="classesCascaderLabel"
+      :placeholder="placeholder"
+      v-model="cascaderValues"
+      :options="cascaderOptions"
+      :props="{ expandTrigger: 'hover' }"
+      @change="inputChange"
+      filterable
+      clearable
+      separator=" -> "
+    />
+    <v-chart
+      :options="polar"
+      :init-options="initCharts"
+      ref="workAreaMapRef"
+      autoresize
+      style="height: 460px;width: 100%"
+    />
+  </div>
 </template>
 
 <script>
@@ -15,11 +42,17 @@ export default {
   data () {
     return {
       initCharts: { renderer: 'svg' },
-      polar: null
+      polar: null,
+      isView: true,
+      tooltipContent: '切换到班级数据显示',
+      placeholder: '试试搜索专业名称吧',
+      cascaderOptions: [], // 专业班级联动菜单数据
+      cascaderValues: '', // 专业班级联动菜单值
+      type: 'getProfessionData' // 获取数据的类型
     }
   },
   mounted () {
-    this.getWorkAreaData()
+    this.getProfessionAndClassesDataCascaderOptions()
   },
   methods: {
     /** 获取学生工作区域数据 */
@@ -32,7 +65,9 @@ export default {
       /* 获取地图数据 */
       let formData = JSON.stringify({
         'useraction': 'getWorkAreaData',
-        'username': window.sessionStorage.getItem('username')
+        'username': window.sessionStorage.getItem('username'),
+        'queryType': this.type === 'getProfessionData' ? 'getProfessionData' : 'getClassesData',
+        'queryInfo': this.cascaderValues
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -316,6 +351,84 @@ export default {
         charts.hideLoading()
       } else {
         this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
+      }
+    },
+
+    changeViewData () {
+      // true就是专业，false就是班级
+      if (this.isView) {
+        this.isView = false
+        this.placeholder = '试试搜索班级名吧'
+        this.getProfessionAndClassesLevelDataCascaderOptions()
+        this.tooltipContent = '切换到专业数据显示'
+        this.type = 'getClassesData'
+      } else {
+        this.isView = true
+        this.placeholder = '试试搜索专业名吧'
+        this.getProfessionAndClassesDataCascaderOptions()
+        this.tooltipContent = '切换到班级数据显示'
+        this.type = 'getProfessionData'
+      }
+    },
+    /** 获取专业及届数数据 */
+    async getProfessionAndClassesDataCascaderOptions () {
+      let formData = JSON.stringify({
+        'useraction': 'getProfessionAndClassesDataCascaderOptions',
+        'username': window.sessionStorage.getItem('username')
+      })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        this.cascaderOptions = result.data.data
+        this.cascaderValues = [this.cascaderOptions[0].value, this.cascaderOptions[0].children[0].value]
+        this.getWorkAreaData()
+        return
+      }
+      this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
+    },
+
+    /** 获取专业及班级及届数的联级菜单数据 */
+    async getProfessionAndClassesLevelDataCascaderOptions () {
+      let formData = JSON.stringify({
+        'useraction': 'getProfessionAndClassesLevelDataCascaderOptions',
+        'username': window.sessionStorage.getItem('username')
+      })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        this.cascaderOptions = result.data.data
+        this.cascaderValues = [this.cascaderOptions[0].value, this.cascaderOptions[0].children[0].value, this.cascaderOptions[0].children[0].children[0].value]
+        this.getWorkAreaData()
+        return
+      }
+      this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
+    },
+    /** 用户选择完后获取 */
+    inputChange () {
+      if (this.cascaderValues === '' || this.cascaderValues === undefined || this.cascaderValues === null) {
+        this.$message({ message: '请写入搜索数据！', type: 'error', showClose: true, center: true })
+      } else {
+        if (this.type === 'getProfessionData') {
+          this.type = 'getProfessionData'
+          this.getWorkAreaData()
+        }
+        if (this.type === 'getClassesData') {
+          this.type = 'getClassesData'
+          this.getWorkAreaData()
+        }
+      }
+    },
+    /** 用户选择班级后获取数据 */
+    changeDataView () {
+      // false显示专业数据  true显示班级数据
+      if (this.isView) {
+        this.isView = false
+        this.tooltipContent = '切换到专业数据显示'
+      } else {
+        this.isView = true
+        this.tooltipContent = '切换到班级数据显示'
       }
     }
   }

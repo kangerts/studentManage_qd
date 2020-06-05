@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted () {
-    this.getProfessionDataCascaderOptions()
+    this.getProfessionAndClassesDataCascaderOptions()
   },
   methods: {
     changeViewData () {
@@ -59,36 +59,18 @@ export default {
       if (this.isView) {
         this.isView = false
         this.placeholder = '试试搜索班级名吧'
-        this.getProfessionAndClassesDataCascaderOptions()
+        this.getProfessionAndClassesLevelDataCascaderOptions()
         this.tooltipContent = '切换到专业数据显示'
         this.type = 'getClassesSalaryData'
       } else {
         this.isView = true
         this.placeholder = '试试搜索专业名吧'
-        this.getProfessionDataCascaderOptions()
+        this.getProfessionAndClassesDataCascaderOptions()
         this.tooltipContent = '切换到班级数据显示'
         this.type = 'getProfessionSalaryData'
       }
     },
-    /** 获取专业数据 */
-    async getProfessionDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
-      })
-      // 提交表单
-      const result = await this.$http.post('/data/', formData)
-      // 判断业务逻辑
-      if (result.data.ret === 0) {
-        this.cascaderOptions = result.data.data
-        this.cascaderValues = this.cascaderOptions[0].value
-        this.getSalaryData('getProfessionSalaryData', this.cascaderOptions[0].label, this.cascaderOptions[0].value)
-        return
-      }
-      this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
-    },
-
-    /** 获取专业及班级的联级菜单数据 */
+    /** 获取专业及届数数据 */
     async getProfessionAndClassesDataCascaderOptions () {
       let formData = JSON.stringify({
         'useraction': 'getProfessionAndClassesDataCascaderOptions',
@@ -100,7 +82,25 @@ export default {
       if (result.data.ret === 0) {
         this.cascaderOptions = result.data.data
         this.cascaderValues = [this.cascaderOptions[0].value, this.cascaderOptions[0].children[0].value]
-        this.getSalaryData('getClassesSalaryData', this.cascaderOptions[0].children[0].label, this.cascaderOptions[0].children[0].value)
+        this.getSalaryData()
+        return
+      }
+      this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
+    },
+
+    /** 获取专业及班级及届数的联级菜单数据 */
+    async getProfessionAndClassesLevelDataCascaderOptions () {
+      let formData = JSON.stringify({
+        'useraction': 'getProfessionAndClassesLevelDataCascaderOptions',
+        'username': window.sessionStorage.getItem('username')
+      })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        this.cascaderOptions = result.data.data
+        this.cascaderValues = [this.cascaderOptions[0].value, this.cascaderOptions[0].children[0].value, this.cascaderOptions[0].children[0].children[0].value]
+        this.getSalaryData()
         return
       }
       this.$message({ message: '读取数据失败！', type: 'error', showClose: true, center: true })
@@ -112,14 +112,12 @@ export default {
         this.$message({ message: '请写入搜索数据！', type: 'error', showClose: true, center: true })
       } else {
         if (this.type === 'getProfessionSalaryData') {
-          var professionName = this.$refs['classesCascaderLabel'].getCheckedNodes()[0].label
-          var professionCode = this.cascaderValues[0]
-          this.getSalaryData(this.type, professionName, professionCode)
+          this.type = 'getProfessionSalaryData'
+          this.getSalaryData()
         }
         if (this.type === 'getClassesSalaryData') {
-          var classesName = this.$refs['classesCascaderLabel'].getCheckedNodes()[0].label
-          var classesCode = this.cascaderValues[1]
-          this.getSalaryData(this.type, classesName, classesCode)
+          this.type = 'getClassesSalaryData'
+          this.getSalaryData()
         }
       }
     },
@@ -135,7 +133,7 @@ export default {
       }
     },
     /** 获取工资数据 */
-    async getSalaryData (type, name = '', code) {
+    async getSalaryData () {
       var myChart = this.$refs.salaryListRef
       myChart.showLoading()
       var formData = ''
@@ -147,8 +145,8 @@ export default {
       formData = JSON.stringify({
         'useraction': 'getSalaryData',
         'username': window.sessionStorage.getItem('username'),
-        'type': type === 'getProfessionSalaryData' ? 'getProfessionSalaryData' : 'getClassesSalaryData',
-        'code': code
+        'queryType': this.type === 'getProfessionSalaryData' ? 'getProfessionSalaryData' : 'getClassesSalaryData',
+        'queryInfo': this.cascaderValues
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -170,7 +168,7 @@ export default {
       ]
       var option = {
         title: {
-          text: name + '  工资情况',
+          text: '工资情况条形图',
           x: 'center',
           textStyle: {
             color: 'rgb(255,255,255)',
