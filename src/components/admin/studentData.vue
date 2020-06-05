@@ -1148,7 +1148,6 @@ export default {
 
     /** 获取学生信息 */
     async getStudentData () {
-      this.queryInfo.pageNum = 1
       let formData = JSON.stringify({
         useraction: 'getStudentData',
         username: window.sessionStorage.getItem('username'),
