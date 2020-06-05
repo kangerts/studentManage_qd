@@ -37,12 +37,20 @@ export default {
       // 时间线列表数据
       timeline: [
         {
+          content: '新增 数据统计部分子功能支持查看某届学生数据',
+          timestamp: '2020-06-05 13:34',
+          size: 'normal',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#409EFF'
+        },
+        {
           content: '新增 教师名称修改',
           timestamp: '2020-06-04 21:34',
           size: 'normal',
           type: 'success',
           icon: 'el-icon-more',
-          color: '#409EFF'
+          color: '#0bbd87'
         },
         {
           content: '新增 学生岗位追踪',
