@@ -276,6 +276,7 @@
           prop="studentNativePlace"
         >
           <el-cascader
+            style="width: 360px"
             placeholder="试试搜索城市名称吧~"
             v-model="studentNativePlaceTemp"
             :options="studentNativePlaceCascaderOptions"
@@ -291,6 +292,7 @@
           width="200px"
         >
           <el-cascader
+            style="width: 360px"
             placeholder="试试搜索专业或班级名"
             v-model="addForm.classesAndProfesion"
             :options="cascaderOptions"
@@ -400,6 +402,7 @@
           width="200px"
         >
           <el-cascader
+            style="width: 360px"
             size="large"
             :options="postDataCascaderOptions"
             v-model="addForm.enterpriseAndPostData"
@@ -499,6 +502,7 @@
           prop="studentNativePlace"
         >
           <el-cascader
+            style="width: 360px"
             placeholder="试试搜索城市名称吧~"
             v-model="studentNativePlaceTemp"
             :options="studentNativePlaceCascaderOptions"
@@ -514,6 +518,7 @@
           width="200px"
         >
           <el-cascader
+            style="width: 360px"
             placeholder="试试搜索专业或班级名"
             v-model="editForm.classesAndProfesion"
             :options="cascaderOptions"
@@ -623,6 +628,7 @@
           width="200px"
         >
           <el-cascader
+            style="width: 360px"
             size="large"
             :options="postDataCascaderOptions"
             v-model="editForm.enterpriseAndPostData"
