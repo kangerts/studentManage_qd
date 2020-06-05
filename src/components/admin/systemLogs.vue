@@ -169,13 +169,13 @@ export default {
       const result = await this.$http.post('/data/', formData)
       // 判断业务逻辑
       if (result.data.ret === 0) {
+        this.getSystemLogsData()
         this.$message({
           message: result.data.data,
           type: 'success',
           showClose: true,
           center: true
         })
-        this.getSystemLogsData()
         this.deleteSystemLogsDialogVisible = false
       } else {
         this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
