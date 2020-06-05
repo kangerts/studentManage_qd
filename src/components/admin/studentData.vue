@@ -1111,7 +1111,7 @@ export default {
       this.queryInfo.keyWord = studentCode
       this.queryInfo.queryType = 'studentCode'
     }
-    this.getstudentData()
+    this.getStudentData()
     this.getPostDataCascaderOptions()
   },
   /** 事件处理函数 */
@@ -1195,7 +1195,7 @@ export default {
               center: true
             })
             this.addDialogVisible = false
-            this.getstudentData()
+            this.getStudentData()
           }
           if (result.data.ret === 1) {
             this.$message({
@@ -1293,7 +1293,7 @@ export default {
               center: true
             })
             this.editDialogVisible = false
-            this.getstudentData()
+            this.getStudentData()
           }
           if (result.data.ret === 1) {
             this.$message({
@@ -1328,7 +1328,7 @@ export default {
           center: true
         })
         this.deleteDialogVisible = false
-        this.getstudentData()
+        this.getStudentData()
       }
       if (result.data.ret === 1) {
         this.$message({
@@ -1370,13 +1370,13 @@ export default {
     /** 监听每页显示多少数据的改变 */
     handleSizeChange (newSize) {
       this.queryInfo.pageSize = newSize
-      this.getstudentData()
+      this.getStudentData()
     },
 
     /** 监听页码的改变 */
     handleCurrentChange (newPage) {
       this.queryInfo.pageNum = newPage
-      this.getstudentData()
+      this.getStudentData()
     },
 
     /** 导出学生数据为Excel文件 */
