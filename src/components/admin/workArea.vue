@@ -14,7 +14,7 @@
       />
     </el-tooltip>
     <el-cascader
-      style="margin-left: 15px;width: 300px"
+      style="margin-left: 15px;width: 350px"
       ref="classesCascaderLabel"
       :placeholder="placeholder"
       v-model="cascaderValues"
