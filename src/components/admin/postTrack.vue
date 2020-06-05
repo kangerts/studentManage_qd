@@ -163,6 +163,7 @@ export default {
         { 'label': '所在企业', 'prop': 'enterpriseName', 'width': 250 },
         { 'label': '最新岗位', 'prop': 'postName', 'width': 200 },
         { 'label': '岗位职责', 'prop': 'postDuty', 'width': 400 },
+        { 'label': '最新薪资', 'prop': 'studentSalary' },
         { 'label': '备注', 'prop': 'remarks', 'width': 200 }
       ],
       // 删除岗位跟踪记录
@@ -189,7 +190,6 @@ export default {
   methods: {
     /** 获取岗位跟踪数据 */
     async getPostTrackData () {
-      this.queryInfo.pageNum = 1
       let formData = JSON.stringify({
         useraction: 'getPostTrackData',
         username: window.sessionStorage.getItem('username'),
