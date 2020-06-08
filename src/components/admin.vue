@@ -165,10 +165,10 @@ export default {
           'icon': 'el-icon-s-data',
           'subMenuName': '数据统计',
           'children': [
-            { 'id': '4-1', 'subMenuName': '男女比', 'path': '/admin/sexRatio' },
-            { 'id': '4-2', 'subMenuName': '未就业', 'path': '/admin/unemployedRate' },
-            { 'id': '4-3', 'subMenuName': '工资榜', 'path': '/admin/salaryList' },
-            { 'id': '4-4', 'subMenuName': '工作区', 'path': '/admin/workArea' },
+            { 'id': '4-1', 'subMenuName': '男女比例', 'path': '/admin/sexRatio' },
+            { 'id': '4-2', 'subMenuName': '就业情况', 'path': '/admin/unemployedRate' },
+            { 'id': '4-3', 'subMenuName': '工资榜单', 'path': '/admin/salaryList' },
+            { 'id': '4-4', 'subMenuName': '工作区域', 'path': '/admin/workArea' },
             { 'id': '4-5', 'subMenuName': '就业方向', 'path': '/admin/workDirection' }
           ]
         },
