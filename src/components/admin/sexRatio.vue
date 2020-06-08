@@ -22,7 +22,6 @@
       :props="{ expandTrigger: 'hover' }"
       @change="inputChange"
       filterable
-      clearable
       separator=" -> "
     />
     <v-chart
