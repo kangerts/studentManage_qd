@@ -55,8 +55,8 @@
           <!--          一级菜单-->
           <el-submenu
             :index="item.id+''"
-            v-for="item in menuList"
-            :key="item.id"
+            v-for="(item, index) in menuList"
+            :key="index"
           >
             <!--          一级菜单模板区-->
             <template slot="title">
@@ -130,7 +130,6 @@ export default {
       // 左侧菜单数据
       menuList: [
         {
-          'id': 1,
           'icon': 'el-icon-user-solid',
           'subMenuName': '教师账户',
           'children': [
@@ -140,7 +139,6 @@ export default {
           ]
         },
         {
-          'id': 2,
           'icon': 'el-icon-s-shop',
           'subMenuName': '基本信息',
           'children': [
@@ -152,7 +150,6 @@ export default {
           ]
         },
         {
-          'id': 3,
           'icon': 'el-icon-s-order',
           'subMenuName': '学生信息',
           'children': [
@@ -161,7 +158,6 @@ export default {
           ]
         },
         {
-          'id': 4,
           'icon': 'el-icon-s-data',
           'subMenuName': '数据统计',
           'children': [
@@ -173,7 +169,6 @@ export default {
           ]
         },
         {
-          'id': 5,
           'icon': 'el-icon-s-tools',
           'subMenuName': '系统设置',
           'children': [
