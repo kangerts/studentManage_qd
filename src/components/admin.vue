@@ -142,7 +142,7 @@ export default {
         {
           'id': 2,
           'icon': 'el-icon-s-shop',
-          'subMenuName': '创建容器',
+          'subMenuName': '基本信息',
           'children': [
             { 'id': '2-1', 'subMenuName': '专业管理', 'path': '/admin/professionManage' },
             { 'id': '2-2', 'subMenuName': '班级管理', 'path': '/admin/classesManage' },
