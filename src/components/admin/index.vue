@@ -30,8 +30,9 @@
       </div>
     </div>
     <div
-      style="color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #F1A325"
+      style="cursor:pointer;color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #F1A325"
       class="box-card"
+      @click="$router.push('/admin/studentData?employmentStatus=已安置')"
     >
       <div style="height: 40px;line-height: 40px">
         {{ this.indexData.indexList[2] }}
@@ -78,8 +79,9 @@
       </div>
     </div>
     <div
-      style="color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #00C397"
+      style="cursor:pointer;color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #00C397"
       class="box-card"
+      @click="$router.push('/admin/studentData?studentSex=男')"
     >
       <div style="height: 40px;line-height: 40px">
         {{ this.indexData.indexList[6] }}
@@ -89,8 +91,9 @@
       </div>
     </div>
     <div
-      style="color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #EA644A"
+      style="cursor:pointer;color: white;border-radius: 15px;height: 100px;width: 200px;margin: 25px;display: inline-block;background-color: #EA644A"
       class="box-card"
+      @click="$router.push('/admin/studentData?studentSex=女')"
     >
       <div style="height: 40px;line-height: 40px">
         {{ this.indexData.indexList[7] }}

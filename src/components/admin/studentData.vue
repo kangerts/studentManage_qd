@@ -33,6 +33,10 @@
                 value="studentName"
               />
               <el-option
+                label="学生性别"
+                value="studentSex"
+              />
+              <el-option
                 label="班级名称"
                 value="classesName"
               />
@@ -1101,16 +1105,30 @@ export default {
   created () {
     // 这里是发起表格数据请求的位置
     this.getProfessionAndClassesDataCascaderOptions()
+
     const classesName = this.$route.query.classesName
     if (classesName !== undefined && classesName !== '') {
       this.queryInfo.keyWord = classesName
       this.queryInfo.queryType = 'classesName'
     }
+
     const studentCode = this.$route.query.studentCode
     if (studentCode !== undefined && studentCode !== '') {
       this.queryInfo.keyWord = studentCode
       this.queryInfo.queryType = 'studentCode'
     }
+
+    const employmentStatus = this.$route.query.employmentStatus
+    if (employmentStatus !== undefined && employmentStatus !== '') {
+      this.queryInfo.searchType = employmentStatus
+    }
+
+    const studentSex = this.$route.query.studentSex
+    if (studentSex !== undefined && studentSex !== '') {
+      this.queryInfo.keyWord = studentSex
+      this.queryInfo.queryType = 'studentSex'
+    }
+
     this.getStudentData()
     this.getPostDataCascaderOptions()
   },
