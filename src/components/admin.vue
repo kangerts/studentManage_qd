@@ -194,10 +194,6 @@ export default {
           }
         }
       }
-      if (this.$route.path === '/admin') {
-        this.activeTabas = '/admin'
-        return
-      }
       this.addTab(this.menuList[iindex].children[jindex].subMenuName, this.$route.path)
     }
   },
