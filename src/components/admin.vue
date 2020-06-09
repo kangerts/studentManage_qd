@@ -181,7 +181,7 @@ export default {
   },
   watch: {
     /** 监听,当路由发生变化的时候执行(防止用户手动更换地址导致tabs的面板变动却不切换相应的tabs) */
-    $route: function () {
+    '$route.path': function () {
       var iindex = -1
       var jindex = -1
       for (let i = 0; i < this.menuList.length; i++) {
