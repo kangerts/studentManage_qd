@@ -28,6 +28,7 @@
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^7.2.0",
+    "eslint-plugin-import": "^2.21.1",
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.11.3",
     "less-loader": "^6.1.0",
