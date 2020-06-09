@@ -124,15 +124,15 @@ export default {
   },
   methods: {
     async getIndexData () {
-      let formData = JSON.stringify({
-        'useraction': 'getIndexData',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getIndexData',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
       // 判断业务逻辑
       if (result.data.ret === 0) {
-        for (let key in result.data) {
+        for (const key in result.data) {
           this.indexData[key] = result.data[key]
         }
       }

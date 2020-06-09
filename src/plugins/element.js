@@ -9,7 +9,7 @@ import {
   DatePicker, Cascader, Radio, RadioGroup
 } from 'element-ui'
 
-let plugins = [Button, Container, Main, Header, Aside,
+const plugins = [Button, Container, Main, Header, Aside,
   Form, FormItem, Input, Alert, Menu,
   Submenu, MenuItem, Tabs, TabPane, Card, Timeline,
   TimelineItem, Row, Col, Progress, Select, Option,

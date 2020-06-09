@@ -101,12 +101,12 @@ export default {
           // 设置按钮状态
           this.isLoading = true
           // 获取表单数据
-          let data = this.modifyPassWord
-          let formData = JSON.stringify({
-            'useraction': 'userModifyPass',
-            'username': window.sessionStorage.getItem('username'),
-            'oldPassword': data.oldPassword,
-            'password': data.password
+          const data = this.modifyPassWord
+          const formData = JSON.stringify({
+            useraction: 'userModifyPass',
+            username: window.sessionStorage.getItem('username'),
+            oldPassword: data.oldPassword,
+            password: data.password
           })
           // 提交表单
           const result = await this.$http.post('/user/', formData)

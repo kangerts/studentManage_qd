@@ -199,11 +199,11 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '专业编号', 'prop': 'professionCode' },
-        { 'label': '专业名称', 'prop': 'professionName' },
-        { 'label': '专业人数', 'prop': 'professionHumanNum' },
-        { 'label': '班级个数', 'prop': 'professionClassesNum' },
-        { 'label': '创建时间', 'prop': 'addTime' }
+        { label: '专业编号', prop: 'professionCode' },
+        { label: '专业名称', prop: 'professionName' },
+        { label: '专业人数', prop: 'professionHumanNum' },
+        { label: '班级个数', prop: 'professionClassesNum' },
+        { label: '创建时间', prop: 'addTime' }
       ],
       /** 控制添加专业对话框的显示与隐藏 */
       addDialogVisible: false,
@@ -248,10 +248,10 @@ export default {
     addProfession () {
       this.$refs.addFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
-            'useraction': 'addProfession',
-            'username': window.sessionStorage.getItem('username'),
-            'professionName': this.addForm.professionName
+          const formData = JSON.stringify({
+            useraction: 'addProfession',
+            username: window.sessionStorage.getItem('username'),
+            professionName: this.addForm.professionName
           })
           // 提交登出请求
           const result = await this.$http.post('/data/', formData)
@@ -276,11 +276,11 @@ export default {
       var editProfessionCode = this.professionCode
       this.$refs.editFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
-            'useraction': 'editProfession',
-            'username': window.sessionStorage.getItem('username'),
-            'professionCode': editProfessionCode,
-            'professionName': this.editForm.professionName
+          const formData = JSON.stringify({
+            useraction: 'editProfession',
+            username: window.sessionStorage.getItem('username'),
+            professionCode: editProfessionCode,
+            professionName: this.editForm.professionName
           })
           const result = await this.$http.post('/data/', formData)
           if (result.data.ret === 0) {
@@ -301,10 +301,10 @@ export default {
     },
     async deleteProfession () {
       var deleteProfessionCode = this.professionCode
-      let formData = JSON.stringify({
-        'useraction': 'deleteProfession',
-        'username': window.sessionStorage.getItem('username'),
-        'professionCode': deleteProfessionCode
+      const formData = JSON.stringify({
+        useraction: 'deleteProfession',
+        username: window.sessionStorage.getItem('username'),
+        professionCode: deleteProfessionCode
       })
       const result = await this.$http.post('/data/', formData)
       if (result.data.ret === 0) {
@@ -319,10 +319,10 @@ export default {
     /** 获取专业管理页面的专业列表数据 */
     async getProfessionData () {
       // this.queryInfo.pageNum = 1
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionData',
-        'username': window.sessionStorage.getItem('username'),
-        'query': this.queryInfo
+      const formData = JSON.stringify({
+        useraction: 'getProfessionData',
+        username: window.sessionStorage.getItem('username'),
+        query: this.queryInfo
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)

@@ -25,9 +25,9 @@ export default {
       // 获取图表对象并设置动画
       var charts = this.$refs.workDirectionRef
       charts.showLoading()
-      let formData = JSON.stringify({
-        'useraction': 'getWorkDirection',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getWorkDirection',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -53,7 +53,7 @@ export default {
       var studentPost = post
       /** 核心参数 */
 
-      let dataMap = {}
+      const dataMap = {}
 
       function dataFormatter (obj) {
         let temp
@@ -135,7 +135,7 @@ export default {
             left: 'right',
             data: ['女生', '男生'],
             selected: {
-              '女生': true, '男生': true
+              女生: true, 男生: true
             }
           },
           calculable: true,
@@ -157,9 +157,9 @@ export default {
           },
           xAxis: [
             {
-              'type': 'category',
-              'axisLabel': { 'interval': 0 },
-              'data': studentPost,
+              type: 'category',
+              axisLabel: { interval: 0 },
+              data: studentPost,
               splitLine: { show: false }
             }
           ],

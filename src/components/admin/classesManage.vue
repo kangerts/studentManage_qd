@@ -240,12 +240,12 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '班级编号', 'prop': 'classesCode' },
-        { 'label': '班级届数', 'prop': 'classesLevel' },
-        { 'label': '班级名称', 'prop': 'classesName' },
-        { 'label': '所属专业', 'prop': 'toProfession' },
-        { 'label': '班级人数', 'prop': 'classesHumanNum' },
-        { 'label': '创建时间', 'prop': 'addTime' }
+        { label: '班级编号', prop: 'classesCode' },
+        { label: '班级届数', prop: 'classesLevel' },
+        { label: '班级名称', prop: 'classesName' },
+        { label: '所属专业', prop: 'toProfession' },
+        { label: '班级人数', prop: 'classesHumanNum' },
+        { label: '创建时间', prop: 'addTime' }
       ],
       /** 控制添加班级对话框的显示与隐藏 */
       addDialogVisible: false,
@@ -299,9 +299,9 @@ export default {
     },
     /** 获取专业数据 */
     async getProfessionDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -316,9 +316,9 @@ export default {
     addclasses () {
       this.$refs.addFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
-            'useraction': 'addClasses',
-            'username': window.sessionStorage.getItem('username'),
+          const formData = JSON.stringify({
+            useraction: 'addClasses',
+            username: window.sessionStorage.getItem('username'),
             ...this.addForm
           })
           // 提交登出请求
@@ -344,11 +344,11 @@ export default {
       var editclassesCode = this.classesCode
       this.$refs.editFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
-            'useraction': 'editClasses',
-            'username': window.sessionStorage.getItem('username'),
-            'classesCode': editclassesCode,
-            'classesName': this.editForm.classesName
+          const formData = JSON.stringify({
+            useraction: 'editClasses',
+            username: window.sessionStorage.getItem('username'),
+            classesCode: editclassesCode,
+            classesName: this.editForm.classesName
           })
           const result = await this.$http.post('/data/', formData)
           if (result.data.ret === 0) {
@@ -369,10 +369,10 @@ export default {
     },
     async deleteclasses () {
       var deleteclassesCode = this.classesCode
-      let formData = JSON.stringify({
-        'useraction': 'deleteClasses',
-        'username': window.sessionStorage.getItem('username'),
-        'classesCode': deleteclassesCode
+      const formData = JSON.stringify({
+        useraction: 'deleteClasses',
+        username: window.sessionStorage.getItem('username'),
+        classesCode: deleteclassesCode
       })
       const result = await this.$http.post('/data/', formData)
       if (result.data.ret === 0) {
@@ -386,10 +386,10 @@ export default {
     },
     /** 获取班级管理页面的班级列表数据 */
     async getclassesData () {
-      let formData = JSON.stringify({
-        'useraction': 'getclassesData',
-        'username': window.sessionStorage.getItem('username'),
-        'query': this.queryInfo
+      const formData = JSON.stringify({
+        useraction: 'getclassesData',
+        username: window.sessionStorage.getItem('username'),
+        query: this.queryInfo
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)

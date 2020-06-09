@@ -69,9 +69,9 @@ export default {
     },
     /** 获取专业及届数数据 */
     async getProfessionAndClassesDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionAndClassesDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionAndClassesDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -87,9 +87,9 @@ export default {
 
     /** 获取专业及班级及届数的联级菜单数据 */
     async getProfessionAndClassesLevelDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionAndClassesLevelDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionAndClassesLevelDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -138,10 +138,10 @@ export default {
       var boyNum = 0 // 男孩数量
       var girlNum = 0 // 女孩数量
       formData = JSON.stringify({
-        'useraction': 'getPeopleData',
-        'username': window.sessionStorage.getItem('username'),
-        'queryType': this.type === 'getProfessionPeopleData' ? 'getProfessionPeopleData' : 'getClassesPeopleData',
-        'queryInfo': this.cascaderValues
+        useraction: 'getPeopleData',
+        username: window.sessionStorage.getItem('username'),
+        queryType: this.type === 'getProfessionPeopleData' ? 'getProfessionPeopleData' : 'getClassesPeopleData',
+        queryInfo: this.cascaderValues
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)

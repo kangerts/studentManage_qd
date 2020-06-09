@@ -156,15 +156,15 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '数据编号', 'prop': 'trackCode' },
-        { 'label': '学生学号', 'prop': 'studentCode', 'width': 200 },
-        { 'label': '学生名称', 'prop': 'studentName', 'width': 200 },
-        { 'label': '记录教师', 'prop': 'recordTeacher', 'width': 250 },
-        { 'label': '所在企业', 'prop': 'enterpriseName', 'width': 250 },
-        { 'label': '最新岗位', 'prop': 'postName', 'width': 200 },
-        { 'label': '岗位职责', 'prop': 'postDuty', 'width': 400 },
-        { 'label': '最新薪资', 'prop': 'studentSalary' },
-        { 'label': '备注', 'prop': 'remarks', 'width': 200 }
+        { label: '数据编号', prop: 'trackCode' },
+        { label: '学生学号', prop: 'studentCode', width: 200 },
+        { label: '学生名称', prop: 'studentName', width: 200 },
+        { label: '记录教师', prop: 'recordTeacher', width: 250 },
+        { label: '所在企业', prop: 'enterpriseName', width: 250 },
+        { label: '最新岗位', prop: 'postName', width: 200 },
+        { label: '岗位职责', prop: 'postDuty', width: 400 },
+        { label: '最新薪资', prop: 'studentSalary' },
+        { label: '备注', prop: 'remarks', width: 200 }
       ],
       // 删除岗位跟踪记录
       deletePostTrackDialogVisible: false
@@ -190,7 +190,7 @@ export default {
   methods: {
     /** 获取岗位跟踪数据 */
     async getPostTrackData () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getPostTrackData',
         username: window.sessionStorage.getItem('username'),
         query: this.queryInfo
@@ -218,7 +218,7 @@ export default {
       this.trackCode = trackCode
     },
     async deletePostTrack () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'deletePostTrack',
         username: window.sessionStorage.getItem('username'),
         trackCode: this.trackCode

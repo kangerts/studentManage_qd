@@ -705,24 +705,24 @@ export default {
   data () {
     return {
       tableHeader: [
-        { 'label': '学生届数', 'prop': 'studentLevel', 'width': 100 },
-        { 'label': '所属专业', 'prop': 'toProfession', 'width': 150 },
-        { 'label': '所属班级', 'prop': 'toClasses', 'width': 150 },
-        { 'label': '学生学号', 'prop': 'studentCode', 'width': 150 },
-        { 'label': '学生姓名', 'prop': 'studentName', 'width': 150 },
-        { 'label': '学生性别', 'prop': 'studentSex', 'width': 100 },
-        { 'label': '学生籍贯', 'prop': 'studentNativePlace', 'width': 120 },
-        { 'label': '学生电话', 'prop': 'studentPhone', 'width': 180 },
-        { 'label': '就业状态', 'prop': 'employmentStatus', 'width': 100 },
-        { 'label': '企业名称', 'prop': 'enterpriseName', 'width': 200 },
-        { 'label': '企业地址', 'prop': 'enterpriseAddress', 'width': 300 },
-        { 'label': '企业电话', 'prop': 'enterprisePhone', 'width': 180 },
-        { 'label': '岗位名称', 'prop': 'postName', 'width': 200 },
-        { 'label': '工作地址', 'prop': 'postAddress', 'width': 200 },
-        { 'label': '最新薪资', 'prop': 'studentSalary', 'width': 150 },
-        { 'label': '直属主管', 'prop': 'teacherName', 'width': 150 },
-        { 'label': '主管电话', 'prop': 'teacherPhone', 'width': 180 },
-        { 'label': '学生状态', 'prop': 'studentStatus', 'width': 120 }
+        { label: '学生届数', prop: 'studentLevel', width: 100 },
+        { label: '所属专业', prop: 'toProfession', width: 150 },
+        { label: '所属班级', prop: 'toClasses', width: 150 },
+        { label: '学生学号', prop: 'studentCode', width: 150 },
+        { label: '学生姓名', prop: 'studentName', width: 150 },
+        { label: '学生性别', prop: 'studentSex', width: 100 },
+        { label: '学生籍贯', prop: 'studentNativePlace', width: 120 },
+        { label: '学生电话', prop: 'studentPhone', width: 180 },
+        { label: '就业状态', prop: 'employmentStatus', width: 100 },
+        { label: '企业名称', prop: 'enterpriseName', width: 200 },
+        { label: '企业地址', prop: 'enterpriseAddress', width: 300 },
+        { label: '企业电话', prop: 'enterprisePhone', width: 180 },
+        { label: '岗位名称', prop: 'postName', width: 200 },
+        { label: '工作地址', prop: 'postAddress', width: 200 },
+        { label: '最新薪资', prop: 'studentSalary', width: 150 },
+        { label: '直属主管', prop: 'teacherName', width: 150 },
+        { label: '主管电话', prop: 'teacherPhone', width: 180 },
+        { label: '学生状态', prop: 'studentStatus', width: 120 }
       ],
       // 企业地址数据
       chinaAddress: provinceAndCityData,
@@ -1088,7 +1088,7 @@ export default {
     },
     studentNativePlaceTemp: function (val) {
       if (val.length !== 0) {
-        let data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
+        const data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
         this.editForm.studentNativePlace = data
         this.addForm.studentNativePlace = data
       } else {
@@ -1101,12 +1101,12 @@ export default {
   created () {
     // 这里是发起表格数据请求的位置
     this.getProfessionAndClassesDataCascaderOptions()
-    let classesName = this.$route.query.classesName
+    const classesName = this.$route.query.classesName
     if (classesName !== undefined && classesName !== '') {
       this.queryInfo.keyWord = classesName
       this.queryInfo.queryType = 'classesName'
     }
-    let studentCode = this.$route.query.studentCode
+    const studentCode = this.$route.query.studentCode
     if (studentCode !== undefined && studentCode !== '') {
       this.queryInfo.keyWord = studentCode
       this.queryInfo.queryType = 'studentCode'
@@ -1127,7 +1127,7 @@ export default {
     },
     /** 获取专业及班级数据 */
     async getProfessionAndClassesDataCascaderOptions () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getProfessionAndClassesCascaderOptions',
         username: window.sessionStorage.getItem('username')
       })
@@ -1148,7 +1148,7 @@ export default {
 
     /** 获取学生信息 */
     async getStudentData () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getStudentData',
         username: window.sessionStorage.getItem('username'),
         query: this.queryInfo
@@ -1180,7 +1180,7 @@ export default {
             this.addForm.enterpriseAndPostData = []
             this.addForm.postDuty = ''
           }
-          let formData = JSON.stringify({
+          const formData = JSON.stringify({
             useraction: 'addstudent',
             username: window.sessionStorage.getItem('username'),
             ...this.addForm
@@ -1212,14 +1212,14 @@ export default {
     /** 修改学生操作 */
     editDialogVisible1 (studentData) {
       // 对象复制
-      for (let key in studentData) {
+      for (const key in studentData) {
         this.editForm[key] = studentData[key]
       }
 
       // 自动显示学生籍贯
-      let data = studentData.studentNativePlace.split('-')
-      let studentNativePlaceCascaderOptions = this.studentNativePlaceCascaderOptions
-      let arr0 = []
+      const data = studentData.studentNativePlace.split('-')
+      const studentNativePlaceCascaderOptions = this.studentNativePlaceCascaderOptions
+      const arr0 = []
       for (let k = 0; k < studentNativePlaceCascaderOptions.length; k++) {
         // 获取省份代号
         if (data[0] === studentNativePlaceCascaderOptions[k].label) {
@@ -1235,8 +1235,8 @@ export default {
       this.studentNativePlaceTemp = arr0
 
       // 遍历处理班级专业自动显示
-      let cascaderOptions = this.cascaderOptions
-      let arr = []
+      const cascaderOptions = this.cascaderOptions
+      const arr = []
       for (let i = 0; i < cascaderOptions.length; i++) {
         // 获取专业代号
         if (studentData.toProfession === cascaderOptions[i].label) {
@@ -1252,9 +1252,9 @@ export default {
       this.editForm.classesAndProfesion = arr
 
       // 自动显示企业岗位
-      let postDataCascaderOptions = this.postDataCascaderOptions
-      let enterprisePost = [this.editForm.enterpriseName, this.editForm.postName]
-      let arr1 = []
+      const postDataCascaderOptions = this.postDataCascaderOptions
+      const enterprisePost = [this.editForm.enterpriseName, this.editForm.postName]
+      const arr1 = []
       for (let i = 0; i < postDataCascaderOptions.length; i++) {
         // 获取公司
         if (postDataCascaderOptions[i].label === enterprisePost[0]) {
@@ -1279,7 +1279,7 @@ export default {
             this.editForm.enterpriseAndPostData = []
             this.editForm.postDuty = ''
           }
-          let formData = JSON.stringify({
+          const formData = JSON.stringify({
             useraction: 'editStudent',
             username: window.sessionStorage.getItem('username'),
             ...this.editForm
@@ -1314,7 +1314,7 @@ export default {
     },
     async deletestudent () {
       var deletestudentCode = this.studentCode
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'deleteStudent',
         username: window.sessionStorage.getItem('username'),
         studentCode: deletestudentCode
@@ -1342,9 +1342,10 @@ export default {
 
     /** 获取企业岗位联级菜单数据 */
     async getPostDataCascaderOptions () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getPostDataCascaderOptions',
-        username: window.sessionStorage.getItem('username') })
+        username: window.sessionStorage.getItem('username')
+      })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
       // 判断业务逻辑
@@ -1381,8 +1382,8 @@ export default {
 
     /** 导出学生数据为Excel文件 */
     async exportStudentData () {
-      let message = this.$message
-      let formData = JSON.stringify({
+      const message = this.$message
+      const formData = JSON.stringify({
         useraction: 'exportStudentData',
         username: window.sessionStorage.getItem('username'),
         getDataType: this.queryInfo.searchType
@@ -1397,9 +1398,9 @@ export default {
         if (res.data.size <= 106) {
           return message({ message: '此类型数据为空，不提供下载！', type: 'warning', showClose: true, center: true })
         }
-        let blod = new Blob([res.data], { type: '' })
-        let url = URL.createObjectURL(blod)
-        let link = document.createElement('a')
+        const blod = new Blob([res.data], { type: '' })
+        const url = URL.createObjectURL(blod)
+        const link = document.createElement('a')
         link.style.display = 'none'
         link.href = url.toString() // 将buffer转为文本
         link.setAttribute('download', '学生就业管理系统学生数据.xlsx')
@@ -1410,16 +1411,16 @@ export default {
 
     /** 导入学生数据Excel文件 */
     inputStudentData () {
-      let input = document.getElementById('fileInput')
+      const input = document.getElementById('fileInput')
       document.body.appendChild(input)
       input.click()
     },
     handleFileChange (e) {
-      let inputDOM = this.$refs.inputer
-      let fileobj = inputDOM.files[0]// 通过DOM取文件数据
-      let fileType = fileobj.type.split('.')[1]
+      const inputDOM = this.$refs.inputer
+      const fileobj = inputDOM.files[0]// 通过DOM取文件数据
+      const fileType = fileobj.type.split('.')[1]
       if (fileType === 'xls' || fileType === 'xlsx') {
-        let formData = new FormData()// new一个formData事件
+        const formData = new FormData()// new一个formData事件
         formData.append('useraction', 'inputStudentData')
         formData.append('username', window.sessionStorage.getItem('username'))
         formData.append('file', fileobj) // 将file属性添加到formData里

@@ -98,12 +98,12 @@ export default {
           // 设置按钮状态
           this.isLoading = true
           // 获取表单数据
-          let data = this.modifyTeacher
-          let formData = JSON.stringify({
-            'useraction': 'userModifyTeacher',
-            'username': window.sessionStorage.getItem('username'),
-            'teachername': data.oldUsername,
-            'newusername': data.enterUsername
+          const data = this.modifyTeacher
+          const formData = JSON.stringify({
+            useraction: 'userModifyTeacher',
+            username: window.sessionStorage.getItem('username'),
+            teachername: data.oldUsername,
+            newusername: data.enterUsername
           })
           // 提交表单
           const result = await this.$http.post('/user/', formData)

@@ -109,7 +109,7 @@ export default {
   methods: {
     // 检测是否初始化系统
     async isSysteInit () {
-      let formData = JSON.stringify({ 'useraction': 'isSystemInit' })
+      const formData = JSON.stringify({ useraction: 'isSystemInit' })
       // 提交表单
       const result = await this.$http.post('/user/', formData)
       // 判断业务逻辑
@@ -131,8 +131,8 @@ export default {
           initButton.loading = true
 
           // 获取表单数据
-          let formData = JSON.stringify({
-            'useraction': 'systemInit',
+          const formData = JSON.stringify({
+            useraction: 'systemInit',
             ...this.initForm
           })
           // 提交表单

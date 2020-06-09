@@ -333,13 +333,13 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '岗位编号', 'prop': 'postCode' },
-        { 'label': '岗位名称', 'prop': 'postName', 'width': 200 },
-        { 'label': '所属企业', 'prop': 'toEnterprise', 'width': 250 },
-        { 'label': '招聘人数', 'prop': 'recruitCount' },
-        { 'label': '工作地点', 'prop': 'postAddress', 'width': 200 },
-        { 'label': '工资待遇', 'prop': 'salaryTreatment', 'width': 400 },
-        { 'label': '创建时间', 'prop': 'addTime', 'width': 150 }
+        { label: '岗位编号', prop: 'postCode' },
+        { label: '岗位名称', prop: 'postName', width: 200 },
+        { label: '所属企业', prop: 'toEnterprise', width: 250 },
+        { label: '招聘人数', prop: 'recruitCount' },
+        { label: '工作地点', prop: 'postAddress', width: 200 },
+        { label: '工资待遇', prop: 'salaryTreatment', width: 400 },
+        { label: '创建时间', prop: 'addTime', width: 150 }
       ],
       /** 控制添加岗位对话框的显示与隐藏 */
       addPostDialogVisible: false,
@@ -405,7 +405,7 @@ export default {
   },
   watch: {
     // 城市代码数组转换为字符串
-    'postAddressTemp': function (val) {
+    postAddressTemp: function (val) {
       this.addPostForm.postAddress = CodeToText[val[0]] + '-' + CodeToText[val[1]]
     },
     // 当用户选择搜索学生的前置条件则锁定筛选数据类型为全部数据并禁用单选框否则应该清空输入框数据
@@ -419,17 +419,17 @@ export default {
       }
     },
     // 城市代码数组转换为字符串
-    'companyAddressTemp': function (val) {
+    companyAddressTemp: function (val) {
       this.editForm.postAddress = CodeToText[val[0]] + '-' + CodeToText[val[1]]
     },
-    'bindEnterpriseTemp': function (val) {
+    bindEnterpriseTemp: function (val) {
       this.editPostForm.bindEnterprise = val[0]
     }
   },
   /** 生命周期函数 */
   created () {
     this.getEnterpriseDataCascaderOptions()
-    let enterpriseName = this.$route.query.enterpriseName
+    const enterpriseName = this.$route.query.enterpriseName
     if (enterpriseName !== undefined && enterpriseName !== '') {
       this.queryInfo.keyWord = enterpriseName
       this.queryInfo.queryType = 'enterpriseName'
@@ -440,17 +440,17 @@ export default {
   methods: {
     /** 获取企业数据 */
     async getEnterpriseDataCascaderOptions () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getEnterpriseDataCascaderOptions',
         username: window.sessionStorage.getItem('username')
       })
       // 提交登出请求
       const result = await this.$http.post('/data/', formData)
       if (result.data.ret === 0) {
-        let cascaderOptionsData = []
-        let data = result.data.data
+        const cascaderOptionsData = []
+        const data = result.data.data
         for (let i = 0; i < data.length; i++) {
-          cascaderOptionsData.push({ label: data[i]['enterpriseName'], value: data[i]['enterpriseCode'] })
+          cascaderOptionsData.push({ label: data[i].enterpriseName, value: data[i].enterpriseCode })
         }
         this.enterpriseCascaderOptions = cascaderOptionsData
       }
@@ -468,7 +468,7 @@ export default {
     addPost () {
       this.$refs.addPostFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
+          const formData = JSON.stringify({
             useraction: 'addPost',
             username: window.sessionStorage.getItem('username'),
             ...this.addPostForm
@@ -500,9 +500,9 @@ export default {
     editPostDialogVisible1 (postData) {
       this.editPostForm = postData
       // 自动显示单位地址
-      let chinaAddress = this.postAddressCascaderOptions
-      let address = postData.postAddress.split('-')
-      let arr1 = []
+      const chinaAddress = this.postAddressCascaderOptions
+      const address = postData.postAddress.split('-')
+      const arr1 = []
       for (let i = 0; i < chinaAddress.length; i++) {
         // 获取省份
         if (chinaAddress[i].label === address[0]) {
@@ -516,8 +516,8 @@ export default {
         }
       }
       // 自动显示岗位绑定的企业
-      let enterpriseData = this.enterpriseCascaderOptions
-      let arr2 = []
+      const enterpriseData = this.enterpriseCascaderOptions
+      const arr2 = []
       for (let i = 0; i < enterpriseData.length; i++) {
         if (enterpriseData[i].label === postData.toEnterprise) {
           arr2.push(enterpriseData[i].value)
@@ -532,7 +532,7 @@ export default {
     async editPost () {
       this.$refs.editPostFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
+          const formData = JSON.stringify({
             useraction: 'editPost',
             username: window.sessionStorage.getItem('username'),
             ...this.editPostForm
@@ -568,8 +568,8 @@ export default {
     },
 
     async deletePost () {
-      let postCode = this.postCode
-      let formData = JSON.stringify({
+      const postCode = this.postCode
+      const formData = JSON.stringify({
         useraction: 'deletePost',
         username: window.sessionStorage.getItem('username'),
         postCode: postCode
@@ -597,7 +597,7 @@ export default {
 
     /** 获取岗位数据 */
     async getPostData () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getPostData',
         username: window.sessionStorage.getItem('username'),
         ...this.queryInfo

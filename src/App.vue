@@ -34,9 +34,9 @@ export default {
           this.lastTime = new Date().getTime() // 如果在10分钟内点击，则把这次点击的时间记录覆盖掉之前存的最后一次点击的时间
           this.$router.push('/login')
           // 设置用户为登出状态
-          let formData = JSON.stringify({
-            'useraction': 'userLogout',
-            'username': window.sessionStorage.getItem('username')
+          const formData = JSON.stringify({
+            useraction: 'userLogout',
+            username: window.sessionStorage.getItem('username')
           })
           // 提交登出请求
           const result = await this.$http.post('/user/', formData)
@@ -47,7 +47,7 @@ export default {
           }
         } else {
           /** 判断是否因为用户未登录可以退出 */
-          let username = window.sessionStorage.getItem('username')
+          const username = window.sessionStorage.getItem('username')
           if (username === null || username === undefined || username === '') {
             this.$router.push('/login')
             this.$message({ message: '用户未登录，请重新登录', type: 'warning', showClose: true, center: true })

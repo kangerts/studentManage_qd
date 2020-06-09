@@ -5,15 +5,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  'presets': [
+  presets: [
     '@vue/cli-plugin-babel/preset'
   ],
-  'plugins': [
+  plugins: [
     [
       'component',
       {
-        'libraryName': 'element-ui',
-        'styleLibraryName': 'theme-chalk'
+        libraryName: 'element-ui',
+        styleLibraryName: 'theme-chalk'
       }
     ],
     // 发布时使用清除组件

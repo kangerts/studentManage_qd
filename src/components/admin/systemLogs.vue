@@ -130,10 +130,10 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '日志编号', 'prop': 'logCode', 'width': 80 },
-        { 'label': '操作账户', 'prop': 'operationUser', 'width': 120 },
-        { 'label': '操作类型', 'prop': 'operationType', 'width': 120 },
-        { 'label': '数据记录', 'prop': 'dataRecord' }
+        { label: '日志编号', prop: 'logCode', width: 80 },
+        { label: '操作账户', prop: 'operationUser', width: 120 },
+        { label: '操作类型', prop: 'operationType', width: 120 },
+        { label: '数据记录', prop: 'dataRecord' }
       ],
       /** 删除操作日志对话框是否显示 */
       deleteSystemLogsDialogVisible: false
@@ -161,9 +161,9 @@ export default {
 
     /** 删除系统操作日志 */
     async deleteSystemLogs () {
-      let formData = JSON.stringify({
-        'useraction': 'deleteSystemLogsData',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'deleteSystemLogsData',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -184,10 +184,10 @@ export default {
 
     /** 获取系统操作日志列表数据 */
     async getSystemLogsData () {
-      let formData = JSON.stringify({
-        'useraction': 'getSystemLogsData',
-        'username': window.sessionStorage.getItem('username'),
-        'query': this.queryInfo
+      const formData = JSON.stringify({
+        useraction: 'getSystemLogsData',
+        username: window.sessionStorage.getItem('username'),
+        query: this.queryInfo
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)

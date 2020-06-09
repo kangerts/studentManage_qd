@@ -68,7 +68,7 @@ export default {
   methods: {
     // 检测是否初始化系统
     async isSysteInit () {
-      let formData = JSON.stringify({ 'useraction': 'isSystemInit' })
+      const formData = JSON.stringify({ useraction: 'isSystemInit' })
       const result = await this.$http.post('/user/', formData)
       // 判断业务逻辑
       if (result.data.ret === 1) {
@@ -78,15 +78,15 @@ export default {
     // 表单提交方法
     submitForm () {
       // 设置按钮状态
-      let message = this.$message
-      let route = this.$router
+      const message = this.$message
+      const route = this.$router
       this.$refs.loginForm.validate(async valid => {
         var loginButton = this.$refs.loginButton
         // 判断是否合法
         if (valid) {
           loginButton.loading = true
-          let formData = JSON.stringify({
-            'useraction': 'userLogin',
+          const formData = JSON.stringify({
+            useraction: 'userLogin',
             ...this.loginForm
           })
           // 提交表单

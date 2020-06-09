@@ -56,26 +56,26 @@ export default {
       var myChart = this.$refs.unemployedRateRef
       myChart.showLoading()
       // 创建获取数据的请求表单
-      let formData = JSON.stringify({
-        'useraction': 'getUnemployedRateData',
-        'username': window.sessionStorage.getItem('username'),
-        'queryType': this.queryType === 'getProfessionunemployedData' ? 'getProfessionunemployedData' : 'getProfessioAndClassesnunemployedData',
-        'queryInfo': this.cascaderValues
+      const formData = JSON.stringify({
+        useraction: 'getUnemployedRateData',
+        username: window.sessionStorage.getItem('username'),
+        queryType: this.queryType === 'getProfessionunemployedData' ? 'getProfessionunemployedData' : 'getProfessioAndClassesnunemployedData',
+        queryInfo: this.cascaderValues
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
       // 判断业务逻辑
       if (result.data.ret === 0) {
-        let data = result.data.data
-        let endData = [] // 最终数据列表
-        let reasonList = [] // 最终原因列表
+        const data = result.data.data
+        const endData = [] // 最终数据列表
+        const reasonList = [] // 最终原因列表
         data.forEach(value => {
           if (value.value !== 0) {
             endData.push(value)
             reasonList.push(value.name)
           }
         })
-        let peopleCount = result.data.peopleCount
+        const peopleCount = result.data.peopleCount
         var option = {
           title: {
             text: peopleCount + '名学生就业与未就业原因占比',
@@ -165,9 +165,9 @@ export default {
     },
     /** 获取专业及届数数据 */
     async getProfessionAndClassesDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionAndClassesDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionAndClassesDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -183,9 +183,9 @@ export default {
 
     /** 获取专业及班级及届数的联级菜单数据 */
     async getProfessionAndClassesLevelDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionAndClassesLevelDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionAndClassesLevelDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)

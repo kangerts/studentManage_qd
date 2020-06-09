@@ -71,9 +71,9 @@ export default {
     },
     /** 获取专业及届数数据 */
     async getProfessionAndClassesDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionAndClassesDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionAndClassesDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -89,9 +89,9 @@ export default {
 
     /** 获取专业及班级及届数的联级菜单数据 */
     async getProfessionAndClassesLevelDataCascaderOptions () {
-      let formData = JSON.stringify({
-        'useraction': 'getProfessionAndClassesLevelDataCascaderOptions',
-        'username': window.sessionStorage.getItem('username')
+      const formData = JSON.stringify({
+        useraction: 'getProfessionAndClassesLevelDataCascaderOptions',
+        username: window.sessionStorage.getItem('username')
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -142,10 +142,10 @@ export default {
       var valueList = ''
 
       formData = JSON.stringify({
-        'useraction': 'getSalaryData',
-        'username': window.sessionStorage.getItem('username'),
-        'queryType': this.type === 'getProfessionSalaryData' ? 'getProfessionSalaryData' : 'getClassesSalaryData',
-        'queryInfo': this.cascaderValues
+        useraction: 'getSalaryData',
+        username: window.sessionStorage.getItem('username'),
+        queryType: this.type === 'getProfessionSalaryData' ? 'getProfessionSalaryData' : 'getClassesSalaryData',
+        queryInfo: this.cascaderValues
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -217,8 +217,8 @@ export default {
             alignWithLabel: false,
             length: 5
           },
-          'splitLine': { // 网格线
-            'show': false
+          splitLine: { // 网格线
+            show: false
           },
           inverse: 'true', // 排序
           axisLine: {
@@ -247,7 +247,7 @@ export default {
             normal: {
               show: true,
               color: function (params) {
-                let num = colorArray.length
+                const num = colorArray.length
                 return {
                   type: 'linear',
                   colorStops: [{

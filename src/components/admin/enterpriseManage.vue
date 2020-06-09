@@ -295,16 +295,16 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { 'label': '企业编号', 'prop': 'enterpriseCode', 'width': 100 },
-        { 'label': '企业名称', 'prop': 'enterpriseName', 'width': 200 },
-        { 'label': '企业规模', 'prop': 'enterpriseScale', 'width': 100 },
-        { 'label': '联系人姓名', 'prop': 'enterpriseContacts', 'width': 100 },
-        { 'label': '企业电话', 'prop': 'enterprisePhone', 'width': 200 },
-        { 'label': '企业地址', 'prop': 'enterpriseAddress', 'width': 300 },
-        { 'label': '天眼查分数', 'prop': 'skyEyeScore', 'width': 100 },
-        { 'label': '备注', 'prop': 'remarks', 'width': 300 },
-        { 'label': '岗位数量', prop: 'postCount' },
-        { 'label': '添加日期', 'prop': 'addTime', 'width': 150 }
+        { label: '企业编号', prop: 'enterpriseCode', width: 100 },
+        { label: '企业名称', prop: 'enterpriseName', width: 200 },
+        { label: '企业规模', prop: 'enterpriseScale', width: 100 },
+        { label: '联系人姓名', prop: 'enterpriseContacts', width: 100 },
+        { label: '企业电话', prop: 'enterprisePhone', width: 200 },
+        { label: '企业地址', prop: 'enterpriseAddress', width: 300 },
+        { label: '天眼查分数', prop: 'skyEyeScore', width: 100 },
+        { label: '备注', prop: 'remarks', width: 300 },
+        { label: '岗位数量', prop: 'postCount' },
+        { label: '添加日期', prop: 'addTime', width: 150 }
       ],
       // 添加企业表单是否显示
       addEnterpriseDialogVisible: false,
@@ -498,7 +498,7 @@ export default {
   },
   /** 生命周期函数 */
   created () {
-    let enterpriseName = this.$route.query.enterpriseName
+    const enterpriseName = this.$route.query.enterpriseName
     if (enterpriseName !== undefined && enterpriseName !== '') {
       this.queryInfo.keyWord = enterpriseName
     }
@@ -510,7 +510,7 @@ export default {
     addEnterprise () {
       this.$refs.addEnterpriseFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
+          const formData = JSON.stringify({
             useraction: 'addEnterprise',
             username: window.sessionStorage.getItem('username'),
             ...this.addEnterpriseForm
@@ -548,7 +548,7 @@ export default {
     editEnterprise () {
       this.$refs.editEnterpriseFormRef.validate(async valid => {
         if (valid) {
-          let formData = JSON.stringify({
+          const formData = JSON.stringify({
             useraction: 'editEnterprise',
             username: window.sessionStorage.getItem('username'),
             ...this.editEnterpriseForm
@@ -584,8 +584,8 @@ export default {
     },
     /** 删除企业 */
     async deleteEnterprise () {
-      let enterpriseCode = this.deleteEnterpriseCode
-      let formData = JSON.stringify({
+      const enterpriseCode = this.deleteEnterpriseCode
+      const formData = JSON.stringify({
         useraction: 'deleteEnterprise',
         username: window.sessionStorage.getItem('username'),
         enterpriseCode: enterpriseCode
@@ -613,7 +613,7 @@ export default {
 
     /** 获取企业数据 */
     async getEnterpriseData () {
-      let formData = JSON.stringify({
+      const formData = JSON.stringify({
         useraction: 'getEnterpriseData',
         username: window.sessionStorage.getItem('username'),
         ...this.queryInfo
