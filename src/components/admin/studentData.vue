@@ -1210,65 +1210,81 @@ export default {
     },
 
     /** 修改学生操作 */
-    editDialogVisible1 (studentData) {
-      // 对象复制
-      for (const key in studentData) {
-        this.editForm[key] = studentData[key]
-      }
+    async editDialogVisible1 (studentData) {
+      // 开启编辑锁
+      const formData = JSON.stringify({
+        useraction: 'systemEditLocked',
+        type: 'editStudent',
+        username: window.sessionStorage.getItem('username'),
+        code: studentData.studentCode
+      })
+      const result = await this.$http.post('/data/', formData)
+      if (result.data.ret === 0) {
+        for (const key in studentData) {
+          this.editForm[key] = studentData[key]
+        }
 
-      // 自动显示学生籍贯
-      const data = studentData.studentNativePlace.split('-')
-      const studentNativePlaceCascaderOptions = this.studentNativePlaceCascaderOptions
-      const arr0 = []
-      for (let k = 0; k < studentNativePlaceCascaderOptions.length; k++) {
-        // 获取省份代号
-        if (data[0] === studentNativePlaceCascaderOptions[k].label) {
-          arr0.push(studentNativePlaceCascaderOptions[k].value)
-          for (let j = 0; j < studentNativePlaceCascaderOptions[k].children.length; j++) {
-            // 获取城市代号
-            if (data[1] === studentNativePlaceCascaderOptions[k].children[j].label) {
-              arr0.push(studentNativePlaceCascaderOptions[k].children[j].value)
+        // 自动显示学生籍贯
+        const data = studentData.studentNativePlace.split('-')
+        const studentNativePlaceCascaderOptions = this.studentNativePlaceCascaderOptions
+        const arr0 = []
+        for (let k = 0; k < studentNativePlaceCascaderOptions.length; k++) {
+          // 获取省份代号
+          if (data[0] === studentNativePlaceCascaderOptions[k].label) {
+            arr0.push(studentNativePlaceCascaderOptions[k].value)
+            for (let j = 0; j < studentNativePlaceCascaderOptions[k].children.length; j++) {
+              // 获取城市代号
+              if (data[1] === studentNativePlaceCascaderOptions[k].children[j].label) {
+                arr0.push(studentNativePlaceCascaderOptions[k].children[j].value)
+              }
             }
           }
         }
-      }
-      this.studentNativePlaceTemp = arr0
+        this.studentNativePlaceTemp = arr0
 
-      // 遍历处理班级专业自动显示
-      const cascaderOptions = this.cascaderOptions
-      const arr = []
-      for (let i = 0; i < cascaderOptions.length; i++) {
-        // 获取专业代号
-        if (studentData.toProfession === cascaderOptions[i].label) {
-          arr.push(cascaderOptions[i].value)
-          for (let ii = 0; ii < cascaderOptions[i].children.length; ii++) {
-            // 获取班级代号
-            if (studentData.toClasses === cascaderOptions[i].children[ii].label) {
-              arr.push(cascaderOptions[i].children[ii].value)
+        // 遍历处理班级专业自动显示
+        const cascaderOptions = this.cascaderOptions
+        const arr = []
+        for (let i = 0; i < cascaderOptions.length; i++) {
+          // 获取专业代号
+          if (studentData.toProfession === cascaderOptions[i].label) {
+            arr.push(cascaderOptions[i].value)
+            for (let ii = 0; ii < cascaderOptions[i].children.length; ii++) {
+              // 获取班级代号
+              if (studentData.toClasses === cascaderOptions[i].children[ii].label) {
+                arr.push(cascaderOptions[i].children[ii].value)
+              }
             }
           }
         }
-      }
-      this.editForm.classesAndProfesion = arr
+        this.editForm.classesAndProfesion = arr
 
-      // 自动显示企业岗位
-      const postDataCascaderOptions = this.postDataCascaderOptions
-      const enterprisePost = [this.editForm.enterpriseName, this.editForm.postName]
-      const arr1 = []
-      for (let i = 0; i < postDataCascaderOptions.length; i++) {
-        // 获取公司
-        if (postDataCascaderOptions[i].label === enterprisePost[0]) {
-          arr1.push(postDataCascaderOptions[i].value)
-          for (let ii = 0; ii < postDataCascaderOptions[i].children.length; ii++) {
-            // 获取岗位
-            if (postDataCascaderOptions[i].children[ii].label === enterprisePost[1]) {
-              arr1.push(postDataCascaderOptions[i].children[ii].value)
+        // 自动显示企业岗位
+        const postDataCascaderOptions = this.postDataCascaderOptions
+        const enterprisePost = [this.editForm.enterpriseName, this.editForm.postName]
+        const arr1 = []
+        for (let i = 0; i < postDataCascaderOptions.length; i++) {
+          // 获取公司
+          if (postDataCascaderOptions[i].label === enterprisePost[0]) {
+            arr1.push(postDataCascaderOptions[i].value)
+            for (let ii = 0; ii < postDataCascaderOptions[i].children.length; ii++) {
+              // 获取岗位
+              if (postDataCascaderOptions[i].children[ii].label === enterprisePost[1]) {
+                arr1.push(postDataCascaderOptions[i].children[ii].value)
+              }
             }
           }
         }
+        this.editForm.enterpriseAndPostData = arr1
+        this.editDialogVisible = true
+      } else {
+        this.$message({
+          message: result.data.data,
+          type: 'error',
+          showClose: true,
+          center: true
+        })
       }
-      this.editForm.enterpriseAndPostData = arr1
-      this.editDialogVisible = true
     },
     editstudent () {
       this.$refs.editFormRef.validate(async valid => {
