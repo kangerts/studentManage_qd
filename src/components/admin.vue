@@ -54,7 +54,7 @@
           </el-menu-item>
           <!--          一级菜单-->
           <el-submenu
-            :index="item.id+''"
+            :index="index+''"
             v-for="(item, index) in menuList"
             :key="index"
           >
