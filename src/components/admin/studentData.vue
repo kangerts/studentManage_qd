@@ -143,12 +143,22 @@
       :data="tableData"
       border
       stripe
+      highlight-current-row
       style="width: 100%"
     >
       <el-table-column
-        type="index"
+        width="150"
+        label="学生学号"
+        prop="studentCode"
         align="center"
-        label="#"
+        fixed="left"
+      />
+      <el-table-column
+        width="150"
+        label="学生姓名"
+        prop="studentName"
+        align="center"
+        fixed="left"
       />
       <el-table-column
         :key="table.prop"
@@ -709,12 +719,10 @@ export default {
   data () {
     return {
       tableHeader: [
+        { label: '学生性别', prop: 'studentSex', width: 100 },
         { label: '学生届数', prop: 'studentLevel', width: 100 },
         { label: '所属专业', prop: 'toProfession', width: 150 },
         { label: '所属班级', prop: 'toClasses', width: 150 },
-        { label: '学生学号', prop: 'studentCode', width: 150 },
-        { label: '学生姓名', prop: 'studentName', width: 150 },
-        { label: '学生性别', prop: 'studentSex', width: 100 },
         { label: '学生籍贯', prop: 'studentNativePlace', width: 120 },
         { label: '学生电话', prop: 'studentPhone', width: 180 },
         { label: '就业状态', prop: 'employmentStatus', width: 100 },

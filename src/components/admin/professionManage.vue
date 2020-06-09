@@ -35,6 +35,7 @@
     <el-table
       :data="tableData"
       border
+      highlight-current-row
       stripe
       style="width: 100%"
     >
