@@ -187,7 +187,6 @@ export default {
       for (let i = 0; i < this.menuList.length; i++) {
         for (let j = 0; j < this.menuList[i].children.length; j++) {
           if (this.menuList[i].children[j].path === this.$route.path) {
-            this.activeTabas = name
             iindex = i
             jindex = j
             break
