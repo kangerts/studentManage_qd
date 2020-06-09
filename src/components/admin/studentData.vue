@@ -37,6 +37,10 @@
                 value="studentSex"
               />
               <el-option
+                label="学生籍贯"
+                value="studentNativePlace"
+              />
+              <el-option
                 label="班级名称"
                 value="classesName"
               />
