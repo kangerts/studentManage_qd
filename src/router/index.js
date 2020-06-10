@@ -4,30 +4,9 @@ import VueRouter from 'vue-router'
 /** 导入element-UI信息提示组件 */
 import { Message } from 'element-ui'
 
-/** 按需导入后台系统功能组件 */
-const init = () => import('../components/init')
-const login = () => import('../components/login')
-const admin = () => import('../components/admin')
-const index = () => import('../components/admin/index')
-const modifyAccount = () => import('../components/admin/modifyAccount')
-const modifyPassWord = () => import('../components/admin/modifyPassWord')
-const modifyTeacher = () => import('../components/admin/modifyTeacher')
-const professionManage = () => import('../components/admin/professionManage')
-const classesManage = () => import('../components/admin/classesManage')
-const enterpriseManage = () => import('../components/admin/enterpriseManage')
-const postManage = () => import('../components/admin/postManage')
-const studentData = () => import('../components/admin/studentData')
-const postTrack = () => import('../components/admin/postTrack')
-const sexRatio = () => import('../components/admin/sexRatio')
-const unemployedRate = () => import('../components/admin/unemployedRate')
-const salaryList = () => import('../components/admin/salaryList')
-const workArea = () => import('../components/admin/workArea')
-const workDirection = () => import('../components/admin/workDirection')
-const updateLogs = () => import('../components/admin/updateLogs')
-const systemLogs = () => import('../components/admin/systemLogs')
-
 Vue.use(VueRouter)
 
+/** 按需导入后台系统功能组件 */
 const routes = [
   {
     // 系统根路径
@@ -37,36 +16,36 @@ const routes = [
   {
     // 系统初始化组件
     path: '/init',
-    component: init
+    component: () => import('../components/init')
   },
   {
     // 系统用户登录组件
     path: '/login',
-    component: login
+    component: () => import('../components/login')
   },
   {
     // 系统后台登录组件
     path: '/admin',
-    component: admin,
+    component: () => import('../components/admin'),
     // 添加子路由
     children: [
-      { path: '/admin', component: index },
-      { path: '/admin/modifyAccount', component: modifyAccount },
-      { path: '/admin/modifyPassWord', component: modifyPassWord },
-      { path: '/admin/modifyTeacher', component: modifyTeacher },
-      { path: '/admin/professionManage', component: professionManage },
-      { path: '/admin/classesManage', component: classesManage },
-      { path: '/admin/enterpriseManage', component: enterpriseManage },
-      { path: '/admin/postManage', component: postManage },
-      { path: '/admin/studentData', component: studentData },
-      { path: '/admin/postTrack', component: postTrack },
-      { path: '/admin/sexRatio', component: sexRatio },
-      { path: '/admin/unemployedRate', component: unemployedRate },
-      { path: '/admin/salaryList', component: salaryList },
-      { path: '/admin/workArea', component: workArea },
-      { path: '/admin/workDirection', component: workDirection },
-      { path: '/admin/updateLogs', component: updateLogs },
-      { path: '/admin/systemLogs', component: systemLogs }
+      { path: '/admin', component: () => import('../components/admin/index') },
+      { path: '/admin/modifyAccount', component: () => import('../components/admin/modifyAccount') },
+      { path: '/admin/modifyPassWord', component: () => import('../components/admin/modifyPassWord') },
+      { path: '/admin/modifyTeacher', component: () => import('../components/admin/modifyTeacher') },
+      { path: '/admin/professionManage', component: () => import('../components/admin/professionManage') },
+      { path: '/admin/classesManage', component: () => import('../components/admin/classesManage') },
+      { path: '/admin/enterpriseManage', component: () => import('../components/admin/enterpriseManage') },
+      { path: '/admin/postManage', component: () => import('../components/admin/postManage') },
+      { path: '/admin/studentData', component: () => import('../components/admin/studentData') },
+      { path: '/admin/postTrack', component: () => import('../components/admin/postTrack') },
+      { path: '/admin/sexRatio', component: () => import('../components/admin/sexRatio') },
+      { path: '/admin/unemployedRate', component: () => import('../components/admin/unemployedRate') },
+      { path: '/admin/salaryList', component: () => import('../components/admin/salaryList') },
+      { path: '/admin/workArea', component: () => import('../components/admin/workArea') },
+      { path: '/admin/workDirection', component: () => import('../components/admin/workDirection') },
+      { path: '/admin/updateLogs', component: () => import('../components/admin/updateLogs') },
+      { path: '/admin/systemLogs', component: () => import('../components/admin/systemLogs') }
     ]
   }
 ]
