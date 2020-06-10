@@ -114,7 +114,6 @@ export default {
 
 <style lang="less" scoped>
   .el-header {
-    background-color: #409EFF;
     color: white;
     font-size: 25px;
     text-align: center;
