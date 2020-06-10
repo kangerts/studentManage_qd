@@ -1,116 +1,122 @@
 <template>
-  <el-container class="admin-container">
-    <!--页面头部(上边)-->
-    <el-header>
-      <div
-        class="admin-logo-container"
-        :style="isCollapse ? 'width:65px' : 'width:230px'"
-      >
-        <img
-          class="admin-logo"
-          src="../assets/img/admin.png"
-          alt=""
-        >
-        <span :style="isCollapse ? 'display: none' : 'display: block'">就业管理</span>
-      </div>
-      <div class="toggle-button-container">
-        <!--折叠按钮-->
+  <div
+    @click="checkTimeOut()"
+    @mouseenter="checkTimeOut()"
+    @mousemove="checkTimeOut()"
+  >
+    <el-container class="admin-container">
+      <!--页面头部(上边)-->
+      <el-header>
         <div
-          class="toggle-button"
-          @click="toggleCollapse"
+          class="admin-logo-container"
+          :style="isCollapse ? 'width:65px' : 'width:230px'"
         >
-          <i
-            :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
-          />
+          <img
+            class="admin-logo"
+            src="../assets/img/admin.png"
+            alt=""
+          >
+          <span :style="isCollapse ? 'display: none' : 'display: block'">就业管理</span>
         </div>
-      </div>
-      <div class="right-function-container">
-        <el-button @click="logout">
-          退出
-        </el-button>
-      </div>
-    </el-header>
-    <!--页面主体部分-->
-    <el-container>
-      <!--页面侧边栏(左边)-->
-      <el-aside :width="isCollapse ? '65px' : '230px'">
-        <!--        页面左侧菜单区域-->
-        <el-menu
-          :collapse="isCollapse"
-          :default-active="$route.path"
-          background-color="#EEF1F6"
-          text-color="#48576a"
-          active-text-color="#409EFF"
-          :unique-opened="true"
-          :collapse-transition="false"
-          :router="true"
-        >
-          <el-menu-item
-            index="/admin"
-            @click="addTab('系统首页', '/admin')"
+        <div class="toggle-button-container">
+          <!--折叠按钮-->
+          <div
+            class="toggle-button"
+            @click="toggleCollapse"
           >
-            <i class="el-icon-s-home" />
-            <span slot="title">系统首页</span>
-          </el-menu-item>
-          <!--          一级菜单-->
-          <el-submenu
-            :index="index+''"
-            v-for="(item, index) in menuList"
-            :key="index"
+            <i
+              :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
+            />
+          </div>
+        </div>
+        <div class="right-function-container">
+          <el-button @click="logout">
+            退出
+          </el-button>
+        </div>
+      </el-header>
+      <!--页面主体部分-->
+      <el-container>
+        <!--页面侧边栏(左边)-->
+        <el-aside :width="isCollapse ? '65px' : '230px'">
+          <!--        页面左侧菜单区域-->
+          <el-menu
+            :collapse="isCollapse"
+            :default-active="$route.path"
+            background-color="#EEF1F6"
+            text-color="#48576a"
+            active-text-color="#409EFF"
+            :unique-opened="true"
+            :collapse-transition="false"
+            :router="true"
           >
-            <!--          一级菜单模板区-->
-            <template slot="title">
-              <!--              图标-->
-              <i :class="item.icon" />
-              <!--              文本-->
-              <span>{{ item.subMenuName }}</span>
-            </template>
-            <!--            二级菜单-->
             <el-menu-item
-              :index="subItem.path+''"
-              v-for="subItem in item.children"
-              :key="subItem.id"
-              @click="addTab(subItem.subMenuName, subItem.path)"
+              index="/admin"
+              @click="addTab('系统首页', '/admin')"
             >
-              <!--          二级菜单模板区-->
+              <i class="el-icon-s-home" />
+              <span slot="title">系统首页</span>
+            </el-menu-item>
+            <!--          一级菜单-->
+            <el-submenu
+              :index="index+''"
+              v-for="(item, index) in menuList"
+              :key="index"
+            >
+              <!--          一级菜单模板区-->
               <template slot="title">
                 <!--              图标-->
-                <i class="el-icon-bangzhu" />
+                <i :class="item.icon" />
                 <!--              文本-->
-                <span>{{ subItem.subMenuName }}</span>
+                <span>{{ item.subMenuName }}</span>
               </template>
-            </el-menu-item>
-          </el-submenu>
-        </el-menu>
-      </el-aside>
-      <!-- 页面主内容(右边)-->
-      <el-main>
-        <el-tabs
-          v-model="activeTabas"
-          type="card"
-          @tab-remove="removeTab"
-          @tab-click="tabClick"
-        >
-          <el-tab-pane
-            v-for="item in Tabs"
-            :key="item.name"
-            :label="item.title"
-            :name="item.name"
-            :closable="item.isClose"
+              <!--            二级菜单-->
+              <el-menu-item
+                :index="subItem.path+''"
+                v-for="subItem in item.children"
+                :key="subItem.id"
+                @click="addTab(subItem.subMenuName, subItem.path)"
+              >
+                <!--          二级菜单模板区-->
+                <template slot="title">
+                  <!--              图标-->
+                  <i class="el-icon-bangzhu" />
+                  <!--              文本-->
+                  <span>{{ subItem.subMenuName }}</span>
+                </template>
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </el-aside>
+        <!-- 页面主内容(右边)-->
+        <el-main>
+          <el-tabs
+            v-model="activeTabas"
+            type="card"
+            @tab-remove="removeTab"
+            @tab-click="tabClick"
           >
-            <el-container>
-              <el-main>
-                <el-card shadow="always">
-                  <!--            内容显示-->
-                  <router-view :key="item.name" />
-                </el-card>
-              </el-main>
-            </el-container>
-          </el-tab-pane>
-        </el-tabs>
-      </el-main>
+            <el-tab-pane
+              v-for="item in Tabs"
+              :key="item.name"
+              :label="item.title"
+              :name="item.name"
+              :closable="item.isClose"
+            >
+              <el-container>
+                <el-main>
+                  <el-card shadow="always">
+                    <!--            内容显示-->
+                    <router-view :key="item.name" />
+                  </el-card>
+                </el-main>
+              </el-container>
+            </el-tab-pane>
+          </el-tabs>
+        </el-main>
+      </el-container>
     </el-container>
-  </el-container>
+  </div>
 </template>
 
 <script>
@@ -118,6 +124,9 @@ export default {
   name: 'Admin',
   data () {
     return {
+      lastTime: null, // 最后一次点击的时间
+      currentTime: null, // 当前点击的时间
+      timeOut: 0.5 * 60 * 1000, // 设置超时时间： 30分钟
       /** tabs标签相关属性 */
       // 当前打开的tabs名称
       activeTabas: '/admin',
@@ -197,6 +206,7 @@ export default {
     }
   },
   created () {
+    this.lastTime = new Date().getTime() // 网页第一次打开时，记录当前时间
     // 保证admin中的页面刷新后重置到/admin路由下
     if (this.$route.path !== '/admin') this.$router.push('/admin')
   },
@@ -255,6 +265,44 @@ export default {
     },
     toggleCollapse () {
       this.isCollapse = !this.isCollapse
+    },
+
+    async checkTimeOut () {
+      this.currentTime = new Date().getTime() // 记录这次点击的时间
+      // 如果当前页面不是登录，初始化界面就可以执行是否退出
+      if (!(this.$route.path === '/login' || this.$route.path === '/init')) {
+        /** 判断是否因为超时可以退出 */
+        // 判断时间是否过期（判断上次最后一次点击的时间和这次点击的时间间隔是否大于10分钟）
+        var isExit = this.currentTime - this.lastTime > this.timeOut
+        if (isExit) {
+          isExit = false
+          // 这里写状态已过期后执行的操作
+          this.lastTime = new Date().getTime() // 如果在10分钟内点击，则把这次点击的时间记录覆盖掉之前存的最后一次点击的时间
+          this.$router.push('/login')
+          // 设置用户为登出状态
+          const formData = JSON.stringify({
+            useraction: 'userLogout',
+            username: window.sessionStorage.getItem('username')
+          })
+          // 提交登出请求
+          const result = await this.$http.post('/user/', formData)
+          if (result.data.ret === 0) {
+            // 清除seesion信息
+            window.sessionStorage.removeItem('username')
+            this.$message({ message: '长时间未操作，请重新登录', type: 'warning', showClose: true, center: true })
+          }
+        } else {
+          /** 判断是否因为用户未登录可以退出 */
+          const username = window.sessionStorage.getItem('username')
+          if (username === null || username === undefined || username === '') {
+            this.$router.push('/login')
+            this.$message({ message: '用户未登录，请重新登录', type: 'warning', showClose: true, center: true })
+          }
+          this.lastTime = new Date().getTime() // 如果在10分钟内点击，则把这次点击的时间记录覆盖掉之前存的最后一次点击的时间
+        }
+      } else {
+        this.lastTime = new Date().getTime() // 如果在10分钟内点击，则把这次点击的时间记录覆盖掉之前存的最后一次点击的时间
+      }
     }
   }
 }
