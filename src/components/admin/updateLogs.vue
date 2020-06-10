@@ -23,7 +23,7 @@
       class="right-col"
     >
       <el-row style="height: 50px;color: #409EFF;position: fixed">
-        <i class="el-icon-s-promotion" />当前版本:V1.5
+        <i class="el-icon-s-promotion" />当前版本：V1.5.0
       </el-row>
     </el-col>
   </el-row>
@@ -39,7 +39,7 @@ export default {
         {
           content: '新增 学生信息编辑锁(防止多人操作冲突)',
           timestamp: '2020-06-09 12:31',
-          size: 'normal',
+          size: 'large',
           type: 'success',
           icon: 'el-icon-more',
           color: '#409EFF'
@@ -223,7 +223,7 @@ export default {
         {
           content: '新增 检查更新',
           timestamp: '2020-01-16 15:46',
-          size: 'large', // normal,large
+          size: 'normal', // normal,large
           type: 'success', // primary / success / warning / danger / info
           icon: 'el-icon-more',
           color: '#0bbd87' // hsl / hsv / hex / rgb
@@ -231,6 +231,14 @@ export default {
         {
           content: '前端部分页面完毕',
           timestamp: '2020-01-16 15:46',
+          size: 'normal',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#0bbd87'
+        },
+        {
+          content: '项目正式启动',
+          timestamp: '2020-01-11 10:26',
           size: 'normal',
           type: 'success',
           icon: 'el-icon-more',
