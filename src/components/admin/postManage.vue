@@ -166,7 +166,6 @@
             :options="postAddressCascaderOptions"
             :props="{ expandTrigger: 'hover' }"
             filterable
-            clearable
             separator=" -> "
           />
         </el-form-item>
@@ -186,7 +185,6 @@
             :options="enterpriseCascaderOptions"
             :props="{ expandTrigger: 'hover' }"
             filterable
-            clearable
             separator=" -> "
           />
         </el-form-item>
@@ -241,7 +239,6 @@
             :options="postAddressCascaderOptions"
             :props="{ expandTrigger: 'hover' }"
             filterable
-            clearable
             separator=" -> "
           />
         </el-form-item>
@@ -261,7 +258,6 @@
             :options="enterpriseCascaderOptions"
             :props="{ expandTrigger: 'hover' }"
             filterable
-            clearable
             separator=" -> "
           />
         </el-form-item>
