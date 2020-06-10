@@ -290,8 +290,8 @@ export default {
           if (result.data.ret === 0) {
             // 清除seesion信息
             window.sessionStorage.removeItem('username')
-            this.$message({ message: '长时间未操作，请重新登录', type: 'warning', showClose: true, center: true })
           }
+          this.$message({ message: '长时间未操作，请重新登录', type: 'warning', showClose: true, center: true })
         } else {
           /** 判断是否因为用户未登录可以退出 */
           const username = window.sessionStorage.getItem('username')
