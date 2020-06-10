@@ -8,26 +8,12 @@ Vue.use(VueRouter)
 
 /** 按需导入后台系统功能组件 */
 const routes = [
+  { path: '', redirect: '/login' },
+  { path: '/init', component: () => import('../components/init') },
+  { path: '/login', component: () => import('../components/login') },
   {
-    // 系统根路径
-    path: '',
-    redirect: '/login'
-  },
-  {
-    // 系统初始化组件
-    path: '/init',
-    component: () => import('../components/init')
-  },
-  {
-    // 系统用户登录组件
-    path: '/login',
-    component: () => import('../components/login')
-  },
-  {
-    // 系统后台登录组件
     path: '/admin',
     component: () => import('../components/admin'),
-    // 添加子路由
     children: [
       { path: '/admin', component: () => import('../components/admin/index') },
       { path: '/admin/modifyAccount', component: () => import('../components/admin/modifyAccount') },
