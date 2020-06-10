@@ -1492,6 +1492,10 @@ align-items: center;
 margin-top: 25px;
 }
 
+/deep/.el-col{
+  padding-right: 0 !important;
+}
+
 .el-pagination {
 margin-top: 25px;
 }
@@ -1501,7 +1505,7 @@ width: 280px;
 }
 
 .el-select {
-width: 120px;
+width: 105px;
 height: 100%;
 }
 
