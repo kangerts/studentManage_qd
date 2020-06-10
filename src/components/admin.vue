@@ -17,7 +17,7 @@
             src="../assets/img/admin.png"
             alt=""
           >
-          <span :style="isCollapse ? 'display: none' : 'display: block'">就业管理</span>
+          <span :style="isCollapse ? 'display: none' : 'display: block;font-size: 18px'">学生就业管理系统</span>
         </div>
         <div class="toggle-button-container">
           <!--折叠按钮-->
