@@ -1,64 +1,62 @@
 <template>
-  <el-container>
+  <el-container id="init">
     <el-header>学生就业管理系统</el-header>
-    <el-main>
-      <el-form
-        ref="initForm"
-        :model="initForm"
-        :rules="rulesInitForm"
-        label-width="80px"
+    <el-form
+      ref="initForm"
+      :model="initForm"
+      :rules="rulesInitForm"
+      label-width="80px"
+    >
+      <el-form-item
+        label="用户名称"
+        prop="username"
       >
-        <el-form-item
-          label="用户名称"
-          prop="username"
-        >
-          <el-input
-            prefix-icon="el-icon-user-solid"
-            v-model="initForm.username"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item
-          label="教师名称"
-          prop="teachername"
-        >
-          <el-input
-            prefix-icon="el-icon-user-solid"
-            v-model="initForm.teachername"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item
-          label="用户密码"
-          prop="password"
-        >
-          <el-input
-            prefix-icon="el-icon-c-scale-to-original"
-            v-model="initForm.password"
-            show-password
-            clearable
-          />
-        </el-form-item>
-        <el-form-item
-          label="确认密码"
-          prop="enterpassword"
-        >
-          <el-input
-            prefix-icon="el-icon-c-scale-to-original"
-            v-model="initForm.enterpassword"
-            show-password
-            clearable
-          />
-        </el-form-item>
-        <el-button
-          ref="initButton"
-          type="primary"
-          @click="submitForm"
-        >
-          初始化
-        </el-button>
-      </el-form>
-    </el-main>
+        <el-input
+          prefix-icon="el-icon-user-solid"
+          v-model="initForm.username"
+          clearable
+        />
+      </el-form-item>
+      <el-form-item
+        label="教师名称"
+        prop="teachername"
+      >
+        <el-input
+          prefix-icon="el-icon-user-solid"
+          v-model="initForm.teachername"
+          clearable
+        />
+      </el-form-item>
+      <el-form-item
+        label="用户密码"
+        prop="password"
+      >
+        <el-input
+          prefix-icon="el-icon-c-scale-to-original"
+          v-model="initForm.password"
+          show-password
+          clearable
+        />
+      </el-form-item>
+      <el-form-item
+        label="确认密码"
+        prop="enterpassword"
+      >
+        <el-input
+          prefix-icon="el-icon-c-scale-to-original"
+          v-model="initForm.enterpassword"
+          show-password
+          clearable
+        />
+      </el-form-item>
+      <el-button
+        ref="initButton"
+        type="primary"
+        @click="submitForm"
+      >
+        初始化
+      </el-button>
+    </el-form>
   </el-container>
 </template>
 
@@ -166,20 +164,27 @@ export default {
     line-height: 60px;
   }
 
-  .el-main {
-    margin-top: 50px;
-    align-self: center;
+  .el-form {
+    padding: 20px;
     background-color: white;
+    margin: 0 auto;
+    width: 300px;
+    height: 420px;
+    margin-top: 50px;
     color: #333;
     text-align: center;
-    line-height: 160px;
-    width: 350px;
+    line-height: 180px;
     border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    > div {
+      margin: 28px 0;
+    }
   }
 
-  .el-form {
-    margin-top: 50px;
+  #init {
+    height: 100%;
+    background: url('../assets/img/bg.jpg') no-repeat;
+    background-size: 100%;
   }
 
 </style>
