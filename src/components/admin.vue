@@ -258,11 +258,11 @@ export default {
       // 提交登出请求
       const result = await this.$http.post('/user/', formData)
       if (result.data.ret === 0) {
-        this.$router.push('/login')
         // 清除seesion信息
         window.sessionStorage.removeItem('username')
-        this.$message({ message: result.data.data, type: 'warning', showClose: true, center: true })
+        this.$router.push('/login')
       }
+      this.$message({ message: '账号已退出系统，请重新登录！', type: 'warning', showClose: true, center: true })
     },
     toggleCollapse () {
       this.isCollapse = !this.isCollapse
