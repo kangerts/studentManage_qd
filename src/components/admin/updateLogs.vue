@@ -173,7 +173,7 @@ export default {
           color: '#0bbd87'
         },
         {
-          content: '完成开发计划',
+          content: '开发 完成开发计划',
           timestamp: '2020-01-29 15:25',
           size: 'normal',
           type: 'success',
@@ -197,7 +197,7 @@ export default {
           color: '#0bbd87'
         },
         {
-          content: '完善学生信息系统',
+          content: '优化 学生信息模块子功能',
           timestamp: '2020-01-21 16:10',
           size: 'normal',
           type: 'success',
@@ -205,7 +205,7 @@ export default {
           color: '#0bbd87'
         },
         {
-          content: '完成创建容器页开发',
+          content: '完成 基本信息模块子功能页面',
           timestamp: '2020-01-17 19:43',
           size: 'normal',
           type: 'success',
@@ -213,7 +213,7 @@ export default {
           color: '#0bbd87'
         },
         {
-          content: '完善专业管理页面',
+          content: '完善 专业管理页面',
           timestamp: '2020-01-17 16:16',
           size: 'normal',
           type: 'success',
@@ -221,15 +221,7 @@ export default {
           color: '#0bbd87'
         },
         {
-          content: '新增 检查更新',
-          timestamp: '2020-01-16 15:46',
-          size: 'normal', // normal,large
-          type: 'success', // primary / success / warning / danger / info
-          icon: 'el-icon-more',
-          color: '#0bbd87' // hsl / hsv / hex / rgb
-        },
-        {
-          content: '前端部分页面完毕',
+          content: '开发 前端部分页面完毕',
           timestamp: '2020-01-16 15:46',
           size: 'normal',
           type: 'success',
