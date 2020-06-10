@@ -21,28 +21,10 @@
               placeholder="搜索类型"
             >
               <el-option
-                label="暂无搜索"
-                value="noSearch"
-              />
-              <el-option
-                label="学生学号"
-                value="studentCode"
-              />
-              <el-option
-                label="学生姓名"
-                value="studentName"
-              />
-              <el-option
-                label="学生性别"
-                value="studentSex"
-              />
-              <el-option
-                label="学生籍贯"
-                value="studentNativePlace"
-              />
-              <el-option
-                label="班级名称"
-                value="classesName"
+                v-for="(item, index) in selectOption"
+                :key="index"
+                :label="item.label"
+                :value="item.value"
               />
             </el-select>
           </el-input>
@@ -722,6 +704,14 @@ export default {
   name: 'StudentData',
   data () {
     return {
+      selectOption: [
+        { value: 'noSearch', label: '暂无搜索' },
+        { value: 'studentCode', label: '学生学号' },
+        { value: 'studentName', label: '学生姓名' },
+        { value: 'studentSex', label: '学生性别' },
+        { value: 'studentNativePlace', label: '学生籍贯' },
+        { value: 'classesName', label: '班级名称' }
+      ],
       tableHeader: [
         { label: '学生性别', prop: 'studentSex', width: 100 },
         { label: '学生届数', prop: 'studentLevel', width: 100 },
@@ -1505,10 +1495,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.input-select {
-width: 50px;
-}
-
 .el-table {
 align-items: center;
 margin-top: 25px;
@@ -1524,6 +1510,7 @@ width: 280px;
 
 .el-select {
 width: 120px;
+height: 100%;
 }
 
 </style>
