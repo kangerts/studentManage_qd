@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>学生就业管理系统初始化</el-header>
+    <el-header>学生就业管理系统</el-header>
     <el-main>
       <el-form
         ref="initForm"
