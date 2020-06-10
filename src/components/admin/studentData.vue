@@ -1452,9 +1452,9 @@ export default {
       // const input = document.getElementById('fileInput')
       // document.body.appendChild(input)
       // input.click()
-      return this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
+      this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
     },
-    // handleFileChange (e) {
+    handleFileChange (e) {
     //   const inputDOM = this.$refs.inputer
     //   const fileobj = inputDOM.files[0]// 通过DOM取文件数据
     //   const fileType = fileobj.type.split('.')[1]
@@ -1479,7 +1479,7 @@ export default {
     //   } else {
     //     this.$message({ message: '请上传以xls或xlsx为后缀的文件！', type: 'warning', showClose: true, center: true })
     //   }
-    // },
+    },
 
     /** 跳转到企业数据页面并显示本学生对应的企业 */
     toEnterpriseShow (enterpriseName) {
