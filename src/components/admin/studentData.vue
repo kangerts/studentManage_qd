@@ -229,6 +229,7 @@
       :close-on-click-modal="false"
     >
       <el-form
+        v-if="addDialogVisible"
         :model="addForm"
         :rules="addFormRules"
         ref="addFormRef"
@@ -455,6 +456,7 @@
       :close-on-click-modal="false"
     >
       <el-form
+        v-if="editDialogVisible"
         :model="editForm"
         :rules="editFormRules"
         ref="editFormRef"

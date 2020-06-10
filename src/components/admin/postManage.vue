@@ -136,6 +136,7 @@
       :close-on-click-modal="false"
     >
       <el-form
+        v-if="addPostDialogVisible"
         :model="addPostForm"
         :rules="addPostFormRules"
         ref="addPostFormRef"
@@ -209,6 +210,7 @@
       :close-on-click-modal="false"
     >
       <el-form
+        v-if="editPostDialogVisible"
         :model="editPostForm"
         :rules="editPostFormRules"
         ref="editPostFormRef"
@@ -495,7 +497,9 @@ export default {
     },
 
     editPostDialogVisible1 (postData) {
-      this.editPostForm = postData
+      for (const key in postData) {
+        this.editPostForm[key] = postData[key]
+      }
       // 自动显示单位地址
       const chinaAddress = this.postAddressCascaderOptions
       const address = postData.postAddress.split('-')
@@ -523,7 +527,6 @@ export default {
       this.postAddressTemp = arr1
       this.bindEnterpriseTemp = arr2
       this.editPostDialogVisible = true
-      this.editPostForm = postData
     },
     /** 编辑岗位 */
     async editPost () {

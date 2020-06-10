@@ -99,6 +99,7 @@
     >
       <!--      对话框主体区域-->
       <el-form
+        v-if="addDialogVisible"
         :model="addForm"
         :rules="addFormRules"
         ref="addFormRef"
@@ -132,6 +133,7 @@
     >
       <!--      对话框主体区域-->
       <el-form
+        v-if="editDialogVisible"
         :model="editForm"
         :rules="editFormRules"
         ref="editFormRef"

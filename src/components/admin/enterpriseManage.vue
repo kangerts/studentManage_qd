@@ -114,6 +114,7 @@
       :close-on-click-modal="false"
     >
       <el-form
+        v-if="addEnterpriseDialogVisible"
         :model="addEnterpriseForm"
         :rules="addEnterpriseFormRules"
         ref="addEnterpriseFormRef"
@@ -188,6 +189,7 @@
       :close-on-click-modal="false"
     >
       <el-form
+        v-if="editEnterpriseDialogVisible"
         :model="editEnterpriseForm"
         :rules="editEnterpriseFormRules"
         ref="editEnterpriseFormRef"
@@ -542,7 +544,9 @@ export default {
 
     /** 编辑企业对话框 */
     editDialogVisible1 (enterpriseData) {
-      this.editEnterpriseForm = enterpriseData
+      for (const key in enterpriseData) {
+        this.editEnterpriseForm[key] = enterpriseData[key]
+      }
       this.editEnterpriseDialogVisible = true
     },
     /** 编辑企业 */
