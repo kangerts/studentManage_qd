@@ -167,7 +167,7 @@ export default {
       ]
       var option = {
         title: {
-          text: '工资情况条形图',
+          text: '薪资情况条形图',
           x: 'center',
           textStyle: {
             color: 'rgb(255,255,255)',
@@ -183,7 +183,7 @@ export default {
         tooltip: {
           show: true,
           formatter (data) {
-            return `${nameList[0]}<br/>平均工资：${valueList[0]}<br/>最高工资：${valueList[1]}<br/>最低工资：${valueList[2]}`
+            return `平均薪资：${valueList[0]}<br/>最高薪资：${valueList[1]}<br/>最低薪资：${valueList[2]}`
           }
         },
         grid: {
