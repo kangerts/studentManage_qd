@@ -1,5 +1,6 @@
 <template>
   <div
+    style="height: 100%; width: 100%;"
     @click="checkTimeOut()"
     @mouseenter="checkTimeOut()"
     @mousemove="checkTimeOut()"
@@ -126,7 +127,7 @@ export default {
     return {
       lastTime: null, // 最后一次点击的时间
       currentTime: null, // 当前点击的时间
-      timeOut: 0.5 * 60 * 1000, // 设置超时时间： 30分钟
+      timeOut: 30 * 60 * 1000, // 设置超时时间： 30分钟
       /** tabs标签相关属性 */
       // 当前打开的tabs名称
       activeTabas: '/admin',
