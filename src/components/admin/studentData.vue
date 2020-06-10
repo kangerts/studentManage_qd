@@ -133,26 +133,13 @@
       style="width: 100%"
     >
       <el-table-column
-        width="150"
-        label="学生学号"
-        prop="studentCode"
-        align="center"
-        fixed="left"
-      />
-      <el-table-column
-        width="150"
-        label="学生姓名"
-        prop="studentName"
-        align="center"
-        fixed="left"
-      />
-      <el-table-column
         :key="table.prop"
         v-for="table in tableHeader"
         :label="table.label"
         :prop="table.prop"
         align="center"
         :width="table.width"
+        :fixed="table.fixed"
       />
       <el-table-column
         width="160"
@@ -715,6 +702,8 @@ export default {
         { value: 'classesName', label: '班级名称' }
       ],
       tableHeader: [
+        { label: '学生学号', prop: 'studentCode', width: 150, fixed: 'left' },
+        { label: '学生姓名', prop: 'studentName', width: 150, fixed: 'left' },
         { label: '学生性别', prop: 'studentSex', width: 100 },
         { label: '学生届数', prop: 'studentLevel', width: 100 },
         { label: '所属专业', prop: 'toProfession', width: 150 },

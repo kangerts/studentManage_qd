@@ -56,6 +56,7 @@
         :prop="table.prop"
         align="center"
         :width="table.width"
+        :fixed="table.fixed"
       />
       <el-table-column
         :formatter="dateFormatter"
@@ -157,9 +158,9 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { label: '数据编号', prop: 'trackCode' },
-        { label: '学生学号', prop: 'studentCode', width: 200 },
-        { label: '学生名称', prop: 'studentName', width: 200 },
+        { label: '数据编号', prop: 'trackCode', fixed: 'left' },
+        { label: '学生学号', prop: 'studentCode', width: 200, fixed: 'left' },
+        { label: '学生名称', prop: 'studentName', width: 200, fixed: 'left' },
         { label: '记录教师', prop: 'recordTeacher', width: 250 },
         { label: '所在企业', prop: 'enterpriseName', width: 250 },
         { label: '最新岗位', prop: 'postName', width: 200 },
