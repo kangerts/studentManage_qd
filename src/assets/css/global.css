@@ -9,6 +9,7 @@ html, body, #app{
     box-shadow: 0 5px 5px 0 rgba(0,0,0,.15)!important;
 }
 
-.el-scrollbar{
-    max-height: 180px;
+/** 修复学生数据管理页面搜索选项显示不完整 */
+.el-cascader__dropdown .el-scrollbar{
+    max-height: 180px !important;
 }
