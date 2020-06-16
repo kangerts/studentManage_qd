@@ -48,6 +48,7 @@
         :label="table.label"
         :prop="table.prop"
         align="center"
+        :width="table.width"
       />
       <el-table-column
         label="操作"
@@ -245,7 +246,7 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { label: '班级编号', prop: 'classesCode' },
+        { label: '班级编号', prop: 'classesCode', width: 100 },
         { label: '班级届数', prop: 'classesLevel' },
         { label: '班级名称', prop: 'classesName' },
         { label: '所属专业', prop: 'toProfession' },

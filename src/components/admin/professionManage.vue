@@ -47,6 +47,7 @@
         :label="table.label"
         :prop="table.prop"
         align="center"
+        :width="table.width"
       />
       <el-table-column
         label="操作"
@@ -204,7 +205,7 @@ export default {
       // 总共多少条数据
       total: 0,
       tableHeader: [
-        { label: '专业编号', prop: 'professionCode' },
+        { label: '专业编号', prop: 'professionCode', width: 100 },
         { label: '专业名称', prop: 'professionName' },
         { label: '专业人数', prop: 'professionHumanNum' },
         { label: '班级个数', prop: 'professionClassesNum' },
