@@ -131,6 +131,8 @@
       stripe
       highlight-current-row
       style="width: 100%"
+      row-style="height:35px"
+      cell-style="padding:2px"
     >
       <el-table-column
         :key="table.prop"
@@ -142,7 +144,7 @@
         :fixed="table.fixed"
       />
       <el-table-column
-        width="160"
+        width="168"
         :formatter="dateFormatter"
         label="修改时间"
         prop="addTime"
@@ -714,7 +716,7 @@ export default {
         { label: '企业名称', prop: 'enterpriseName', width: 200 },
         { label: '企业地址', prop: 'enterpriseAddress', width: 300 },
         { label: '企业电话', prop: 'enterprisePhone', width: 180 },
-        { label: '岗位名称', prop: 'postName', width: 200 },
+        { label: '岗位名称', prop: 'postName', width: 300 },
         { label: '工作地址', prop: 'postAddress', width: 200 },
         { label: '最新薪资', prop: 'studentSalary', width: 150 },
         { label: '直属主管', prop: 'teacherName', width: 150 },

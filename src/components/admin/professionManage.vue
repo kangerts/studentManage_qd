@@ -38,6 +38,8 @@
       highlight-current-row
       stripe
       style="width: 100%"
+      row-style="height:35px"
+      cell-style="padding:2px"
     >
       <el-table-column
         :key="table.prop"

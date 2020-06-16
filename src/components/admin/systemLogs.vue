@@ -57,6 +57,7 @@
       border
       stripe
       style="width: 100%"
+      row-style="height:35px"
     >
       <el-table-column
         :key="table.prop"
