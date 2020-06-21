@@ -1075,16 +1075,16 @@ export default {
       }
     },
     // 当用户点击创建学生按钮addDialogVisible为true就可以获取相应数据了
-    addDialogVisible: function (val) {
-      if (val) {
-        this.getProfessionAndClassesDataCascaderOptions()
-      }
-    },
-    editDialogVisible: function (val) {
-      if (val) {
-        this.getProfessionAndClassesDataCascaderOptions()
-      }
-    },
+    // addDialogVisible: function (val) {
+    //   if (val) {
+    //     this.getProfessionAndClassesDataCascaderOptions()
+    //   }
+    // },
+    // editDialogVisible: function (val) {
+    //   if (val) {
+    //     this.getProfessionAndClassesDataCascaderOptions()
+    //   }
+    // },
     studentNativePlaceTemp: function (val) {
       if (val.length !== 0) {
         const data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
@@ -1107,22 +1107,30 @@ export default {
       this.queryInfo.queryType = 'classesName'
     }
 
-    const studentCode = this.$route.query.studentCode
-    if (studentCode !== undefined && studentCode !== '') {
-      this.queryInfo.keyWord = studentCode
-      this.queryInfo.queryType = 'studentCode'
+    // 自动识别请求类型及其数据
+    const query = this.$route.query
+    for (const key in query) {
+      if (key !== undefined && key !== '') {
+        this.queryInfo.keyWord = query[key]
+        this.queryInfo.queryType = key
+      }
     }
-
-    const employmentStatus = this.$route.query.employmentStatus
-    if (employmentStatus !== undefined && employmentStatus !== '') {
-      this.queryInfo.searchType = employmentStatus
-    }
-
-    const studentSex = this.$route.query.studentSex
-    if (studentSex !== undefined && studentSex !== '') {
-      this.queryInfo.keyWord = studentSex
-      this.queryInfo.queryType = 'studentSex'
-    }
+    // const studentCode = this.$route.query.studentCode
+    // if (studentCode !== undefined && studentCode !== '') {
+    //   this.queryInfo.keyWord = studentCode
+    //   this.queryInfo.queryType = 'studentCode'
+    // }
+    //
+    // const employmentStatus = this.$route.query.employmentStatus
+    // if (employmentStatus !== undefined && employmentStatus !== '') {
+    //   this.queryInfo.searchType = employmentStatus
+    // }
+    //
+    // const studentSex = this.$route.query.studentSex
+    // if (studentSex !== undefined && studentSex !== '') {
+    //   this.queryInfo.keyWord = studentSex
+    //   this.queryInfo.queryType = 'studentSex'
+    // }
 
     this.getStudentData()
     this.getPostDataCascaderOptions()
