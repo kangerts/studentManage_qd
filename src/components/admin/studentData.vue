@@ -1101,12 +1101,6 @@ export default {
     // 这里是发起表格数据请求的位置
     this.getProfessionAndClassesDataCascaderOptions()
 
-    const classesName = this.$route.query.classesName
-    if (classesName !== undefined && classesName !== '') {
-      this.queryInfo.keyWord = classesName
-      this.queryInfo.queryType = 'classesName'
-    }
-
     // 自动识别请求类型及其数据
     const query = this.$route.query
     for (const key in query) {
@@ -1115,6 +1109,13 @@ export default {
         this.queryInfo.queryType = key
       }
     }
+
+    // const classesName = this.$route.query.classesName
+    // if (classesName !== undefined && classesName !== '') {
+    //     this.queryInfo.keyWord = classesName
+    //     this.queryInfo.queryType = 'classesName'
+    // }
+
     // const studentCode = this.$route.query.studentCode
     // if (studentCode !== undefined && studentCode !== '') {
     //   this.queryInfo.keyWord = studentCode
@@ -1454,36 +1455,41 @@ export default {
       this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
     },
     handleFileChange (e) {
-    //   const inputDOM = this.$refs.inputer
-    //   const fileobj = inputDOM.files[0]// 通过DOM取文件数据
-    //   const fileType = fileobj.type.split('.')[1]
-    //   if (fileType === 'xls' || fileType === 'xlsx') {
-    //     const formData = new FormData()// new一个formData事件
-    //     formData.append('useraction', 'inputStudentData')
-    //     formData.append('username', window.sessionStorage.getItem('username'))
-    //     formData.append('file', fileobj) // 将file属性添加到formData里
-    //     // 此时formData就是我们要向后台传的参数了
-    //     this.$http({
-    //       url: '/data/',
-    //       data: formData, // 在此处上传文件
-    //       method: 'post',
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data' // 值得注意的是，这个地方一定要把请求头更改一下
-    //       }
-    //     }).then(function (res) {
-    //       console.log(res, '此处应该是请求成功的回调')
-    //     }.catch(function (req) {
-    //       console.log(req, '请求失败的回调，自己看看为啥失败')
-    //     }))
-    //   } else {
-    //     this.$message({ message: '请上传以xls或xlsx为后缀的文件！', type: 'warning', showClose: true, center: true })
-    //   }
+      //   const inputDOM = this.$refs.inputer
+      //   const fileobj = inputDOM.files[0]// 通过DOM取文件数据
+      //   const fileType = fileobj.type.split('.')[1]
+      //   if (fileType === 'xls' || fileType === 'xlsx') {
+      //     const formData = new FormData()// new一个formData事件
+      //     formData.append('useraction', 'inputStudentData')
+      //     formData.append('username', window.sessionStorage.getItem('username'))
+      //     formData.append('file', fileobj) // 将file属性添加到formData里
+      //     // 此时formData就是我们要向后台传的参数了
+      //     this.$http({
+      //       url: '/data/',
+      //       data: formData, // 在此处上传文件
+      //       method: 'post',
+      //       headers: {
+      //         'Content-Type': 'multipart/form-data' // 值得注意的是，这个地方一定要把请求头更改一下
+      //       }
+      //     }).then(function (res) {
+      //       console.log(res, '此处应该是请求成功的回调')
+      //     }.catch(function (req) {
+      //       console.log(req, '请求失败的回调，自己看看为啥失败')
+      //     }))
+      //   } else {
+      //     this.$message({ message: '请上传以xls或xlsx为后缀的文件！', type: 'warning', showClose: true, center: true })
+      //   }
     },
 
     /** 跳转到企业数据页面并显示本学生对应的企业 */
     toEnterpriseShow (enterpriseName) {
       if (enterpriseName === '未绑定') {
-        return this.$message({ message: '此学生未绑定企业岗位，暂不支持查看企业！', type: 'warning', showClose: true, center: true })
+        return this.$message({
+          message: '此学生未绑定企业岗位，暂不支持查看企业！',
+          type: 'warning',
+          showClose: true,
+          center: true
+        })
       }
       this.$router.push({
         path: '/admin/enterpriseManage',
@@ -1497,26 +1503,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-table {
-align-items: center;
-margin-top: 25px;
-}
+    .el-table {
+        align-items: center;
+        margin-top: 25px;
+    }
 
-/deep/.el-col{
-  padding-right: 0 !important;
-}
+    /deep/ .el-col {
+        padding-right: 0 !important;
+    }
 
-.el-pagination {
-margin-top: 25px;
-}
+    .el-pagination {
+        margin-top: 25px;
+    }
 
-.el-cascader {
-width: 280px;
-}
+    .el-cascader {
+        width: 280px;
+    }
 
-.el-select {
-width: 105px;
-height: 100%;
-}
+    .el-select {
+        width: 105px;
+        height: 100%;
+    }
 
 </style>
