@@ -715,7 +715,7 @@ export default {
         { label: '就业状态', prop: 'employmentStatus', width: 100 },
         { label: '企业名称', prop: 'enterpriseName', width: 200 },
         { label: '企业地址', prop: 'enterpriseAddress', width: 300 },
-        { label: '企业电话', prop: 'enterprisePhone', width: 180 },
+        { label: '联系企业', prop: 'enterprisePhone', width: 180 },
         { label: '岗位名称', prop: 'postName', width: 300 },
         { label: '工作地址', prop: 'postAddress', width: 200 },
         { label: '最新薪资', prop: 'studentSalary', width: 150 },

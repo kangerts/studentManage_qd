@@ -141,12 +141,12 @@
           <el-input v-model="addEnterpriseForm.enterpriseContacts" />
         </el-form-item>
         <el-form-item
-          label="企业电话"
+          label="联系方式"
           prop="enterprisePhone"
         >
           <el-input
+            type="textarea"
             v-model="addEnterpriseForm.enterprisePhone"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
           />
         </el-form-item>
         <el-form-item
@@ -216,12 +216,12 @@
           <el-input v-model="editEnterpriseForm.enterpriseContacts" />
         </el-form-item>
         <el-form-item
-          label="企业电话"
+          label="联系方式"
           prop="enterprisePhone"
         >
           <el-input
+            type="textarea"
             v-model="editEnterpriseForm.enterprisePhone"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
           />
         </el-form-item>
         <el-form-item
@@ -304,7 +304,7 @@ export default {
         { label: '企业名称', prop: 'enterpriseName', width: 200 },
         { label: '企业规模', prop: 'enterpriseScale', width: 100 },
         { label: '联系人姓名', prop: 'enterpriseContacts', width: 100 },
-        { label: '企业电话', prop: 'enterprisePhone', width: 200 },
+        { label: '联系方式', prop: 'enterprisePhone', width: 200 },
         { label: '企业地址', prop: 'enterpriseAddress', width: 300 },
         { label: '天眼查分数', prop: 'skyEyeScore', width: 100 },
         { label: '备注', prop: 'remarks', width: 300 },
@@ -367,13 +367,13 @@ export default {
         enterprisePhone: [
           {
             required: true,
-            message: '请输入企业联系电话',
+            message: '请输入联系方式信息',
             trigger: 'blur'
           },
           {
-            min: 11,
-            max: 11,
-            message: '长度 11 个字符',
+            min: 4,
+            max: 100,
+            message: '长度在 4 到 100 个字符',
             trigger: 'blur'
           }
         ],
@@ -460,13 +460,13 @@ export default {
         enterprisePhone: [
           {
             required: true,
-            message: '请输入企业联系电话',
+            message: '请输入联系方式信息',
             trigger: 'blur'
           },
           {
-            min: 11,
-            max: 11,
-            message: '长度 11 个字符',
+            min: 4,
+            max: 100,
+            message: '长度在 4 到 100 个字符',
             trigger: 'blur'
           }
         ],
