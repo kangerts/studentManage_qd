@@ -183,8 +183,7 @@ export default {
           subMenuName: '系统设置',
           children: [
             { id: '5-1', subMenuName: '更新日志', path: '/admin/updateLogs' },
-            { id: '5-2', subMenuName: '操作日志', path: '/admin/systemLogs' },
-            { id: '5-3', subMenuName: '数据恢复', path: '/admin/dataRecovery' }
+            { id: '5-2', subMenuName: '操作日志', path: '/admin/systemLogs' }
           ]
         }
       ]

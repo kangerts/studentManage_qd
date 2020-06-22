@@ -1074,17 +1074,6 @@ export default {
         this.getStudentData()
       }
     },
-    // 当用户点击创建学生按钮addDialogVisible为true就可以获取相应数据了
-    // addDialogVisible: function (val) {
-    //   if (val) {
-    //     this.getProfessionAndClassesDataCascaderOptions()
-    //   }
-    // },
-    // editDialogVisible: function (val) {
-    //   if (val) {
-    //     this.getProfessionAndClassesDataCascaderOptions()
-    //   }
-    // },
     studentNativePlaceTemp: function (val) {
       if (val.length !== 0) {
         const data = CodeToText[val[0]] + '-' + CodeToText[val[1]]
@@ -1100,6 +1089,7 @@ export default {
   created () {
     // 这里是发起表格数据请求的位置
     this.getProfessionAndClassesDataCascaderOptions()
+    this.getPostDataCascaderOptions()
 
     // 自动识别请求类型及其数据
     const query = this.$route.query
@@ -1111,7 +1101,6 @@ export default {
     }
 
     this.getStudentData()
-    this.getPostDataCascaderOptions()
   },
   /** 事件处理函数 */
   methods: {

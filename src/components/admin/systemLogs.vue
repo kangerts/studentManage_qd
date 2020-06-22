@@ -33,23 +33,6 @@
           </el-select>
         </el-input>
       </el-col>
-      <!--    按钮区域列-->
-      <el-col :span="2">
-        <el-row>
-          <el-tooltip
-            effect="dark"
-            content="删除操作日志"
-            placement="top"
-          >
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              @click="deleteSystemLogsDialogVisible = true"
-            />
-          </el-tooltip>
-        </el-row>
-      </el-col>
     </el-row>
     <!--  表格数据区域-->
     <el-table
@@ -74,6 +57,41 @@
         prop="addTime"
         align="center"
       />
+      <el-table-column
+        label="操作"
+        align="center"
+        width="200px"
+        fixed="right"
+      >
+        <!--        操作按钮区域的作用域插槽-->
+        <template slot-scope="scope">
+          <el-tooltip
+            effect="dark"
+            content="恢复数据(可恢复此条数据)"
+            placement="top"
+          >
+            <el-button
+              type="primary"
+              icon="el-icon-refresh"
+              circle
+              :disabled="scope.row.operationType.indexOf('删除') !== -1 ? false: true"
+              @click="dataRecoveryDialog(scope.row)"
+            />
+          </el-tooltip>
+          <el-tooltip
+            effect="dark"
+            content="删除数据(彻底删除本条数据)"
+            placement="top"
+          >
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              @click="deleteSystemLogsDialog(scope.row.logCode)"
+            />
+          </el-tooltip>
+        </template>
+      </el-table-column>
     </el-table>
     <!--    分页器区域-->
     <el-pagination
@@ -86,6 +104,25 @@
       :total="total"
       background
     />
+    <!--    恢复数据对话框-->
+    <el-dialog
+      title="恢复数据"
+      :visible.sync="dataRecoveryDialogVisible"
+      width="50%"
+      :close-on-click-modal="false"
+    >
+      <span>确认恢复此条数据吗?</span>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="dataRecoveryDialogVisible = false">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="dataRecovery"
+        >恢复数据</el-button>
+      </span>
+    </el-dialog>
     <!--    删除操作日志对话框-->
     <el-dialog
       title="清空日志"
@@ -136,6 +173,8 @@ export default {
         { label: '操作类型', prop: 'operationType', width: 120 },
         { label: '数据记录', prop: 'dataRecord' }
       ],
+      /** 恢复数据对话框是否显示 */
+      dataRecoveryDialogVisible: false,
       /** 删除操作日志对话框是否显示 */
       deleteSystemLogsDialogVisible: false
     }
@@ -157,14 +196,18 @@ export default {
     /** 修复当用户在大于1的分页进行数据搜索没有返回值的问题 */
     setPageNum () {
       this.queryInfo.pageNum = 1
-      this.getEmploymentStatusData()
+      this.getSystemLogsData()
     },
-
     /** 删除系统操作日志 */
+    deleteSystemLogsDialog (logCode) {
+      this.deleteSystemLogsDialogVisible = true
+      this.logCode = logCode
+    },
     async deleteSystemLogs () {
       const formData = JSON.stringify({
         useraction: 'deleteSystemLogsData',
-        username: window.sessionStorage.getItem('username')
+        username: window.sessionStorage.getItem('username'),
+        logCode: this.logCode
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -177,6 +220,34 @@ export default {
           center: true
         })
         this.deleteSystemLogsDialogVisible = false
+        this.getSystemLogsData()
+      } else {
+        this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
+      }
+    },
+
+    /** 数据恢复操作 */
+    dataRecoveryDialog (data) {
+      this.dataRecoveryDialogVisible = true
+      this.rowDataRecovery = data
+    },
+    async dataRecovery () {
+      const formData = JSON.stringify({
+        useraction: 'systemDataRecovery',
+        username: window.sessionStorage.getItem('username'),
+        data: this.rowDataRecovery
+      })
+      // 提交表单
+      const result = await this.$http.post('/data/', formData)
+      // 判断业务逻辑
+      if (result.data.ret === 0) {
+        this.$message({
+          message: result.data.data,
+          type: 'success',
+          showClose: true,
+          center: true
+        })
+        this.dataRecoveryDialogVisible = false
         this.getSystemLogsData()
       } else {
         this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
