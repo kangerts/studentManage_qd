@@ -700,6 +700,7 @@ export default {
         { value: 'studentCode', label: '学生学号' },
         { value: 'studentName', label: '学生姓名' },
         { value: 'studentSex', label: '学生性别' },
+        { value: 'employmentStatus', label: '就业状态' },
         { value: 'studentNativePlace', label: '学生籍贯' },
         { value: 'classesName', label: '班级名称' }
       ],
