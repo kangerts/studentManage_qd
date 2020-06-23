@@ -37,12 +37,20 @@ export default {
       // 时间线列表数据
       timeline: [
         {
+          content: '新增 系统数据支持导入导出',
+          timestamp: '2020-06-23 15:11',
+          size: 'large',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#409EFF'
+        },
+        {
           content: '新增 学生信息编辑锁(防止多人操作冲突)',
           timestamp: '2020-06-09 12:31',
           size: 'large',
           type: 'success',
           icon: 'el-icon-more',
-          color: '#409EFF'
+          color: '#0bbd87'
         },
         {
           content: '新增 数据统计部分子功能支持查看某届学生数据',
