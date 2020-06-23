@@ -721,6 +721,7 @@ export default {
         { label: '最新薪资', prop: 'studentSalary', width: 150 },
         { label: '直属主管', prop: 'teacherName', width: 150 },
         { label: '主管电话', prop: 'teacherPhone', width: 180 },
+        { label: '更新教师', prop: 'updateTeacherName', width: 120 },
         { label: '学生状态', prop: 'studentStatus', width: 120 }
       ],
       // 企业地址数据
@@ -1415,36 +1416,31 @@ export default {
 
     /** 导入学生数据Excel文件 */
     inputStudentData () {
-      // const input = document.getElementById('fileInput')
-      // document.body.appendChild(input)
-      // input.click()
-      this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
+      const input = document.getElementById('fileInput')
+      document.body.appendChild(input)
+      input.click()
+      // this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
     },
-    handleFileChange (e) {
-      //   const inputDOM = this.$refs.inputer
-      //   const fileobj = inputDOM.files[0]// 通过DOM取文件数据
-      //   const fileType = fileobj.type.split('.')[1]
-      //   if (fileType === 'xls' || fileType === 'xlsx') {
-      //     const formData = new FormData()// new一个formData事件
-      //     formData.append('useraction', 'inputStudentData')
-      //     formData.append('username', window.sessionStorage.getItem('username'))
-      //     formData.append('file', fileobj) // 将file属性添加到formData里
-      //     // 此时formData就是我们要向后台传的参数了
-      //     this.$http({
-      //       url: '/data/',
-      //       data: formData, // 在此处上传文件
-      //       method: 'post',
-      //       headers: {
-      //         'Content-Type': 'multipart/form-data' // 值得注意的是，这个地方一定要把请求头更改一下
-      //       }
-      //     }).then(function (res) {
-      //       console.log(res, '此处应该是请求成功的回调')
-      //     }.catch(function (req) {
-      //       console.log(req, '请求失败的回调，自己看看为啥失败')
-      //     }))
-      //   } else {
-      //     this.$message({ message: '请上传以xls或xlsx为后缀的文件！', type: 'warning', showClose: true, center: true })
-      //   }
+    async handleFileChange (e) {
+      const inputDOM = this.$refs.inputer
+      const fileobj = inputDOM.files[0]// 通过DOM取文件数据
+      const fileType = fileobj.type.split('.')[1]
+      if (fileType === 'xls' || fileType === 'xlsx') {
+        const formData = new FormData()// new一个formData事件
+        formData.append('useraction', 'inputStudentData')
+        formData.append('username', window.sessionStorage.getItem('username'))
+        formData.append('file', fileobj) // 将file属性添加到formData里
+        formData.append('headers', "Content-Type': 'multipart/form-data")
+        const result = await this.$http.post('/data/', formData)
+        // 判断业务逻辑
+        if (result.data.ret === 0) {
+          this.$message({ message: result.data.data, type: 'success', showClose: true, center: true })
+        } else {
+          this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
+        }
+      } else {
+        this.$message({ message: '请上传以xls或xlsx为后缀的文件！', type: 'warning', showClose: true, center: true })
+      }
     },
 
     /** 跳转到企业数据页面并显示本学生对应的企业 */

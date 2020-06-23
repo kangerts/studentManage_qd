@@ -132,7 +132,63 @@
           label="企业规模"
           prop="enterpriseScale"
         >
-          <el-input v-model="addEnterpriseForm.enterpriseScale" />
+          <el-radio-group
+            v-model="addEnterpriseForm.enterpriseScale"
+            size="medium"
+          >
+            <el-radio
+              label="大型"
+              border
+            >
+              大型
+            </el-radio>
+            <el-radio
+              label="中型"
+              border
+            >
+              中型
+            </el-radio>
+            <el-radio
+              label="小型"
+              border
+            >
+              小型
+            </el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item
+          label="优质等级"
+          prop="goodGrade"
+        >
+          <el-radio-group
+            size="medium"
+            v-model="addEnterpriseForm.goodGrade"
+          >
+            <el-radio
+              label="优"
+              border
+            >
+              优
+            </el-radio>
+            <el-radio
+              label="良"
+              border
+            >
+              良
+            </el-radio>
+            <el-radio
+              label="中"
+              border
+            >
+              中
+            </el-radio>
+            <el-radio
+              label="差"
+              border
+            >
+              差
+            </el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item
           label="企业联系人"
@@ -168,7 +224,10 @@
           label="备注"
           prop="remarks"
         >
-          <el-input v-model="addEnterpriseForm.remarks" />
+          <el-input
+            type="textarea"
+            v-model="addEnterpriseForm.remarks"
+          />
         </el-form-item>
       </el-form>
       <span
@@ -207,7 +266,63 @@
           label="企业规模"
           prop="enterpriseScale"
         >
-          <el-input v-model="editEnterpriseForm.enterpriseScale" />
+          <el-radio-group
+            v-model="editEnterpriseForm.enterpriseScale"
+            size="medium"
+          >
+            <el-radio
+              label="大型"
+              border
+            >
+              大型
+            </el-radio>
+            <el-radio
+              label="中型"
+              border
+            >
+              中型
+            </el-radio>
+            <el-radio
+              label="小型"
+              border
+            >
+              小型
+            </el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item
+          label="优质等级"
+          prop="goodGrade"
+        >
+          <el-radio-group
+            size="medium"
+            v-model="editEnterpriseForm.goodGrade"
+          >
+            <el-radio
+              label="优"
+              border
+            >
+              优
+            </el-radio>
+            <el-radio
+              label="良"
+              border
+            >
+              良
+            </el-radio>
+            <el-radio
+              label="中"
+              border
+            >
+              中
+            </el-radio>
+            <el-radio
+              label="差"
+              border
+            >
+              差
+            </el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item
           label="企业联系人"
@@ -243,7 +358,10 @@
           label="备注"
           prop="remarks"
         >
-          <el-input v-model="editEnterpriseForm.remarks" />
+          <el-input
+            type="textarea"
+            v-model="editEnterpriseForm.remarks"
+          />
         </el-form-item>
       </el-form>
       <span
@@ -303,6 +421,7 @@ export default {
         { label: '企业编号', prop: 'enterpriseCode', width: 100 },
         { label: '企业名称', prop: 'enterpriseName', width: 200 },
         { label: '企业规模', prop: 'enterpriseScale', width: 100 },
+        { label: '优质等级', prop: 'goodGrade', width: 120 },
         { label: '联系人姓名', prop: 'enterpriseContacts', width: 100 },
         { label: '联系方式', prop: 'enterprisePhone', width: 200 },
         { label: '企业地址', prop: 'enterpriseAddress', width: 300 },
@@ -317,6 +436,7 @@ export default {
       addEnterpriseForm: {
         enterpriseName: '',
         enterpriseScale: '',
+        goodGrade: '',
         enterpriseContacts: '',
         enterprisePhone: '',
         enterpriseAddress: '',
@@ -341,13 +461,14 @@ export default {
         enterpriseScale: [
           {
             required: true,
-            message: '请输入企业规模(大型、中型、小型)',
+            message: '请选择企业规模',
             trigger: 'blur'
-          },
+          }
+        ],
+        goodGrade: [
           {
-            min: 2,
-            max: 6,
-            message: '长度在 2 到 6 个字符',
+            required: true,
+            message: '请选择企业优质等级',
             trigger: 'blur'
           }
         ],
@@ -410,6 +531,7 @@ export default {
       editEnterpriseForm: {
         enterpriseName: '',
         enterpriseScale: '',
+        goodGrade: '',
         enterpriseContacts: '',
         enterprisePhone: '',
         enterpriseAddress: '',
@@ -434,13 +556,14 @@ export default {
         enterpriseScale: [
           {
             required: true,
-            message: '请输入企业规模(大型、中型、小型)',
+            message: '请选择企业规模',
             trigger: 'blur'
-          },
+          }
+        ],
+        goodGrade: [
           {
-            min: 2,
-            max: 6,
-            message: '长度在 2 到 6 个字符',
+            required: true,
+            message: '请选择企业优质等级',
             trigger: 'blur'
           }
         ],
