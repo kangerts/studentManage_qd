@@ -1425,7 +1425,8 @@ export default {
     async handleFileChange (e) {
       const inputDOM = this.$refs.inputer
       const fileobj = inputDOM.files[0]// 通过DOM取文件数据
-      const fileType = fileobj.type.split('.')[1]
+      const endFile = fileobj.type.split('.')
+      const fileType = endFile[endFile.length - 1]
       if (fileType === 'xls' || fileType === 'xlsx') {
         const formData = new FormData()// new一个formData事件
         formData.append('useraction', 'inputStudentData')
