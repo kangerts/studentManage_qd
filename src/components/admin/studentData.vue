@@ -104,7 +104,7 @@
         <input
           type="file"
           id="fileInput"
-          ref="inputer"
+          ref="fileInputRef"
           @change="handleFileChange"
           style="display: none"
         >
@@ -1423,7 +1423,7 @@ export default {
       // this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
     },
     async handleFileChange (e) {
-      const inputDOM = this.$refs.inputer
+      const inputDOM = this.$refs.fileInputRef
       const fileobj = inputDOM.files[0]// 通过DOM取文件数据
       const endFile = fileobj.type.split('.')
       const fileType = endFile[endFile.length - 1]
