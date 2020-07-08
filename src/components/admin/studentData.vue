@@ -105,7 +105,7 @@
           type="file"
           id="fileInput"
           ref="fileInputRef"
-          @change="handleFileChange"
+          @change="handleFileChange($event)"
           style="display: none"
         >
         <el-tooltip
@@ -1422,10 +1422,10 @@ export default {
       input.click()
       // this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
     },
-    async handleFileChange (e) {
-      const inputDOM = this.$refs.fileInputRef
-      const fileobj = inputDOM.files[0]// 通过DOM取文件数据
-      const endFile = fileobj.type.split('.')
+    async handleFileChange (event) {
+      console.log(event.target.files)
+      const fileobj = event.target.files[0]// 通过DOM取文件数据
+      const endFile = fileobj.name.split('.')
       const fileType = endFile[endFile.length - 1]
       if (fileType === 'xls' || fileType === 'xlsx') {
         const formData = new FormData()// new一个formData事件
