@@ -138,55 +138,7 @@ export default {
       /** 左侧菜单属性 */
       isCollapse: false,
       // 左侧菜单数据
-      menuList: [
-        {
-          icon: 'el-icon-user-solid',
-          subMenuName: '教师账户',
-          children: [
-            { id: '1-1', subMenuName: '账户修改', path: '/admin/modifyAccount' },
-            { id: '1-2', subMenuName: '密码修改', path: '/admin/modifyPassWord' },
-            { id: '1-3', subMenuName: '教师修改', path: '/admin/modifyTeacher' }
-          ]
-        },
-        {
-          icon: 'el-icon-s-shop',
-          subMenuName: '基本信息',
-          children: [
-            { id: '2-1', subMenuName: '专业管理', path: '/admin/professionManage' },
-            { id: '2-2', subMenuName: '班级管理', path: '/admin/classesManage' },
-            { id: '2-3', subMenuName: '企业管理', path: '/admin/enterpriseManage' },
-            { id: '2-4', subMenuName: '岗位管理', path: '/admin/postManage' }
-
-          ]
-        },
-        {
-          icon: 'el-icon-s-order',
-          subMenuName: '学生信息',
-          children: [
-            { id: '3-1', subMenuName: '学生数据', path: '/admin/studentData' },
-            { id: '3-2', subMenuName: '岗位追踪', path: '/admin/postTrack' }
-          ]
-        },
-        {
-          icon: 'el-icon-s-data',
-          subMenuName: '数据统计',
-          children: [
-            { id: '4-1', subMenuName: '男女比例', path: '/admin/sexRatio' },
-            { id: '4-2', subMenuName: '就业情况', path: '/admin/unemployedRate' },
-            { id: '4-3', subMenuName: '薪资榜单', path: '/admin/salaryList' },
-            { id: '4-4', subMenuName: '工作区域', path: '/admin/workArea' },
-            { id: '4-5', subMenuName: '就业方向', path: '/admin/workDirection' }
-          ]
-        },
-        {
-          icon: 'el-icon-s-tools',
-          subMenuName: '系统设置',
-          children: [
-            { id: '5-1', subMenuName: '更新日志', path: '/admin/updateLogs' },
-            { id: '5-2', subMenuName: '操作日志', path: '/admin/systemLogs' }
-          ]
-        }
-      ]
+      menuList: []
     }
   },
   watch: {
@@ -210,6 +162,61 @@ export default {
     this.lastTime = new Date().getTime() // 网页第一次打开时，记录当前时间
     // 保证admin中的页面刷新后重置到/admin路由下
     if (this.$route.path !== '/admin') this.$router.push('/admin')
+    let isSuper = window.sessionStorage.getItem('is_super')
+    let data = [
+      {
+        icon: 'el-icon-user-solid',
+        subMenuName: '教师账户',
+        children: [
+          { id: '1-1', subMenuName: '账户修改', path: '/admin/modifyAccount' },
+          { id: '1-2', subMenuName: '密码修改', path: '/admin/modifyPassWord' },
+          { id: '1-3', subMenuName: '教师修改', path: '/admin/modifyTeacher' },
+          { id: '1-4', subMenuName: '教师管理', path: '/admin/teacherManage' }
+        ]
+      },
+      {
+        icon: 'el-icon-s-shop',
+        subMenuName: '基本信息',
+        children: [
+          { id: '2-1', subMenuName: '专业管理', path: '/admin/professionManage' },
+          { id: '2-2', subMenuName: '班级管理', path: '/admin/classesManage' },
+          { id: '2-3', subMenuName: '企业管理', path: '/admin/enterpriseManage' },
+          { id: '2-4', subMenuName: '岗位管理', path: '/admin/postManage' }
+
+        ]
+      },
+      {
+        icon: 'el-icon-s-order',
+        subMenuName: '学生信息',
+        children: [
+          { id: '3-1', subMenuName: '学生数据', path: '/admin/studentData' },
+          { id: '3-2', subMenuName: '岗位追踪', path: '/admin/postTrack' }
+        ]
+      },
+      {
+        icon: 'el-icon-s-data',
+        subMenuName: '数据统计',
+        children: [
+          { id: '4-1', subMenuName: '男女比例', path: '/admin/sexRatio' },
+          { id: '4-2', subMenuName: '就业情况', path: '/admin/unemployedRate' },
+          { id: '4-3', subMenuName: '薪资榜单', path: '/admin/salaryList' },
+          { id: '4-4', subMenuName: '工作区域', path: '/admin/workArea' },
+          { id: '4-5', subMenuName: '就业方向', path: '/admin/workDirection' }
+        ]
+      },
+      {
+        icon: 'el-icon-s-tools',
+        subMenuName: '系统设置',
+        children: [
+          { id: '5-1', subMenuName: '更新日志', path: '/admin/updateLogs' },
+          { id: '5-2', subMenuName: '操作日志', path: '/admin/systemLogs' }
+        ]
+      }
+    ]
+    if (isSuper === 'false') {
+      data[0].children.splice(3, 1)
+    }
+    this.menuList = data
   },
   methods: {
     /** tabs标签相关函数 */
@@ -260,6 +267,7 @@ export default {
       if (result.data.ret === 0) {
         // 清除seesion信息
         window.sessionStorage.removeItem('username')
+        window.sessionStorage.removeItem('is_super')
         this.$router.push('/login')
       }
       this.$message({ message: '账号已退出系统，请重新登录！', type: 'warning', showClose: true, center: true })

@@ -1423,7 +1423,6 @@ export default {
       // this.$message({ message: '此功能暂未开放，敬请期待！', type: 'warning', showClose: true, center: true })
     },
     async handleFileChange (event) {
-      console.log(event.target.files)
       const fileobj = event.target.files[0]// 通过DOM取文件数据
       const endFile = fileobj.name.split('.')
       const fileType = endFile[endFile.length - 1]
@@ -1436,6 +1435,7 @@ export default {
         const result = await this.$http.post('/data/', formData)
         // 判断业务逻辑
         if (result.data.ret === 0) {
+          this.getStudentData()
           this.$message({ message: result.data.data, type: 'success', showClose: true, center: true })
         } else {
           this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
