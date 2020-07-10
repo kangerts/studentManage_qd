@@ -156,7 +156,6 @@
         >
           <el-input
             v-model="addPostForm.recruitCount"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
           />
         </el-form-item>
         <el-form-item
@@ -230,7 +229,6 @@
         >
           <el-input
             v-model="editPostForm.recruitCount"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
           />
         </el-form-item>
         <el-form-item
