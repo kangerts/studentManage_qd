@@ -23,7 +23,7 @@
       class="right-col"
     >
       <el-row style="height: 50px;color: #409EFF;position: fixed">
-        <i class="el-icon-s-promotion" />当前版本：V1.6.1
+        <i class="el-icon-s-promotion" />当前版本：V1.6.5
       </el-row>
     </el-col>
   </el-row>
@@ -37,12 +37,20 @@ export default {
       // 时间线列表数据
       timeline: [
         {
+          content: '新增 教师管理',
+          timestamp: '2020-07-10 19:3',
+          size: 'large',
+          type: 'success',
+          icon: 'el-icon-more',
+          color: '#409EFF'
+        },
+        {
           content: '新增 系统数据支持导入导出',
           timestamp: '2020-06-23 15:11',
           size: 'large',
           type: 'success',
           icon: 'el-icon-more',
-          color: '#409EFF'
+          color: '#0bbd87'
         },
         {
           content: '新增 学生信息编辑锁(防止多人操作冲突)',
