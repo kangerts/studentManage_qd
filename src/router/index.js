@@ -19,6 +19,7 @@ const routes = [
       { path: '/admin/modifyAccount', component: () => import('../components/admin/modifyAccount') },
       { path: '/admin/modifyPassWord', component: () => import('../components/admin/modifyPassWord') },
       { path: '/admin/modifyTeacher', component: () => import('../components/admin/modifyTeacher') },
+      { path: '/admin/teacherManage', component: () => import('../components/admin/teacherManage') },
       { path: '/admin/professionManage', component: () => import('../components/admin/professionManage') },
       { path: '/admin/classesManage', component: () => import('../components/admin/classesManage') },
       { path: '/admin/enterpriseManage', component: () => import('../components/admin/enterpriseManage') },

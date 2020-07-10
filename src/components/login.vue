@@ -93,6 +93,7 @@ export default {
             loginButton.loading = false
             // 登录成功保存用户账号
             window.sessionStorage.setItem('username', this.loginForm.username)
+            window.sessionStorage.setItem('is_super', result.data.is_super)
             message({ message: result.data.data, type: 'success', showClose: true, center: true })
             route.push('/admin')
           } else if (result.data.ret === 1) {
