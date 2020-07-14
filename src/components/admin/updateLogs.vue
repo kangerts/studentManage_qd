@@ -23,7 +23,7 @@
       class="right-col"
     >
       <el-row style="height: 50px;color: #409EFF;position: fixed">
-        <i class="el-icon-s-promotion" />当前版本：V1.6.1
+        <i class="el-icon-s-promotion" />当前版本：V1.6.5
       </el-row>
     </el-col>
   </el-row>
