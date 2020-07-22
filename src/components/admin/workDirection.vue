@@ -1,11 +1,24 @@
 <template>
-  <v-chart
-    :options="polar"
-    :init-options="initCharts"
-    autoresize
-    ref="workDirectionRef"
-    style="height: 460px;width: 100%"
-  />
+  <div>
+    <v-chart
+      :options="polar"
+      :init-options="initCharts"
+      autoresize
+      ref="workDirectionRef"
+      style="height: 460px;width: 100%"
+    />
+    <!--    分页器区域-->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="queryInfo.pageNum"
+      :page-sizes="[5, 8]"
+      :page-size="queryInfo.pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      background
+    />
+  </div>
 </template>
 
 <script>
@@ -14,20 +27,41 @@ export default {
   data () {
     return {
       polar: null,
-      initCharts: { renderer: 'svg' }
+      initCharts: { renderer: 'svg' },
+      /** 数据表格 */
+      // 数据表格数据绑定
+      queryInfo: {
+        // 当前页数
+        pageNum: 1,
+        // 当前每页显示多少条数据
+        pageSize: 5
+      },
+      // 总共多少条数据
+      total: 0
     }
   },
   mounted () {
     this.getWOrkDirection()
   },
   methods: {
+    /** 监听每页显示多少数据的改变 */
+    handleSizeChange (newSize) {
+      this.queryInfo.pageSize = newSize
+      this.getWOrkDirection()
+    },
+    /** 监听页码的改变 */
+    handleCurrentChange (newPage) {
+      this.queryInfo.pageNum = newPage
+      this.getWOrkDirection()
+    },
     async getWOrkDirection () {
       // 获取图表对象并设置动画
       var charts = this.$refs.workDirectionRef
       charts.showLoading()
       const formData = JSON.stringify({
         useraction: 'getWorkDirection',
-        username: window.sessionStorage.getItem('username')
+        username: window.sessionStorage.getItem('username'),
+        query: this.queryInfo
       })
       // 提交表单
       const result = await this.$http.post('/data/', formData)
@@ -37,7 +71,8 @@ export default {
       var postBoyCountAndClassesLevel = {} // 男生的数据
       var postGirlCountAndClassesLevel = {} // 女生数据
       if (result.data.ret === 0) {
-        // console.log(result.data)
+        let data = result.data.pagination
+        this.total = data.total
         year = result.data.yearData
         post = result.data.studentPost
         postBoyCountAndClassesLevel = result.data.postBoyCountAndClassesLevel
