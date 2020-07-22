@@ -162,7 +162,7 @@ export default {
         { label: '数据记录', prop: 'dataRecord' }
       ],
       /** 恢复数据对话框是否显示 */
-      dataRecoveryDialogVisible: false,
+      dataRecoveryDialogVisible: false
     }
   },
   /** 生命周期函数 */
