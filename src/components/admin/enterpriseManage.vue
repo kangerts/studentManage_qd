@@ -9,13 +9,14 @@
           @clear="getEnterpriseData"
           @input="getEnterpriseData"
           @focus="setPageNum"
+          @blur="setSearchType"
           placeholder="请输入企业名称"
           v-model="queryInfo.keyWord"
           prefix-icon="el-icon-search"
         />
       </el-col>
       <!--    按钮区域列-->
-      <el-col :span="4">
+      <el-col :span="2">
         <el-row>
           <el-tooltip
             effect="dark"
@@ -31,6 +32,45 @@
           </el-tooltip>
         </el-row>
       </el-col>
+      <div>
+        <el-radio-group
+          :disabled="isSearchType"
+          @change="getEnterpriseData"
+          v-model="queryInfo.searchType"
+          size="medium"
+        >
+          <el-radio
+            label="全部"
+            border
+          >
+            全部
+          </el-radio>
+          <el-radio
+            label="优"
+            border
+          >
+            优
+          </el-radio>
+          <el-radio
+            label="良"
+            border
+          >
+            良
+          </el-radio>
+          <el-radio
+            label="中"
+            border
+          >
+            中
+          </el-radio>
+          <el-radio
+            label="差"
+            border
+          >
+            差
+          </el-radio>
+        </el-radio-group>
+      </div>
     </el-row>
     <!--  表格数据区域-->
     <el-table
@@ -80,18 +120,6 @@
               icon="el-icon-edit"
               circle
               @click="editDialogVisible1(scope.row)"
-            />
-          </el-tooltip>
-          <el-tooltip
-            effect="dark"
-            content="删除企业(会删除本企业所有岗位)"
-            placement="top"
-          >
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              @click="deleteEnterpriseDialogVisible1(scope.row.enterpriseCode)"
             />
           </el-tooltip>
         </template>
@@ -405,13 +433,15 @@ export default {
     return {
       /** 数据表格 */
       // 数据表格数据绑定
+      isSearchType: false,
       queryInfo: {
         // 当前搜索关键字
         keyWord: '',
         // 当前页数
         pageNum: 1,
         // 当前每页显示多少条数据
-        pageSize: 5
+        pageSize: 5,
+        searchType: '全部'
       },
       // 数据表格数据
       tableData: [],
@@ -707,40 +737,6 @@ export default {
       })
     },
 
-    /** 删除企业对话框 */
-    deleteEnterpriseDialogVisible1 (enterpriseCode) {
-      this.deleteEnterpriseDialogVisible = true
-      this.deleteEnterpriseCode = enterpriseCode
-    },
-    /** 删除企业 */
-    async deleteEnterprise () {
-      const enterpriseCode = this.deleteEnterpriseCode
-      const formData = JSON.stringify({
-        useraction: 'deleteEnterprise',
-        username: window.sessionStorage.getItem('username'),
-        enterpriseCode: enterpriseCode
-      })
-      const result = await this.$http.post('/data/', formData)
-      if (result.data.ret === 0) {
-        this.$message({
-          message: result.data.data,
-          type: 'success',
-          showClose: true,
-          center: true
-        })
-        this.deleteEnterpriseDialogVisible = false
-        this.getEnterpriseData()
-      }
-      if (result.data.ret === 1) {
-        this.$message({
-          message: result.data.data,
-          type: 'error',
-          showClose: true,
-          center: true
-        })
-      }
-    },
-
     /** 获取企业数据 */
     async getEnterpriseData () {
       const formData = JSON.stringify({
@@ -774,10 +770,14 @@ export default {
         }
       })
     },
-
+    setSearchType () {
+      this.isSearchType = false
+    },
     /** 修复当用户在大于1的分页进行数据搜索没有返回值的问题 */
     setPageNum () {
       this.queryInfo.pageNum = 1
+      this.isSearchType = true
+      this.queryInfo.searchType = '全部'
       this.getEnterpriseData()
     },
     /** 监听每页显示多少数据的改变 */

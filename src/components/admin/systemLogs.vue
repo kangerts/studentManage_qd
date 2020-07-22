@@ -78,18 +78,6 @@
               @click="dataRecoveryDialog(scope.row)"
             />
           </el-tooltip>
-          <el-tooltip
-            effect="dark"
-            content="删除数据(彻底删除本条数据)"
-            placement="top"
-          >
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              @click="deleteSystemLogsDialog(scope.row.logCode)"
-            />
-          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -174,9 +162,7 @@ export default {
         { label: '数据记录', prop: 'dataRecord' }
       ],
       /** 恢复数据对话框是否显示 */
-      dataRecoveryDialogVisible: false,
-      /** 删除操作日志对话框是否显示 */
-      deleteSystemLogsDialogVisible: false
+      dataRecoveryDialogVisible: false
     }
   },
   /** 生命周期函数 */
@@ -198,34 +184,6 @@ export default {
       this.queryInfo.pageNum = 1
       this.getSystemLogsData()
     },
-    /** 删除系统操作日志 */
-    deleteSystemLogsDialog (logCode) {
-      this.deleteSystemLogsDialogVisible = true
-      this.logCode = logCode
-    },
-    async deleteSystemLogs () {
-      const formData = JSON.stringify({
-        useraction: 'deleteSystemLogsData',
-        username: window.sessionStorage.getItem('username'),
-        logCode: this.logCode
-      })
-      // 提交表单
-      const result = await this.$http.post('/data/', formData)
-      // 判断业务逻辑
-      if (result.data.ret === 0) {
-        this.$message({
-          message: result.data.data,
-          type: 'success',
-          showClose: true,
-          center: true
-        })
-        this.deleteSystemLogsDialogVisible = false
-        this.getSystemLogsData()
-      } else {
-        this.$message({ message: result.data.data, type: 'error', showClose: true, center: true })
-      }
-    },
-
     /** 数据恢复操作 */
     dataRecoveryDialog (data) {
       this.dataRecoveryDialogVisible = true
