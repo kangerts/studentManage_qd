@@ -57,7 +57,6 @@
           <el-radio
             label="全部"
             border
-            style="display: none"
           >
             全部
           </el-radio>
@@ -1497,6 +1496,7 @@ export default {
 
     /deep/ .el-radio-group label{
         width: 85px;
+        margin-right: 10px;
      }
 
     .el-pagination {
