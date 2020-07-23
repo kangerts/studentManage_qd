@@ -57,6 +57,7 @@
           <el-radio
             label="全部"
             border
+            style="display: none"
           >
             全部
           </el-radio>
@@ -83,6 +84,12 @@
             border
           >
             拟升学
+          </el-radio>
+          <el-radio
+            label="专升本"
+            border
+          >
+            专升本
           </el-radio>
         </el-radio-group>
 
@@ -376,6 +383,12 @@
             >
               拟升学
             </el-radio>
+            <el-radio
+              label="专升本"
+              border
+            >
+              专升本
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item
@@ -602,6 +615,12 @@
               border
             >
               拟升学
+            </el-radio>
+            <el-radio
+              label="专升本"
+              border
+            >
+              专升本
             </el-radio>
           </el-radio-group>
         </el-form-item>
@@ -1475,6 +1494,10 @@ export default {
     /deep/ .el-col {
         padding-right: 0 !important;
     }
+
+    /deep/ .el-radio-group label{
+        width: 85px;
+     }
 
     .el-pagination {
         margin-top: 25px;
